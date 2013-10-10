@@ -17,7 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
-    <style name="StyledIndicators" parent="@android:style/Theme.Holo.Light.Dialog.NoActionBar">
+    <style name="StyledIndicators" parent="@style/Theme.Sherlock.Light.NoActionBar">
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
     </style>
 

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">ViewPageIndicator</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="contentDes"></string>
+    <string name="newsTitle">新闻</string>
 
 </resources>
