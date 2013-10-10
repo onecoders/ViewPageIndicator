@@ -13,77 +13,78 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class MainActivity extends FragmentActivity {
 	/**
-	 * Tab±êÌâ
+	 * Tabï¿½ï¿½ï¿½ï¿½
 	 */
-	private static final String[] TITLE = new String[] { "Í·Ìõ", "·¿²ú", "ÁíÒ»Ãæ", "Å®ÈË",
-														"²Æ¾­", "ÊıÂë", "Çé¸Ğ", "¿Æ¼¼" };
+	private static final String[] TITLE = new String[] { "å¤´æ¡", "æˆ¿äº§", "å¦ä¸€é¢",
+			"å¥³äºº", "è´¢ç»", "æ•°ç ", "æƒ…æ„Ÿ", "ç§‘æŠ€" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		//ViewPagerµÄadapter
-		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
-        ViewPager pager = (ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(adapter);
 
-        //ÊµÀı»¯TabPageIndicatorÈ»ºóÉèÖÃViewPagerÓëÖ®¹ØÁª
-        TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
-        
-        //Èç¹ûÎÒÃÇÒª¶ÔViewPagerÉèÖÃ¼àÌı£¬ÓÃindicatorÉèÖÃ¾ÍĞĞÁË
-        indicator.setOnPageChangeListener(new OnPageChangeListener() {
-			
+		// ViewPagerï¿½ï¿½adapter
+		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
+				getSupportFragmentManager());
+		ViewPager pager = (ViewPager) findViewById(R.id.pager);
+		pager.setAdapter(adapter);
+
+		// Êµï¿½ï¿½TabPageIndicatorÈ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ViewPagerï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½
+		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		indicator.setViewPager(pager);
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ViewPagerï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½indicatorï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½
+		indicator.setOnPageChangeListener(new OnPageChangeListener() {
+
 			@Override
 			public void onPageSelected(int arg0) {
-				Toast.makeText(getApplicationContext(), TITLE[arg0], Toast.LENGTH_SHORT).show();
+				//
 			}
-			
+
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				
+
 			}
-			
+
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				
+
 			}
 		});
-        
+
 	}
 
-	
 	/**
-	 * ViewPagerÊÊÅäÆ÷
+	 * ViewPagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * 
 	 * @author len
-	 *
+	 * 
 	 */
-    class TabPageIndicatorAdapter extends FragmentPagerAdapter {
-        public TabPageIndicatorAdapter(FragmentManager fm) {
-            super(fm);
-        }
+	class TabPageIndicatorAdapter extends FragmentPagerAdapter {
+		public TabPageIndicatorAdapter(FragmentManager fm) {
+			super(fm);
+		}
 
-        @Override
-        public Fragment getItem(int position) {
-        	//ĞÂ½¨Ò»¸öFragmentÀ´Õ¹Ê¾ViewPager itemµÄÄÚÈİ£¬²¢´«µİ²ÎÊı
-        	Fragment fragment = new ItemFragment();  
-            Bundle args = new Bundle();  
-            args.putString("arg", TITLE[position]);  
-            fragment.setArguments(args);  
-        	
-            return fragment;
-        }
+		@Override
+		public Fragment getItem(int position) {
+			// ï¿½Â½ï¿½Ò»ï¿½ï¿½Fragmentï¿½ï¿½Õ¹Ê¾ViewPager itemï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½
+			Fragment fragment = new ItemFragment();
+			Bundle args = new Bundle();
+			args.putString("arg", TITLE[position]);
+			fragment.setArguments(args);
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLE[position % TITLE.length];
-        }
+			return fragment;
+		}
 
-        @Override
-        public int getCount() {
-            return TITLE.length;
-        }
-    }
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return TITLE[position % TITLE.length];
+		}
+
+		@Override
+		public int getCount() {
+			return TITLE.length;
+		}
+	}
 
 }
