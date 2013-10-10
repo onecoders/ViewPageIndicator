@@ -321,8 +321,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int vpi__bright_foreground_holo_light=0x7f050003;
         public static final int vpi__bright_foreground_inverse_holo_dark=0x7f050006;
         public static final int vpi__bright_foreground_inverse_holo_light=0x7f050007;
-        public static final int vpi__dark_theme=0x7f050011;
-        public static final int vpi__light_theme=0x7f050012;
+        public static final int vpi__dark_theme=0x7f050012;
+        public static final int vpi__light_theme=0x7f050013;
+        public static final int whilte=0x7f050011;
     }
     public static final class dimen {
         public static final int default_circle_indicator_radius=0x7f080000;
@@ -341,26 +342,33 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int base_action_bar_bg=0x7f020000;
-        public static final int base_tabpager_indicator_selected=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int icon=0x7f020003;
-        public static final int selector_tabtext=0x7f020004;
-        public static final int tab_indicator=0x7f020005;
-        public static final int vpi__tab_indicator=0x7f020006;
-        public static final int vpi__tab_selected_focused_holo=0x7f020007;
-        public static final int vpi__tab_selected_holo=0x7f020008;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020009;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02000a;
-        public static final int vpi__tab_unselected_holo=0x7f02000b;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02000c;
+        public static final int base_actionbar_bg=0x7f020001;
+        public static final int base_tabpager_indicator_selected=0x7f020002;
+        public static final int biz_news_main_back_normal=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int logo=0x7f020006;
+        public static final int night_base_main_action_personal_normal=0x7f020007;
+        public static final int selector_tabtext=0x7f020008;
+        public static final int tab_indicator=0x7f020009;
+        public static final int vpi__tab_indicator=0x7f02000a;
+        public static final int vpi__tab_selected_focused_holo=0x7f02000b;
+        public static final int vpi__tab_selected_holo=0x7f02000c;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02000d;
+        public static final int vpi__tab_unselected_focused_holo=0x7f02000e;
+        public static final int vpi__tab_unselected_holo=0x7f02000f;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020010;
     }
     public static final class id {
         public static final int bottom=0x7f040003;
-        public static final int indicator=0x7f040005;
-        public static final int menu_settings=0x7f040008;
+        public static final int indicator=0x7f040008;
+        public static final int main_center_logo=0x7f040006;
+        public static final int main_left_imgbtn=0x7f040005;
+        public static final int main_right_imgbtn=0x7f040007;
+        public static final int menu_settings=0x7f04000b;
         public static final int none=0x7f040000;
-        public static final int pager=0x7f040006;
-        public static final int textview=0x7f040007;
+        public static final int pager=0x7f040009;
+        public static final int textview=0x7f04000a;
         public static final int top=0x7f040004;
         public static final int triangle=0x7f040001;
         public static final int underline=0x7f040002;
