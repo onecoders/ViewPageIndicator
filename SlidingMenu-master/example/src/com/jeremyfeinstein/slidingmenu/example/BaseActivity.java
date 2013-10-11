@@ -1,15 +1,8 @@
 package com.jeremyfeinstein.slidingmenu.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -34,12 +27,14 @@ public class BaseActivity extends SlidingFragmentActivity {
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		if (savedInstanceState == null) {
-			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+			FragmentTransaction t = this.getSupportFragmentManager()
+					.beginTransaction();
 			mFrag = new SampleListFragment();
 			t.replace(R.id.menu_frame, mFrag);
 			t.commit();
 		} else {
-			mFrag = (ListFragment)this.getSupportFragmentManager().findFragmentById(R.id.menu_frame);
+			mFrag = (ListFragment) this.getSupportFragmentManager()
+					.findFragmentById(R.id.menu_frame);
 		}
 
 		// customize the SlidingMenu
