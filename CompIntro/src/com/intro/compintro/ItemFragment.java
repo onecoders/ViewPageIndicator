@@ -17,7 +17,6 @@ public class ItemFragment extends Fragment {
 		View contextView = inflater.inflate(R.layout.fragment_item, container, false);
 		TextView mTextView = (TextView) contextView.findViewById(R.id.textview);
 		
-		//��ȡActivity���ݹ����Ĳ���
 		Bundle mBundle = getArguments();
 		String title = mBundle.getString("arg");
 		

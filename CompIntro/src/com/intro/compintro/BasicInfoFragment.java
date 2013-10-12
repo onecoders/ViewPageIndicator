@@ -20,6 +20,8 @@ public class BasicInfoFragment extends SherlockFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		/*RelativeLayout v = new RelativeLayout(getActivity());
+		v.setBackgroundColor(color);*/
 		return inflater.inflate(R.layout.index_main, null);
 	}
 
@@ -68,7 +70,6 @@ public class BasicInfoFragment extends SherlockFragment {
 
 		@Override
 		public Fragment getItem(int position) {
-			// �½�һ��Fragment��չʾViewPager item�����ݣ������ݲ���
 			Fragment fragment = new ItemFragment();
 			Bundle args = new Bundle();
 			args.putString("arg", TITLE[position]);
