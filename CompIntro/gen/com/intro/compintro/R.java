@@ -1362,45 +1362,48 @@ containing a value of this type.
         public static final int abs__toast_frame=0x7f020075;
         public static final int base_action_bar_bg=0x7f020076;
         public static final int base_actionbar_bg=0x7f020077;
-        public static final int biz_news_main_back_normal=0x7f020078;
-        public static final int btn_cab_done_default_w=0x7f020079;
-        public static final int btn_cab_done_focused_w=0x7f02007a;
-        public static final int btn_cab_done_pressed_w=0x7f02007b;
-        public static final int btn_cab_done_w=0x7f02007c;
-        public static final int cab_background_bottom_w=0x7f02007d;
-        public static final int cab_background_top_w=0x7f02007e;
-        public static final int ic_launcher=0x7f02007f;
-        public static final int list_focused_w=0x7f020080;
-        public static final int logo=0x7f020081;
-        public static final int menu_dropdown_panel_w=0x7f020082;
-        public static final int night_base_main_action_personal_normal=0x7f020083;
-        public static final int pressed_background_w=0x7f020084;
-        public static final int progress_bg_w=0x7f020085;
-        public static final int progress_horizontal_w=0x7f020086;
-        public static final int progress_primary_w=0x7f020087;
-        public static final int progress_secondary_w=0x7f020088;
-        public static final int selectable_background_w=0x7f020089;
-        public static final int shadow=0x7f02008a;
-        public static final int shadowright=0x7f02008b;
-        public static final int spinner_ab_default_w=0x7f02008c;
-        public static final int spinner_ab_disabled_w=0x7f02008d;
-        public static final int spinner_ab_focused_w=0x7f02008e;
-        public static final int spinner_ab_pressed_w=0x7f02008f;
-        public static final int spinner_background_ab_w=0x7f020090;
-        public static final int tab_indicator_ab_w=0x7f020091;
-        public static final int tab_selected_focused_w=0x7f020092;
-        public static final int tab_selected_pressed_w=0x7f020093;
-        public static final int tab_selected_w=0x7f020094;
-        public static final int tab_unselected_focused_w=0x7f020095;
-        public static final int tab_unselected_pressed_w=0x7f020096;
-        public static final int tab_unselected_w=0x7f020097;
-        public static final int vpi__tab_indicator=0x7f020098;
-        public static final int vpi__tab_selected_focused_holo=0x7f020099;
-        public static final int vpi__tab_selected_holo=0x7f02009a;
-        public static final int vpi__tab_selected_pressed_holo=0x7f02009b;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02009c;
-        public static final int vpi__tab_unselected_holo=0x7f02009d;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02009e;
+        public static final int base_tabpager_indicator_selected=0x7f020078;
+        public static final int biz_news_main_back_normal=0x7f020079;
+        public static final int btn_cab_done_default_w=0x7f02007a;
+        public static final int btn_cab_done_focused_w=0x7f02007b;
+        public static final int btn_cab_done_pressed_w=0x7f02007c;
+        public static final int btn_cab_done_w=0x7f02007d;
+        public static final int cab_background_bottom_w=0x7f02007e;
+        public static final int cab_background_top_w=0x7f02007f;
+        public static final int ic_launcher=0x7f020080;
+        public static final int list_focused_w=0x7f020081;
+        public static final int logo=0x7f020082;
+        public static final int menu_dropdown_panel_w=0x7f020083;
+        public static final int night_base_main_action_personal_normal=0x7f020084;
+        public static final int pressed_background_w=0x7f020085;
+        public static final int progress_bg_w=0x7f020086;
+        public static final int progress_horizontal_w=0x7f020087;
+        public static final int progress_primary_w=0x7f020088;
+        public static final int progress_secondary_w=0x7f020089;
+        public static final int selectable_background_w=0x7f02008a;
+        public static final int selector_tabtext=0x7f02008b;
+        public static final int shadow=0x7f02008c;
+        public static final int shadowright=0x7f02008d;
+        public static final int spinner_ab_default_w=0x7f02008e;
+        public static final int spinner_ab_disabled_w=0x7f02008f;
+        public static final int spinner_ab_focused_w=0x7f020090;
+        public static final int spinner_ab_pressed_w=0x7f020091;
+        public static final int spinner_background_ab_w=0x7f020092;
+        public static final int tab_indicator=0x7f020093;
+        public static final int tab_indicator_ab_w=0x7f020094;
+        public static final int tab_selected_focused_w=0x7f020095;
+        public static final int tab_selected_pressed_w=0x7f020096;
+        public static final int tab_selected_w=0x7f020097;
+        public static final int tab_unselected_focused_w=0x7f020098;
+        public static final int tab_unselected_pressed_w=0x7f020099;
+        public static final int tab_unselected_w=0x7f02009a;
+        public static final int vpi__tab_indicator=0x7f02009b;
+        public static final int vpi__tab_selected_focused_holo=0x7f02009c;
+        public static final int vpi__tab_selected_holo=0x7f02009d;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02009e;
+        public static final int vpi__tab_unselected_focused_holo=0x7f02009f;
+        public static final int vpi__tab_unselected_holo=0x7f0200a0;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f0200a1;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f04002a;
@@ -1566,21 +1569,23 @@ containing a value of this type.
         public static final int hello_world=0x7f09000f;
     }
     public static final class style {
-        public static final int ActionBar_Solid_W=0x7f0a005f;
-        public static final int ActionBar_Transparent_W=0x7f0a0060;
-        public static final int ActionBarTabStyle_W=0x7f0a0064;
-        public static final int ActionButton_CloseMode_W=0x7f0a0067;
+        public static final int ActionBar_Solid_W=0x7f0a005e;
+        public static final int ActionBar_Transparent_W=0x7f0a005f;
+        public static final int ActionBarTabStyle_W=0x7f0a0062;
+        public static final int ActionButton_CloseMode_W=0x7f0a0065;
         /** 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
  API 11 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f0a005d;
-        public static final int DropDownListView_W=0x7f0a0063;
-        public static final int DropDownNav_W=0x7f0a0065;
-        public static final int PopupMenu_W=0x7f0a0062;
-        public static final int ProgressBar_W=0x7f0a0066;
+        public static final int AppBaseTheme=0x7f0a0069;
+        public static final int CustomTabPageIndicator=0x7f0a0067;
+        public static final int CustomTabPageIndicator_Text=0x7f0a0068;
+        public static final int DropDownListView_W=0x7f0a0061;
+        public static final int DropDownNav_W=0x7f0a0063;
+        public static final int PopupMenu_W=0x7f0a0060;
+        public static final int ProgressBar_W=0x7f0a0064;
         public static final int Sherlock___TextAppearance_Small=0x7f0a0046;
         public static final int Sherlock___Theme=0x7f0a0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0a0053;
@@ -1625,11 +1630,11 @@ containing a value of this type.
         public static final int Theme_Sherlock_Light_DarkActionBar=0x7f0a0056;
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f0a0058;
         public static final int Theme_Sherlock_NoActionBar=0x7f0a0057;
-        public static final int Theme_W=0x7f0a005e;
+        public static final int Theme_W=0x7f0a005d;
         /**  this style is only referenced in a Light.DarkActionBar based theme 
  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int Theme_W_Widget=0x7f0a0061;
+        public static final int Theme_W_Widget=0x7f0a0066;
         public static final int Widget=0x7f0a0000;
         public static final int Widget_IconPageIndicator=0x7f0a005c;
         public static final int Widget_Sherlock_ActionBar=0x7f0a0002;
