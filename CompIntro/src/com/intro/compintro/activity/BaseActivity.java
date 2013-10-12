@@ -61,8 +61,8 @@ public class BaseActivity extends SlidingFragmentActivity {
 					.findFragmentById(R.id.menu_frame);
 		}
 		// set the secondaryMenu
-		getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
-		getSlidingMenu().setSecondaryShadowDrawable(R.drawable.shadowright);
+		sm.setSecondaryMenu(R.layout.menu_frame_two);
+		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.menu_frame_two, new RightUserCenterFragment())
 				.commit();
