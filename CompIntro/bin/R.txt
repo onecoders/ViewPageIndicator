@@ -495,6 +495,7 @@ int string abs__shareactionprovider_share_with 0x7f090006
 int string abs__shareactionprovider_share_with_application 0x7f090007
 int string action_settings 0x7f09000e
 int string app_name 0x7f09000d
+int string clickAgain 0x7f090010
 int string hello_world 0x7f09000f
 int style ActionBar_Solid_W 0x7f0a005f
 int style ActionBar_Transparent_W 0x7f0a0060

@@ -56,13 +56,10 @@ public class ColorMenuFragment extends ListFragment {
 		if (getActivity() == null)
 			return;
 
-		/*if (getActivity() instanceof FragmentChangeActivity) {
-			FragmentChangeActivity fca = (FragmentChangeActivity) getActivity();
+		if (getActivity() instanceof MainActivity) {
+			MainActivity fca = (MainActivity) getActivity();
 			fca.switchContent(fragment);
-		} else if (getActivity() instanceof ResponsiveUIActivity) {
-			ResponsiveUIActivity ra = (ResponsiveUIActivity) getActivity();
-			ra.switchContent(fragment);
-		}*/
+		}
 	}
 
 }

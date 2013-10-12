@@ -4,5 +4,6 @@
     <string name="app_name">CompIntro</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="clickAgain">再按一次退出程序</string>
 
 </resources>

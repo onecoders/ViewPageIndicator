@@ -2,7 +2,6 @@ package com.intro.compintro;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -12,7 +11,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity {
 
 	private int mTitleRes;
-	protected ListFragment mFrag;
+	protected ColorMenuFragment mFrag;
 
 	public BaseActivity(int titleRes) {
 		mTitleRes = titleRes;
@@ -40,11 +39,11 @@ public class BaseActivity extends SlidingFragmentActivity {
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager()
 					.beginTransaction();
-			mFrag = new SampleListFragment();
+			mFrag = new ColorMenuFragment();
 			t.replace(R.id.menu_frame, mFrag);
 			t.commit();
 		} else {
-			mFrag = (ListFragment) this.getSupportFragmentManager()
+			mFrag = (ColorMenuFragment) this.getSupportFragmentManager()
 					.findFragmentById(R.id.menu_frame);
 		}
 
