@@ -12,7 +12,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity {
 
 	private int mTitleRes;
-	protected ColorMenuFragment mFrag;
+	protected LeftMenuFragment mFrag;
 
 	public BaseActivity(int titleRes) {
 		mTitleRes = titleRes;
@@ -31,32 +31,30 @@ public class BaseActivity extends SlidingFragmentActivity {
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		// show home as up so we can toggle
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// check if the content frame contains the menu frame
 		if (findViewById(R.id.menu_frame) == null) {
 			setBehindContentView(R.layout.menu_frame);
-			getSlidingMenu().setSlidingEnabled(true);
-			getSlidingMenu()
-					.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+			sm.setSlidingEnabled(true);
+			sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		} else {
 			// add a dummy view
 			View v = new View(this);
 			setBehindContentView(v);
-			getSlidingMenu().setSlidingEnabled(false);
-			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+			sm.setSlidingEnabled(false);
+			sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		}
 		// set the Behind View
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager()
 					.beginTransaction();
-			mFrag = new ColorMenuFragment();
+			mFrag = new LeftMenuFragment();
 			t.replace(R.id.menu_frame, mFrag);
 			t.commit();
 		} else {
-			mFrag = (ColorMenuFragment) this.getSupportFragmentManager()
+			mFrag = (LeftMenuFragment) this.getSupportFragmentManager()
 					.findFragmentById(R.id.menu_frame);
 		}
 		// set the secondaryMenu

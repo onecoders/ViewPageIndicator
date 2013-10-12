@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
 			mContent = getSupportFragmentManager().getFragment(
 					savedInstanceState, "mContent");
 		if (mContent == null)
-			mContent = new SampleListFragment();
+			mContent = new BasicInfoFragment();
 
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, mContent).commit();

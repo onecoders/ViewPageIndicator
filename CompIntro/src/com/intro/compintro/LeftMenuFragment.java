@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ColorMenuFragment extends ListFragment {
+public class LeftMenuFragment extends ListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,19 +32,16 @@ public class ColorMenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			newContent = new ColorFragment(R.color.red);
+			newContent = new BasicInfoFragment();
 			break;
 		case 1:
-			newContent = new ColorFragment(R.color.green);
+			newContent = new MarketingFragment();
 			break;
 		case 2:
-			newContent = new ColorFragment(R.color.blue);
+			newContent = new MainProductFragment();
 			break;
 		case 3:
-			newContent = new ColorFragment(android.R.color.white);
-			break;
-		case 4:
-			newContent = new ColorFragment(android.R.color.black);
+			newContent = new OtherProductFragment();
 			break;
 		}
 		if (newContent != null)
