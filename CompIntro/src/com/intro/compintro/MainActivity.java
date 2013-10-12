@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class MainActivity extends BaseActivity {
 
 	private Fragment mContent;
-	private static Boolean isExit = false;
 
 	public MainActivity() {
 		super(R.string.hello_world);
@@ -49,10 +48,14 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			exitBy2Click();
+			if (!getSlidingMenu().isMenuShowing()) {
+				exitBy2Click();
+			}
 		}
-		return super.onKeyDown(keyCode, event);
+		return false;
 	}
+
+	private static Boolean isExit = false;
 
 	private void exitBy2Click() {
 		Timer tExit = null;
