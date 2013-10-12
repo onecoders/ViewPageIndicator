@@ -24,6 +24,17 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 		setTitle(mTitleRes);
 
+		// customize the SlidingMenu
+		SlidingMenu sm = getSlidingMenu();
+		sm.setMode(SlidingMenu.LEFT_RIGHT);
+		sm.setShadowWidthRes(R.dimen.shadow_width);
+		sm.setShadowDrawable(R.drawable.shadow);
+		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		sm.setFadeDegree(0.35f);
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		if (savedInstanceState == null) {
@@ -37,15 +48,12 @@ public class BaseActivity extends SlidingFragmentActivity {
 					.findFragmentById(R.id.menu_frame);
 		}
 
-		// customize the SlidingMenu
-		SlidingMenu sm = getSlidingMenu();
-		sm.setShadowWidthRes(R.dimen.shadow_width);
-		sm.setShadowDrawable(R.drawable.shadow);
-		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// set the secondaryMenu
+		getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
+		getSlidingMenu().setSecondaryShadowDrawable(R.drawable.shadowright);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.menu_frame_two, new SampleListFragment())
+				.commit();
 	}
 
 	@Override
