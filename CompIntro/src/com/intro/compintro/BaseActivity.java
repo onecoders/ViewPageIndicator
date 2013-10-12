@@ -2,6 +2,7 @@ package com.intro.compintro;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -31,11 +32,23 @@ public class BaseActivity extends SlidingFragmentActivity {
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
+		// show home as up so we can toggle
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+		// check if the content frame contains the menu frame
+		if (findViewById(R.id.menu_frame) == null) {
+			setBehindContentView(R.layout.menu_frame);
+			getSlidingMenu().setSlidingEnabled(true);
+			getSlidingMenu()
+					.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		} else {
+			// add a dummy view
+			View v = new View(this);
+			setBehindContentView(v);
+			getSlidingMenu().setSlidingEnabled(false);
+			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+		}
 		// set the Behind View
-		setBehindContentView(R.layout.menu_frame);
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager()
 					.beginTransaction();
@@ -46,7 +59,6 @@ public class BaseActivity extends SlidingFragmentActivity {
 			mFrag = (ColorMenuFragment) this.getSupportFragmentManager()
 					.findFragmentById(R.id.menu_frame);
 		}
-
 		// set the secondaryMenu
 		getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
 		getSlidingMenu().setSecondaryShadowDrawable(R.drawable.shadowright);
@@ -60,8 +72,6 @@ public class BaseActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			toggle();
-			return true;
-		case 1:
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

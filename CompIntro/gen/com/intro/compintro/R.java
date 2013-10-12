@@ -9,7 +9,6 @@ package com.intro.compintro;
 
 public final class R {
     public static final class array {
-        public static final int birds=0x7f0b0001;
         public static final int color_names=0x7f0b0000;
     }
     public static final class attr {

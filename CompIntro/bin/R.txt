@@ -1,4 +1,3 @@
-int array birds 0x7f0b0001
 int array color_names 0x7f0b0000
 int attr actionBarDivider 0x7f01000e
 int attr actionBarItemBackground 0x7f01000f
