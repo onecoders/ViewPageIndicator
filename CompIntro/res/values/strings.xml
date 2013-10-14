@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CompIntro</string>
+    <string name="app_name">公司介绍应用</string>
+    <string name="basic_info_title">公司基本情况介绍</string>
+    <string name="marketing_title">营销活动宣传</string>
+    <string name="main_product_title">主打产品介绍</string>
+    <string name="product_title">产品介绍</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="clickAgain">再按一次退出程序</string>

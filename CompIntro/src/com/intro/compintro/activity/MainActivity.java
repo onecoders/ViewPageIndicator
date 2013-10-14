@@ -15,10 +15,6 @@ public class MainActivity extends BaseActivity {
 
 	private Fragment mContent;
 
-	public MainActivity() {
-		super(R.string.hello_world);
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

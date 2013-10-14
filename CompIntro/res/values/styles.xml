@@ -19,78 +19,62 @@
 -->
 
 <resources>
-
-    <style name="Theme.W" parent="@style/Theme.Sherlock.Light">
-        <item name="actionBarItemBackground">@drawable/selectable_background_w</item>
-        <item name="popupMenuStyle">@style/PopupMenu.W</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.W</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.W</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.W</item>
-        <item name="actionBarStyle">@style/ActionBar.Solid.W</item>
-        <item name="actionModeBackground">@drawable/cab_background_top_w</item>
-        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_w</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.W</item>
+    <style name="StyledIndicators" parent="@style/Theme.Sherlock.Light">
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+        <item name="vpiLinePageIndicatorStyle">@style/CustomLinePageIndicator</item>
+        <item name="vpiTitlePageIndicatorStyle">@style/CustomTitlePageIndicator</item>
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+        <item name="vpiUnderlinePageIndicatorStyle">@style/CustomUnderlinePageIndicator</item>
     </style>
 
-    <style name="ActionBar.Solid.W" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
-        <item name="background">@drawable/ab_solid_w</item>
-        <item name="backgroundStacked">@drawable/ab_stacked_solid_w</item>
-        <item name="backgroundSplit">@drawable/ab_bottom_solid_w</item>
-        <item name="progressBarStyle">@style/ProgressBar.W</item>
+    <style name="CustomTitlePageIndicator">
+        <item name="android:background">#18FF0000</item>
+        <item name="footerColor">#FFAA2222</item>
+        <item name="footerLineHeight">1dp</item>
+        <item name="footerIndicatorHeight">3dp</item>
+        <item name="footerIndicatorStyle">underline</item>
+        <item name="android:textColor">#AA000000</item>
+        <item name="selectedColor">#FF000000</item>
+        <item name="selectedBold">true</item>
     </style>
 
-    <style name="ActionBar.Transparent.W" parent="@style/Widget.Sherlock.Light.ActionBar">
-        <item name="background">@drawable/ab_transparent_w</item>
-        <item name="progressBarStyle">@style/ProgressBar.W</item>
+    <style name="CustomLinePageIndicator">
+        <item name="strokeWidth">4dp</item>
+        <item name="lineWidth">30dp</item>
+        <item name="unselectedColor">#FF888888</item>
+        <item name="selectedColor">#FF880000</item>
     </style>
 
-    <style name="PopupMenu.W" parent="@style/Widget.Sherlock.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_w</item>
-    </style>
-
-    <style name="DropDownListView.W" parent="@style/Widget.Sherlock.Light.ListView.DropDown">
-        <item name="android:listSelector">@drawable/selectable_background_w</item>
-    </style>
-
-    <style name="ActionBarTabStyle.W" parent="@style/Widget.Sherlock.Light.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator_ab_w</item>
-    </style>
-
-    <style name="DropDownNav.W" parent="@style/Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
-        <item name="android:background">@drawable/spinner_background_ab_w</item>
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_w</item>
-        <item name="android:dropDownSelector">@drawable/selectable_background_w</item>
-    </style>
-
-    <style name="ProgressBar.W" parent="@style/Widget.Sherlock.Light.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/progress_horizontal_w</item>
-    </style>
-
-    <style name="ActionButton.CloseMode.W" parent="@style/Widget.Sherlock.Light.ActionButton.CloseMode">
-        <item name="android:background">@drawable/btn_cab_done_w</item>
-    </style>
-
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.W.Widget" parent="@style/Theme.Sherlock">
-        <item name="popupMenuStyle">@style/PopupMenu.W</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.W</item>
+    <style name="CustomCirclePageIndicator">
+        <item name="fillColor">#FF888888</item>
+        <item name="strokeColor">#FF000000</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="radius">10dp</item>
+        <item name="centered">true</item>
     </style>
 
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
-        <item name="android:background">@drawable/tab_indicator</item>
+        <item name="android:background">@drawable/custom_tab_indicator</item>
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textColor">#FF555555</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:divider">@drawable/custom_tab_indicator_divider</item>
         <item name="android:dividerPadding">10dp</item>
         <item name="android:showDividers">middle</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
         <item name="android:fadingEdge">horizontal</item>
         <item name="android:fadingEdgeLength">8dp</item>
     </style>
 
     <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
         <item name="android:typeface">monospace</item>
-        <item name="android:textColor">@drawable/selector_tabtext</item>
     </style>
 
+    <style name="CustomUnderlinePageIndicator">
+        <item name="selectedColor">#FFCC0000</item>
+        <item name="android:background">#FFCCCCCC</item>
+        <item name="fadeLength">1000</item>
+        <item name="fadeDelay">1000</item>
+    </style>
 </resources>

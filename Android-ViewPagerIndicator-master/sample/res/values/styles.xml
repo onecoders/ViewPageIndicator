@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <style name="StyledIndicators" parent="@android:style/Theme.Light">
+    <style name="StyledIndicators" parent="@style/Theme.Sherlock.Light">
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="vpiLinePageIndicatorStyle">@style/CustomLinePageIndicator</item>
         <item name="vpiTitlePageIndicatorStyle">@style/CustomTitlePageIndicator</item>

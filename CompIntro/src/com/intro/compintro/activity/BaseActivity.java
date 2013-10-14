@@ -2,7 +2,6 @@ package com.intro.compintro.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -14,19 +13,11 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity {
 
-	private int mTitleRes;
 	protected LeftNavMenuFragment mFrag;
-
-	public BaseActivity(int titleRes) {
-		mTitleRes = titleRes;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setTitle(mTitleRes);
-
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT_RIGHT);
@@ -34,22 +25,12 @@ public class BaseActivity extends SlidingFragmentActivity {
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		// show home as up so we can toggle
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// check if the content frame contains the menu frame
-		if (findViewById(R.id.menu_frame) == null) {
-			setBehindContentView(R.layout.menu_frame);
-			sm.setSlidingEnabled(true);
-			sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		} else {
-			// add a dummy view
-			View v = new View(this);
-			setBehindContentView(v);
-			sm.setSlidingEnabled(false);
-			sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-		}
 		// set the Behind View
+		setBehindContentView(R.layout.menu_frame);
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager()
 					.beginTransaction();
