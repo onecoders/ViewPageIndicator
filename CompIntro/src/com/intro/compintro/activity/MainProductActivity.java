@@ -13,17 +13,18 @@ import com.intro.compintro.fragment.TestFragment;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class MarketingActivity extends BaseActivity {
+public class MainProductActivity extends BaseActivity {
 
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 
-	private static final String[] CONTENT = new String[] { "行业资讯", "发展历程",
-			"企业新闻", "营销资讯" };
+	private static final String[] CONTENT = new String[] { "A产品", "B产品", "C产品",
+			"D产品", "E产品" };
 	private static final int[] ICONS = new int[] {
 			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
-			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar };
+			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
+			R.drawable.perm_group_calendar, };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

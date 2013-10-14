@@ -6,14 +6,12 @@ import android.support.v4.app.FragmentTransaction;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.intro.compintro.R;
-import com.intro.compintro.fragment.LeftNavMenuFragment;
-import com.intro.compintro.fragment.RightUserCenterFragment;
+import com.intro.compintro.fragment.BehindContentFragment;
+import com.intro.compintro.fragment.SecondaryMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity {
-
-	protected LeftNavMenuFragment mFrag;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,21 +29,17 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
-		if (savedInstanceState == null) {
-			FragmentTransaction t = this.getSupportFragmentManager()
-					.beginTransaction();
-			mFrag = new LeftNavMenuFragment();
-			t.replace(R.id.menu_frame, mFrag);
-			t.commit();
-		} else {
-			mFrag = (LeftNavMenuFragment) this.getSupportFragmentManager()
-					.findFragmentById(R.id.menu_frame);
-		}
+		FragmentTransaction t = this.getSupportFragmentManager()
+				.beginTransaction();
+		BehindContentFragment mFrag = new BehindContentFragment();
+		t.replace(R.id.menu_frame, mFrag);
+		t.commit();
+
 		// set the secondaryMenu
 		sm.setSecondaryMenu(R.layout.menu_frame_two);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.menu_frame_two, new RightUserCenterFragment())
+				.replace(R.id.menu_frame_two, new SecondaryMenuFragment())
 				.commit();
 	}
 

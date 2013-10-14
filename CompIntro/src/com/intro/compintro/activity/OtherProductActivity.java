@@ -13,17 +13,18 @@ import com.intro.compintro.fragment.TestFragment;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class MarketingActivity extends BaseActivity {
+public class OtherProductActivity extends BaseActivity {
 
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 
-	private static final String[] CONTENT = new String[] { "行业资讯", "发展历程",
-			"企业新闻", "营销资讯" };
+	private static final String[] CONTENT = new String[] { "F产品", "G产品", "H产品",
+			"I产品", "J产品" };
 	private static final int[] ICONS = new int[] {
 			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
-			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar };
+			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
+			R.drawable.perm_group_calendar, };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,13 +58,6 @@ public class MarketingActivity extends BaseActivity {
 		});
 	}
 
-	@Override
-	public void onBackPressed() {
-		Intent i = new Intent(this, BasicInfoActivity.class);
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(i);
-	}
-
 	class GoogleMusicAdapter extends FragmentPagerAdapter implements
 			IconPagerAdapter {
 		public GoogleMusicAdapter(FragmentManager fm) {
@@ -89,6 +83,13 @@ public class MarketingActivity extends BaseActivity {
 		public int getCount() {
 			return CONTENT.length;
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(this, BasicInfoActivity.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(i);
 	}
 
 }

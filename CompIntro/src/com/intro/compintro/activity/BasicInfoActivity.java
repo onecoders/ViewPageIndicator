@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -18,7 +19,6 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class BasicInfoActivity extends BaseActivity {
 
-	private Fragment mContent;
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
@@ -43,29 +43,23 @@ public class BasicInfoActivity extends BaseActivity {
 		indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 
-		/*
-		 * // set the Above View if (savedInstanceState != null) mContent =
-		 * getSupportFragmentManager().getFragment( savedInstanceState,
-		 * "mContent"); if (mContent == null) mContent = new
-		 * BasicInfoFragment();
-		 * 
-		 * getSupportFragmentManager().beginTransaction()
-		 * .replace(R.id.content_frame, mContent).commit();
-		 */
-	}
+		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		mContent = adapter.getItem(pager.getCurrentItem());
-		getSupportFragmentManager().putFragment(outState, "mContent", mContent);
-	}
+			@Override
+			public void onPageSelected(int arg0) {
+				//
+			}
 
-	public void switchContent(Fragment fragment) {
-		mContent = fragment;
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
-		getSlidingMenu().showContent();
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+
+			}
+		});
 	}
 
 	@Override
