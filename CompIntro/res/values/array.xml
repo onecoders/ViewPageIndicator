@@ -7,19 +7,18 @@
         <item>主打产品</item>
         <item>更多介绍</item>
     </string-array>
-    
     <string-array name="menu_items_name_en">
         <item>Basic Information</item>
         <item>Marketing Activity</item>
         <item>Main Product</item>
         <item>More Product</item>
     </string-array>
-    
-    <integer-array name="menu_item_pic">
+
+    <integer-array name="menu_item_icon">
         <item>@drawable/basic_info</item>
         <item>@drawable/marketing</item>
         <item>@drawable/main_product</item>
         <item>@drawable/other_product</item>
     </integer-array>
-    
+
 </resources>

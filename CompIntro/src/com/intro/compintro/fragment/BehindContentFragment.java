@@ -32,7 +32,7 @@ public class BehindContentFragment extends SherlockListFragment {
 				R.array.menu_items_name_zh);
 		String[] menuItemNamesEn = getResources().getStringArray(
 				R.array.menu_items_name_en);
-		int[] icon = getResources().getIntArray(R.array.menu_item_pic);
+		int[] icon = getResources().getIntArray(R.array.menu_item_icon);
 		List<MenuItem> menuList = new ArrayList<MenuItem>();
 
 		for (int i = 0; i < icon.length; i++) {
@@ -64,6 +64,8 @@ public class BehindContentFragment extends SherlockListFragment {
 		}
 		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
+		getSherlockActivity().overridePendingTransition(R.anim.zoomin,
+				R.anim.zoomout);
 	}
-
+	
 }
