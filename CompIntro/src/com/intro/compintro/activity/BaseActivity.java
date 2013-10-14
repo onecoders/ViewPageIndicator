@@ -2,9 +2,13 @@ package com.intro.compintro.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.app.ActionBar;
 import com.intro.compintro.R;
 import com.intro.compintro.fragment.BehindContentFragment;
 import com.intro.compintro.fragment.SecondaryMenuFragment;
@@ -13,9 +17,22 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity {
 
+	private int menuBtnId;
+	private int titleId;
+
+	public BaseActivity(int menuBtnId, int titleId) {
+		this.menuBtnId = menuBtnId;
+		this.titleId = titleId;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initActinBar();
+		initSlidingMenu();
+	}
+
+	private void initSlidingMenu() {
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT_RIGHT);
@@ -24,8 +41,6 @@ public class BaseActivity extends SlidingFragmentActivity {
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		// show home as up so we can toggle
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -43,20 +58,29 @@ public class BaseActivity extends SlidingFragmentActivity {
 				.commit();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			toggle();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	public void initActinBar() {
+		ActionBar actionBar = getSupportActionBar();
+		// set LayoutParams
+		ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+				ActionBar.LayoutParams.WRAP_CONTENT,
+				ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+		// Set display to custom next
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		// Do any other config to the action bar
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		// Get custom view
+		View actionbarView = LayoutInflater.from(this).inflate(
+				R.layout.actionbar, null);
+		ImageButton btn = (ImageButton) actionbarView
+				.findViewById(R.id.menu_btn);
+		btn.setBackgroundResource(menuBtnId);
+		TextView tv = (TextView) actionbarView.findViewById(R.id.title);
+		tv.setText(titleId);
+		// Now set custom view
+		actionBar.setCustomView(actionbarView, params);
 	}
 
 }

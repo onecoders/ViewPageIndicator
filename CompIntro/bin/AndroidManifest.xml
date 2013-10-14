@@ -15,18 +15,16 @@
         android:theme="@style/StyledIndicators" >
         <activity
             android:name="com.intro.compintro.activity.BasicInfoActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/basic_info_title" >
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.intro.compintro.activity.MarketingActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/marketing_title" >
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MarketingActivity" />
 
@@ -35,8 +33,7 @@
         </activity>
         <activity
             android:name="com.intro.compintro.activity.MainProductActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/main_product_title" >
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MainProductActivity" />
 
@@ -45,8 +42,7 @@
         </activity>
         <activity
             android:name="com.intro.compintro.activity.OtherProductActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/other_product_title" >
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.OtherProductActivity" />
 

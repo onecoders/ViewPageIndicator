@@ -19,6 +19,10 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class BasicInfoActivity extends BaseActivity {
 
+	public BasicInfoActivity() {
+		super(R.drawable.biz_pics_main_back, R.string.basic_info_title);
+	}
+
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;

@@ -15,6 +15,10 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class MarketingActivity extends BaseActivity {
 
+	public MarketingActivity() {
+		super(R.drawable.biz_pics_main_back, R.string.marketing_title);
+	}
+
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
