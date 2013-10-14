@@ -13,18 +13,11 @@
         android:layout_centerVertical="true" />
 
     <View
-        android:id="@+id/divider_left"
-        android:layout_width="0.5dip"
+        android:id="@+id/divider"
+        android:layout_width="1dip"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/menu_btn"
-        android:background="#db2202" />
-
-    <View
-        android:id="@+id/divider_right"
-        android:layout_width="0.5dip"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@id/divider_left"
-        android:background="#b00700" />
+        android:background="@drawable/base_action_bar_back_divider" />
 
     <TextView
         android:id="@+id/title"
@@ -32,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@id/divider_right"
+        android:layout_toRightOf="@id/divider"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />

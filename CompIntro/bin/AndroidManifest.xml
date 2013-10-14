@@ -14,12 +14,23 @@
         android:label="@string/app_name"
         android:theme="@style/StyledIndicators" >
         <activity
-            android:name="com.intro.compintro.activity.BasicInfoActivity"
-            android:configChanges="orientation|screenSize" >
+            android:name="com.intro.compintro.activity.SplashActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.intro.compintro.activity.BasicInfoActivity"
+            android:configChanges="orientation|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.BasicInfoActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity

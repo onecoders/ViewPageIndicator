@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.intro.compintro.R;
 import com.intro.compintro.fragment.TestFragment;
+import com.intro.compintro.util.Action;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -64,7 +65,7 @@ public class MainProductActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(this, BasicInfoActivity.class);
+		Intent i = new Intent(Action.ACTION_BASIC_INFO);
 		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
 	}

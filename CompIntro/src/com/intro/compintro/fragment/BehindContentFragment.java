@@ -1,6 +1,5 @@
 package com.intro.compintro.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +10,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.intro.compintro.R;
-import com.intro.compintro.activity.BasicInfoActivity;
-import com.intro.compintro.activity.MainProductActivity;
-import com.intro.compintro.activity.MarketingActivity;
-import com.intro.compintro.activity.OtherProductActivity;
+import com.intro.compintro.util.Action;
 
 public class BehindContentFragment extends SherlockListFragment {
 
@@ -37,19 +33,18 @@ public class BehindContentFragment extends SherlockListFragment {
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
 		Intent i = null;
-		Context context = getSherlockActivity();
 		switch (position) {
 		case 0:
-			i = new Intent(context, BasicInfoActivity.class);
+			i = new Intent(Action.ACTION_BASIC_INFO);
 			break;
 		case 1:
-			i = new Intent(context, MarketingActivity.class);
+			i = new Intent(Action.ACTION_MARKETING);
 			break;
 		case 2:
-			i = new Intent(context, MainProductActivity.class);
+			i = new Intent(Action.ACTION_MAIN_PRODUCT);
 			break;
 		case 3:
-			i = new Intent(context, OtherProductActivity.class);
+			i = new Intent(Action.ACTION_OTHER_PRODUCT);
 			break;
 		}
 		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
