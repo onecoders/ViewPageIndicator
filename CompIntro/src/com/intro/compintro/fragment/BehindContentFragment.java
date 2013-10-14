@@ -1,5 +1,8 @@
 package com.intro.compintro.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +13,8 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.adapter.BehindMenuAdapter;
+import com.intro.compintro.datastruct.MenuItem;
 import com.intro.compintro.util.Action;
 
 public class BehindContentFragment extends SherlockListFragment {
@@ -17,17 +22,27 @@ public class BehindContentFragment extends SherlockListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		return inflater.inflate(R.layout.behind_menu, null);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		String[] colors = getResources().getStringArray(R.array.color_names);
-		ArrayAdapter<String> colorAdapter = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, colors);
-		setListAdapter(colorAdapter);
+		String[] menuItemNamesZh = getResources().getStringArray(
+				R.array.menu_items_name_zh);
+		String[] menuItemNamesEn = getResources().getStringArray(
+				R.array.menu_items_name_en);
+		int[] icon = getResources().getIntArray(R.array.menu_item_pic);
+		List<MenuItem> menuList = new ArrayList<MenuItem>();
+
+		for (int i = 0; i < icon.length; i++) {
+			menuList.add(new MenuItem(icon[i], menuItemNamesZh[i],
+					menuItemNamesEn[i]));
+		}
+
+		ArrayAdapter<MenuItem> adapter = new BehindMenuAdapter(
+				getSherlockActivity(), menuList);
+		setListAdapter(adapter);
 	}
 
 	@Override
