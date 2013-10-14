@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -15,7 +16,8 @@ import com.intro.compintro.fragment.SecondaryMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class BaseActivity extends SlidingFragmentActivity {
+public class BaseActivity extends SlidingFragmentActivity implements
+		OnClickListener {
 
 	private int menuBtnId;
 	private int titleId;
@@ -74,13 +76,40 @@ public class BaseActivity extends SlidingFragmentActivity {
 		// Get custom view
 		View actionbarView = LayoutInflater.from(this).inflate(
 				R.layout.actionbar, null);
-		ImageButton btn = (ImageButton) actionbarView
+		ImageButton menuBtn = (ImageButton) actionbarView
 				.findViewById(R.id.menu_btn);
-		btn.setBackgroundResource(menuBtnId);
+		menuBtn.setBackgroundResource(menuBtnId);
+		menuBtn.setOnClickListener(this);
 		TextView tv = (TextView) actionbarView.findViewById(R.id.title);
 		tv.setText(titleId);
+		ImageButton personalBtn = (ImageButton) actionbarView
+				.findViewById(R.id.personal_btn);
+		personalBtn.setOnClickListener(this);
 		// Now set custom view
 		actionBar.setCustomView(actionbarView, params);
+	}
+
+	@Override
+	public void onClick(View v) {
+		SlidingMenu sm = getSlidingMenu();
+		switch (v.getId()) {
+		case R.id.menu_btn:
+			if (sm.isMenuShowing()) {
+				showContent();
+			} else {
+				getSlidingMenu().showMenu();
+			}
+			break;
+		case R.id.personal_btn:
+			if (sm.isSecondaryMenuShowing()) {
+				showContent();
+			} else {
+				sm.showSecondaryMenu();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 }
