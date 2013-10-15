@@ -27,8 +27,8 @@ public class MarketingFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarContent(actionBar,
-				R.drawable.biz_pics_main_back, R.string.marketing_title);
+		ViewHelper.setActionBarContent(actionBar, R.drawable.marketing_back,
+				R.string.marketing_title);
 	}
 
 	private FragmentPagerAdapter adapter;

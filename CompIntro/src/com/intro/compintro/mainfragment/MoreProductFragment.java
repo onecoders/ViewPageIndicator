@@ -27,8 +27,8 @@ public class MoreProductFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarContent(actionBar,
-				R.drawable.biz_pics_main_back, R.string.other_product_title);
+		ViewHelper.setActionBarContent(actionBar, R.drawable.more_product_back,
+				R.string.other_product_title);
 	}
 
 	private FragmentPagerAdapter adapter;
