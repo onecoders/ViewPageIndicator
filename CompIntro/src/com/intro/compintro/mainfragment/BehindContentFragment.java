@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.activity.MainActivity;
@@ -47,7 +47,7 @@ public class BehindContentFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
-		Fragment newContent = null;
+		SherlockFragment newContent = null;
 		switch (position) {
 		case 0:
 			newContent = new BasicInfoFragment();
@@ -67,7 +67,7 @@ public class BehindContentFragment extends SherlockListFragment {
 	}
 
 	// the meat of switching the above fragment
-	private void switchFragment(Fragment fragment) {
+	private void switchFragment(SherlockFragment fragment) {
 		if (getSherlockActivity() == null)
 			return;
 

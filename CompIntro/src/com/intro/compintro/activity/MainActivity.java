@@ -4,32 +4,35 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.mainfragment.BasicInfoFragment;
 
 public class MainActivity extends BaseActivity {
 
+	SherlockFragment mFragment;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_frame);
+		mFragment = new BasicInfoFragment();
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, new BasicInfoFragment()).commit();
+				.replace(R.id.content_frame, mFragment).commit();
 
 	}
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
+	public void onBackPressed() {
+		if (mFragment instanceof BasicInfoFragment) {
 			if (!getSlidingMenu().isMenuShowing()) {
 				exitBy2Click();
 			}
+		} else {
+			switchContent(new BasicInfoFragment());
 		}
-		return false;
 	}
 
 	private static Boolean isExit = false;
@@ -54,7 +57,8 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
-	public void switchContent(Fragment fragment) {
+	public void switchContent(SherlockFragment fragment) {
+		mFragment = fragment;
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
 		getSlidingMenu().showContent();
