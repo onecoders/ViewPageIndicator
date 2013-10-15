@@ -1,7 +1,6 @@
 package com.intro.compintro.mainfragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,6 +18,9 @@ import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
 public class BasicInfoFragment extends SherlockFragment {
+
+	private static final String BASIC_INFO_POS = "basic_info_pos";
+	private int currentPos = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class BasicInfoFragment extends SherlockFragment {
 
 		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
+		if (savedInstanceState != null) {
+			currentPos = savedInstanceState.getInt(BASIC_INFO_POS);
+		}
+		pager.setCurrentItem(currentPos);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
@@ -69,7 +75,6 @@ public class BasicInfoFragment extends SherlockFragment {
 
 			}
 		});
-
 		return convertView;
 	}
 
@@ -80,7 +85,7 @@ public class BasicInfoFragment extends SherlockFragment {
 		}
 
 		@Override
-		public Fragment getItem(int position) {
+		public SherlockFragment getItem(int position) {
 			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
 		}
 
@@ -102,8 +107,9 @@ public class BasicInfoFragment extends SherlockFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		currentPos = pager.getCurrentItem();
 		super.onSaveInstanceState(outState);
-		getChildFragmentManager().putFragment(outState, "mContent", null);
+		outState.putInt(BASIC_INFO_POS, currentPos);
 	}
 
 }

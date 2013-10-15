@@ -20,6 +20,9 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class MarketingFragment extends SherlockFragment {
 
+	private static final String MARKETING_POS = "marketing_pos";
+	private int currentPos = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +53,10 @@ public class MarketingFragment extends SherlockFragment {
 
 		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
+		if (savedInstanceState != null) {
+			currentPos = savedInstanceState.getInt(MARKETING_POS);
+		}
+		pager.setCurrentItem(currentPos);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
@@ -101,8 +108,9 @@ public class MarketingFragment extends SherlockFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		currentPos = pager.getCurrentItem();
 		super.onSaveInstanceState(outState);
-		getChildFragmentManager().putFragment(outState, "mContent", null);
+		outState.putInt(MARKETING_POS, currentPos);
 	}
 
 }
