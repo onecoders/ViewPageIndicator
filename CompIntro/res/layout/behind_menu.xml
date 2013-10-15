@@ -3,6 +3,7 @@
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/list_padding"
+    android:layout_marginBottom="@dimen/list_padding"
+    android:layout_marginTop="@dimen/list_padding"
     android:background="@drawable/night_biz_pc_account_content"
     android:padding="@dimen/list_padding" />
