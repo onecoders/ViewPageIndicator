@@ -8,5 +8,6 @@
     <string name="other_product_title">更多产品</string>
     <string name="action_settings">Settings</string>
     <string name="clickAgain">再按一次退出程序</string>
+    <string name="user_center">用户中心</string>
 
 </resources>

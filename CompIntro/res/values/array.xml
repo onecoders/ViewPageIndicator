@@ -20,5 +20,20 @@
         <item>@drawable/main_product</item>
         <item>@drawable/other_product</item>
     </integer-array>
+    
+    <string-array name="secondary_menu_title">
+        <item>设置</item>
+        <item>收藏</item>
+        <item>分享</item>
+    </string-array>
+    
+    <integer-array name="secondary_menu_icon">
+        <item>@drawable/basic_info</item>
+        <item>@drawable/marketing</item>
+        <item>@drawable/main_product</item>
+        <item>@drawable/other_product</item>
+    </integer-array>
+    
+    
 
 </resources>
