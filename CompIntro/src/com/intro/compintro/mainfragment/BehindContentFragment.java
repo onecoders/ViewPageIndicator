@@ -3,6 +3,7 @@ package com.intro.compintro.mainfragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,17 +33,18 @@ public class BehindContentFragment extends SherlockListFragment {
 				R.array.menu_items_name_zh);
 		String[] menuItemNamesEn = getResources().getStringArray(
 				R.array.menu_items_name_en);
-		int[] icon = getResources().getIntArray(R.array.menu_item_icon);
+		TypedArray array = getResources().obtainTypedArray(
+				R.array.menu_item_icon);
 		List<MenuItem> menuList = new ArrayList<MenuItem>();
 
-		for (int i = 0; i < icon.length; i++) {
-			menuList.add(new MenuItem(icon[i], menuItemNamesZh[i],
-					menuItemNamesEn[i]));
+		for (int i = 0; i < array.length(); i++) {
+			menuList.add(new MenuItem(array.getResourceId(i, 0),
+					menuItemNamesZh[i], menuItemNamesEn[i]));
 		}
-
 		ArrayAdapter<MenuItem> adapter = new BehindMenuAdapter(
 				getSherlockActivity(), menuList);
 		setListAdapter(adapter);
+		array.recycle();
 	}
 
 	@Override

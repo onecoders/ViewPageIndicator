@@ -9,8 +9,7 @@
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="10dip"
-        android:src="@drawable/biz_navigation_tab_ugc" />
+        android:layout_margin="10dip" />
 
     <LinearLayout
         android:layout_width="wrap_content"
