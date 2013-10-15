@@ -33,18 +33,18 @@ public class BehindContentFragment extends SherlockListFragment {
 				R.array.menu_items_name_zh);
 		String[] menuItemNamesEn = getResources().getStringArray(
 				R.array.menu_items_name_en);
-		TypedArray array = getResources().obtainTypedArray(
+		TypedArray iconArray = getResources().obtainTypedArray(
 				R.array.menu_item_icon);
 		List<MenuItem> menuList = new ArrayList<MenuItem>();
 
-		for (int i = 0; i < array.length(); i++) {
-			menuList.add(new MenuItem(array.getResourceId(i, 0),
+		for (int i = 0; i < iconArray.length(); i++) {
+			menuList.add(new MenuItem(iconArray.getResourceId(i, 0),
 					menuItemNamesZh[i], menuItemNamesEn[i]));
 		}
 		ArrayAdapter<MenuItem> adapter = new BehindMenuAdapter(
 				getSherlockActivity(), menuList);
 		setListAdapter(adapter);
-		array.recycle();
+		iconArray.recycle();
 	}
 
 	@Override

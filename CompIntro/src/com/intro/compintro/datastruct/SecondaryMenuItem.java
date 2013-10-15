@@ -3,11 +3,11 @@ package com.intro.compintro.datastruct;
 public class SecondaryMenuItem {
 
 	private int iconId;
-	private int titleId;
+	private String title;
 
-	public SecondaryMenuItem(int iconId, int titleId) {
+	public SecondaryMenuItem(int iconId, String title) {
 		this.iconId = iconId;
-		this.titleId = titleId;
+		this.title = title;
 	}
 
 	public int getIconId() {
@@ -18,12 +18,12 @@ public class SecondaryMenuItem {
 		this.iconId = iconId;
 	}
 
-	public int getTitleId() {
-		return titleId;
+	public String getTitleId() {
+		return title;
 	}
 
-	public void setTitleId(int titleId) {
-		this.titleId = titleId;
+	public void setTitleId(String title) {
+		this.title = title;
 	}
 
 }

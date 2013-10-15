@@ -28,10 +28,9 @@
     </string-array>
     
     <integer-array name="secondary_menu_icon">
-        <item>@drawable/basic_info</item>
-        <item>@drawable/marketing</item>
-        <item>@drawable/main_product</item>
-        <item>@drawable/other_product</item>
+        <item>@drawable/biz_pc_list_setting_icon</item>
+        <item>@drawable/biz_pc_go_favor</item>
+        <item>@drawable/biz_audio_btn_share</item>
     </integer-array>
     
     
