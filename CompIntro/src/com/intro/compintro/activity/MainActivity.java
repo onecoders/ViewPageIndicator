@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.intro.compintro.R;
-import com.intro.compintro.fragment.BasicInfoFragment;
+import com.intro.compintro.mainfragment.BasicInfoFragment;
 
 public class MainActivity extends BaseActivity {
 

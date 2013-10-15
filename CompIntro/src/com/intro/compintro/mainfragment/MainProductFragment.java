@@ -1,4 +1,4 @@
-package com.intro.compintro.fragment;
+package com.intro.compintro.mainfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.innerfragment.TestFragment;
 import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;

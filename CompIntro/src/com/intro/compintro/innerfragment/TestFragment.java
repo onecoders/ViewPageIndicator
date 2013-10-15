@@ -1,4 +1,4 @@
-package com.intro.compintro.fragment;
+package com.intro.compintro.innerfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

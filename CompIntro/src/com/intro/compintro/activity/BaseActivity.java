@@ -10,8 +10,8 @@ import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.intro.compintro.R;
-import com.intro.compintro.fragment.BehindContentFragment;
-import com.intro.compintro.fragment.SecondaryMenuFragment;
+import com.intro.compintro.mainfragment.BehindContentFragment;
+import com.intro.compintro.mainfragment.SecondaryMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 

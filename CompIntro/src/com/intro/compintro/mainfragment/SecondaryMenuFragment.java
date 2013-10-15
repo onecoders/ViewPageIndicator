@@ -1,4 +1,4 @@
-package com.intro.compintro.fragment;
+package com.intro.compintro.mainfragment;
 
 import android.content.Context;
 import android.os.Bundle;

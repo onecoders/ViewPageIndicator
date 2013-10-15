@@ -1,4 +1,4 @@
-package com.intro.compintro.fragment;
+package com.intro.compintro.mainfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,29 +13,31 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.innerfragment.TestFragment;
 import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class MarketingFragment extends SherlockFragment {
+public class BasicInfoFragment extends SherlockFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
 		ViewHelper.setActionBarContent(actionBar,
-				R.drawable.biz_pics_main_back, R.string.marketing_title);
+				R.drawable.biz_pics_main_back, R.string.basic_info_title);
 	}
 
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 
-	private static final String[] CONTENT = new String[] { "行业资讯", "发展历程",
-			"企业新闻", "营销资讯" };
+	private static final String[] CONTENT = new String[] { "公司介绍", "发展历程",
+			"公司实力", "资质荣誉", "联系我们" };
 	private static final int[] ICONS = new int[] {
 			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
-			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar };
+			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
+			R.drawable.perm_group_calendar, };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
