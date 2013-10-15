@@ -25,37 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.intro.compintro.activity.BasicInfoActivity"
+            android:name="com.intro.compintro.activity.MainActivity"
             android:configChanges="orientation|screenSize" >
             <intent-filter>
-                <action android:name="android.intent.action.BasicInfoActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.intro.compintro.activity.MarketingActivity"
-            android:configChanges="orientation|screenSize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MarketingActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.intro.compintro.activity.MainProductActivity"
-            android:configChanges="orientation|screenSize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MainProductActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.intro.compintro.activity.OtherProductActivity"
-            android:configChanges="orientation|screenSize" >
-            <intent-filter>
-                <action android:name="android.intent.action.OtherProductActivity" />
+                <action android:name="android.intent.action.MainActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -1,47 +1,54 @@
-package com.intro.compintro.activity;
+package com.intro.compintro.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
-import com.intro.compintro.fragment.TestFragment;
-import com.intro.compintro.util.Action;
+import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class MainProductActivity extends BaseActivity {
+public class BasicInfoFragment extends SherlockFragment {
 
-	public MainProductActivity() {
-		super(R.drawable.biz_pics_main_back, R.string.main_product_title);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
+		ViewHelper.setActionBarContent(actionBar,
+				R.drawable.biz_pics_main_back, R.string.basic_info_title);
 	}
 
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 
-	private static final String[] CONTENT = new String[] { "A产品", "B产品", "C产品",
-			"D产品", "E产品" };
+	private static final String[] CONTENT = new String[] { "公司介绍", "发展历程",
+			"公司实力", "资质荣誉", "联系我们" };
 	private static final int[] ICONS = new int[] {
 			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
 			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
 			R.drawable.perm_group_calendar, };
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.simple_tabs);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View convertView = inflater.inflate(R.layout.simple_tabs, container,
+				false);
+		adapter = new GoogleMusicAdapter(getChildFragmentManager());
 
-		adapter = new GoogleMusicAdapter(getSupportFragmentManager());
-
-		pager = (ViewPager) findViewById(R.id.pager);
+		pager = (ViewPager) convertView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
-		indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
@@ -61,13 +68,8 @@ public class MainProductActivity extends BaseActivity {
 
 			}
 		});
-	}
 
-	@Override
-	public void onBackPressed() {
-		Intent i = new Intent(Action.ACTION_BASIC_INFO);
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(i);
+		return convertView;
 	}
 
 	class GoogleMusicAdapter extends FragmentPagerAdapter implements
@@ -95,6 +97,12 @@ public class MainProductActivity extends BaseActivity {
 		public int getCount() {
 			return CONTENT.length;
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getChildFragmentManager().putFragment(outState, "mContent", null);
 	}
 
 }

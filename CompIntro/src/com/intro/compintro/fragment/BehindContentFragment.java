@@ -3,8 +3,8 @@ package com.intro.compintro.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +13,9 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.activity.MainActivity;
 import com.intro.compintro.adapter.BehindMenuAdapter;
 import com.intro.compintro.datastruct.MenuItem;
-import com.intro.compintro.util.Action;
 
 public class BehindContentFragment extends SherlockListFragment {
 
@@ -47,25 +47,34 @@ public class BehindContentFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
-		Intent i = null;
+		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			i = new Intent(Action.ACTION_BASIC_INFO);
+			newContent = new BasicInfoFragment();
 			break;
 		case 1:
-			i = new Intent(Action.ACTION_MARKETING);
+			newContent = new MarketingFragment();
 			break;
 		case 2:
-			i = new Intent(Action.ACTION_MAIN_PRODUCT);
+			newContent = new MainProductFragment();
 			break;
 		case 3:
-			i = new Intent(Action.ACTION_OTHER_PRODUCT);
+			newContent = new MoreProductFragment();
 			break;
 		}
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(i);
-		getSherlockActivity().overridePendingTransition(R.anim.zoomin,
-				R.anim.zoomout);
+		if (newContent != null)
+			switchFragment(newContent);
 	}
-	
+
+	// the meat of switching the above fragment
+	private void switchFragment(Fragment fragment) {
+		if (getSherlockActivity() == null)
+			return;
+
+		if (getSherlockActivity() instanceof MainActivity) {
+			MainActivity fca = (MainActivity) getActivity();
+			fca.switchContent(fragment);
+		}
+	}
+
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.intro.compintro.R;
@@ -18,14 +17,6 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
-
-	private int menuBtnId;
-	private int titleId;
-
-	public BaseActivity(int menuBtnId, int titleId) {
-		this.menuBtnId = menuBtnId;
-		this.titleId = titleId;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,10 +69,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 				R.layout.actionbar, null);
 		ImageButton menuBtn = (ImageButton) actionbarView
 				.findViewById(R.id.menu_btn);
-		menuBtn.setBackgroundResource(menuBtnId);
 		menuBtn.setOnClickListener(this);
-		TextView tv = (TextView) actionbarView.findViewById(R.id.title);
-		tv.setText(titleId);
 		ImageButton personalBtn = (ImageButton) actionbarView
 				.findViewById(R.id.personal_btn);
 		personalBtn.setOnClickListener(this);
