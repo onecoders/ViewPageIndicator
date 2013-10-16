@@ -1547,7 +1547,8 @@ containing a value of this type.
         public static final int sherlock_spinner_item=0x7f030023;
         public static final int simple_tabs=0x7f030024;
         public static final int slidingmenumain=0x7f030025;
-        public static final int splash=0x7f030026;
+        public static final int slip_to_padding_refresh=0x7f030026;
+        public static final int splash=0x7f030027;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1596,6 +1597,7 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int basic_info_title=0x7f0a000e;
         public static final int clickAgain=0x7f0a0013;
+        public static final int loading=0x7f0a0015;
         public static final int main_product_title=0x7f0a0010;
         public static final int marketing_title=0x7f0a000f;
         public static final int other_product_title=0x7f0a0011;
