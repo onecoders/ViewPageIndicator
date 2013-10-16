@@ -339,13 +339,13 @@ public final class R {
 		public static final int abs__textfield_searchview_right_holo_dark = 0x7f02006d;
 		public static final int abs__textfield_searchview_right_holo_light = 0x7f02006e;
 		public static final int abs__toast_frame = 0x7f02006f;
-		public static final int vpi__tab_indicator = 0x7f02009a;
-		public static final int vpi__tab_selected_focused_holo = 0x7f02009b;
-		public static final int vpi__tab_selected_holo = 0x7f02009c;
-		public static final int vpi__tab_selected_pressed_holo = 0x7f02009d;
-		public static final int vpi__tab_unselected_focused_holo = 0x7f02009e;
-		public static final int vpi__tab_unselected_holo = 0x7f02009f;
-		public static final int vpi__tab_unselected_pressed_holo = 0x7f0200a0;
+		public static final int vpi__tab_indicator = 0x7f02009b;
+		public static final int vpi__tab_selected_focused_holo = 0x7f02009c;
+		public static final int vpi__tab_selected_holo = 0x7f02009d;
+		public static final int vpi__tab_selected_pressed_holo = 0x7f02009e;
+		public static final int vpi__tab_unselected_focused_holo = 0x7f02009f;
+		public static final int vpi__tab_unselected_holo = 0x7f0200a0;
+		public static final int vpi__tab_unselected_pressed_holo = 0x7f0200a1;
 	}
 	public static final class id {
 		public static final int abs__action_bar = 0x7f05002a;
@@ -402,7 +402,7 @@ public final class R {
 		public static final int showCustom = 0x7f050008;
 		public static final int showHome = 0x7f050005;
 		public static final int showTitle = 0x7f050007;
-		public static final int slidingmenumain = 0x7f050050;
+		public static final int slidingmenumain = 0x7f050051;
 		public static final int tabMode = 0x7f050003;
 		public static final int top = 0x7f050019;
 		public static final int triangle = 0x7f050016;
@@ -440,9 +440,9 @@ public final class R {
 		public static final int abs__search_dropdown_item_icons_2line = 0x7f030012;
 		public static final int abs__search_view = 0x7f030013;
 		public static final int abs__simple_dropdown_hint = 0x7f030014;
-		public static final int sherlock_spinner_dropdown_item = 0x7f030020;
-		public static final int sherlock_spinner_item = 0x7f030021;
-		public static final int slidingmenumain = 0x7f030023;
+		public static final int sherlock_spinner_dropdown_item = 0x7f030022;
+		public static final int sherlock_spinner_item = 0x7f030023;
+		public static final int slidingmenumain = 0x7f030025;
 	}
 	public static final class string {
 		public static final int abs__action_bar_home_description = 0x7f0a0000;

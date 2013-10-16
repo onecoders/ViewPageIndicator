@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
-import com.intro.compintro.innerfragment.TestFragment;
+import com.intro.compintro.innerfragment.SampleListFragment;
 import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
@@ -46,7 +46,7 @@ public class BasicInfoFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.simple_tabs, container,
 				false);
-		adapter = new GoogleMusicAdapter(getChildFragmentManager());
+		adapter = new BasicInfoAdapter(getChildFragmentManager());
 
 		pager = (ViewPager) convertView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
@@ -78,15 +78,19 @@ public class BasicInfoFragment extends SherlockFragment {
 		return convertView;
 	}
 
-	class GoogleMusicAdapter extends FragmentPagerAdapter implements
+	class BasicInfoAdapter extends FragmentPagerAdapter implements
 			IconPagerAdapter {
-		public GoogleMusicAdapter(FragmentManager fm) {
+		public BasicInfoAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
 		@Override
 		public SherlockFragment getItem(int position) {
-			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
+			Bundle extra = new Bundle();
+			extra.putString(SampleListFragment.CONTENT_KEY, CONTENT[position]);
+			SampleListFragment fragment = new SampleListFragment();
+			fragment.setArguments(extra);
+			return fragment;
 		}
 
 		@Override

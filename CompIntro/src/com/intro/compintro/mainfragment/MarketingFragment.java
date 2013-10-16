@@ -1,7 +1,6 @@
 package com.intro.compintro.mainfragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
-import com.intro.compintro.innerfragment.TestFragment;
+import com.intro.compintro.innerfragment.SampleListFragment;
 import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
@@ -46,7 +45,7 @@ public class MarketingFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.simple_tabs, container,
 				false);
-		adapter = new GoogleMusicAdapter(getChildFragmentManager());
+		adapter = new MarketingAdapter(getChildFragmentManager());
 
 		pager = (ViewPager) convertView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
@@ -79,15 +78,19 @@ public class MarketingFragment extends SherlockFragment {
 		return convertView;
 	}
 
-	class GoogleMusicAdapter extends FragmentPagerAdapter implements
+	class MarketingAdapter extends FragmentPagerAdapter implements
 			IconPagerAdapter {
-		public GoogleMusicAdapter(FragmentManager fm) {
+		public MarketingAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
 		@Override
-		public Fragment getItem(int position) {
-			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
+		public SherlockFragment getItem(int position) {
+			Bundle extra = new Bundle();
+			extra.putString(SampleListFragment.CONTENT_KEY, CONTENT[position]);
+			SampleListFragment fragment = new SampleListFragment();
+			fragment.setArguments(extra);
+			return fragment;
 		}
 
 		@Override

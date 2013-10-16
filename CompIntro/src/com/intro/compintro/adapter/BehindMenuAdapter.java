@@ -57,16 +57,11 @@ public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 		((TextView) convertView.findViewById(R.id.second_title)).setText(item
 				.getTitleEn());
 		if (position == selectItem) {
-			convertView.setBackgroundColor(getColor(R.color.pressed_w));
+			convertView.setBackgroundResource(R.color.pressed_w);
 		} else {
-			convertView
-					.setBackgroundColor(getColor(android.R.color.transparent));
+			convertView.setBackgroundResource(android.R.color.transparent);
 		}
 		return convertView;
-	}
-
-	private int getColor(int colorId) {
-		return getContext().getResources().getColor(colorId);
 	}
 
 }

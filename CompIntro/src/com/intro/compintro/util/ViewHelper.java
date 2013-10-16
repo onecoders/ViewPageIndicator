@@ -12,11 +12,13 @@ public class ViewHelper {
 	public static void setActionBarContent(ActionBar actionbar, int backIconId,
 			int titleId) {
 		View actionbarView = actionbar.getCustomView();
-		ImageButton menuBtn = (ImageButton) actionbarView
-				.findViewById(R.id.menu_btn);
-		menuBtn.setBackgroundResource(backIconId);
-		TextView tv = (TextView) actionbarView.findViewById(R.id.title);
-		tv.setText(titleId);
+		if (actionbarView != null) {
+			ImageButton menuBtn = (ImageButton) actionbarView
+					.findViewById(R.id.menu_btn);
+			menuBtn.setBackgroundResource(backIconId);
+			TextView tv = (TextView) actionbarView.findViewById(R.id.title);
+			tv.setText(titleId);
+		}
 	}
 
 }
