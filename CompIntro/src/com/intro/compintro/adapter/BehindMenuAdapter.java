@@ -16,6 +16,7 @@ import com.intro.compintro.datastruct.MenuItem;
 public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 
 	private List<MenuItem> menuList;
+	private int selectItem = 0;
 
 	public BehindMenuAdapter(Context context, List<MenuItem> menuList) {
 		super(context, 0, menuList);
@@ -37,6 +38,11 @@ public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 		return menuList.size();
 	}
 
+	public void setSelectItem(int selectItem) {
+		this.selectItem = selectItem;
+		notifyDataSetInvalidated();
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		MenuItem item = getItem(position);
@@ -50,7 +56,17 @@ public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 				.getTitleZh());
 		((TextView) convertView.findViewById(R.id.second_title)).setText(item
 				.getTitleEn());
+		if (position == selectItem) {
+			convertView.setBackgroundColor(getColor(R.color.pressed_w));
+		} else {
+			convertView
+					.setBackgroundColor(getColor(android.R.color.transparent));
+		}
 		return convertView;
+	}
+
+	private int getColor(int colorId) {
+		return getContext().getResources().getColor(colorId);
 	}
 
 }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -19,6 +18,8 @@ import com.intro.compintro.adapter.BehindMenuAdapter;
 import com.intro.compintro.datastruct.MenuItem;
 
 public class BehindContentFragment extends SherlockListFragment {
+
+	private BehindMenuAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +42,7 @@ public class BehindContentFragment extends SherlockListFragment {
 			menuList.add(new MenuItem(iconArray.getResourceId(i, 0),
 					menuItemNamesZh[i], menuItemNamesEn[i]));
 		}
-		ArrayAdapter<MenuItem> adapter = new BehindMenuAdapter(
-				getSherlockActivity(), menuList);
+		adapter = new BehindMenuAdapter(getSherlockActivity(), menuList);
 		setListAdapter(adapter);
 		iconArray.recycle();
 	}
@@ -66,6 +66,12 @@ public class BehindContentFragment extends SherlockListFragment {
 		}
 		if (newContent != null)
 			switchFragment(newContent);
+		adapter.setSelectItem(position);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
 	}
 
 	// the meat of switching the above fragment
