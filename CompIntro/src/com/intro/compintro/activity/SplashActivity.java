@@ -9,7 +9,7 @@ import com.intro.compintro.R;
 
 public class SplashActivity extends SherlockActivity {
 
-	private static final int SPLASH_DISPLAY_LENGHT = 2000;
+	private static final int SPLASH_DISPLAY_LENGHT = 1000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
