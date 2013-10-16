@@ -347,7 +347,7 @@ int drawable base_main_action_personal_normal_pressed 0x7f020075
 int drawable base_tabpager_indicator_selected 0x7f020076
 int drawable basic_info 0x7f020077
 int drawable basic_info_back 0x7f020078
-int drawable biz_ad_new_version1_img_bg0 0x7f020079
+int drawable biz_ad_new_version1_img_bg1 0x7f020079
 int drawable biz_audio_btn_share 0x7f02007a
 int drawable biz_pc_go_favor 0x7f02007b
 int drawable biz_pc_list_setting_icon 0x7f02007c

@@ -1371,7 +1371,7 @@ containing a value of this type.
         public static final int base_tabpager_indicator_selected=0x7f020076;
         public static final int basic_info=0x7f020077;
         public static final int basic_info_back=0x7f020078;
-        public static final int biz_ad_new_version1_img_bg0=0x7f020079;
+        public static final int biz_ad_new_version1_img_bg1=0x7f020079;
         public static final int biz_audio_btn_share=0x7f02007a;
         public static final int biz_pc_go_favor=0x7f02007b;
         public static final int biz_pc_list_setting_icon=0x7f02007c;
