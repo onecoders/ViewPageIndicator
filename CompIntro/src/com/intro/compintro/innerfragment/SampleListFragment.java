@@ -48,9 +48,10 @@ public class SampleListFragment extends SherlockFragment implements
 		// get from server, do task in background
 		List<SampleItem> initItems = new ArrayList<SampleItem>();
 		for (int i = 0; i < 20; i++) {
-			adapter.add(new SampleItem(content,
+			initItems.add(new SampleItem(content,
 					android.R.drawable.ic_menu_search));
 		}
+		adapter.addAll(initItems);
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 
@@ -92,19 +93,21 @@ public class SampleListFragment extends SherlockFragment implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		lastVisibleIndex = firstVisibleItem + visibleItemCount - 1;
+		// header view considered
+		lastVisibleIndex = firstVisibleItem + visibleItemCount - 2;
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		if (lastVisibleIndex == adapter.getCount()
 				&& scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
-			// get next more from server (do this task in other thread)
+			// get more 20 from server (do this task in other thread)
 			List<SampleItem> moreItems = new ArrayList<SampleItem>();
 			for (int i = 0; i < 20; i++) {
-				adapter.add(new SampleItem(content,
+				moreItems.add(new SampleItem(content,
 						android.R.drawable.ic_menu_search));
 			}
+			adapter.addAll(moreItems);
 			adapter.notifyDataSetChanged();
 		}
 	}
