@@ -224,10 +224,9 @@ public class SampleListFragment extends SherlockFragment implements
 			for (SampleItem sampleItem : result) {
 				loadedItems.addFirst(sampleItem);
 			}
-			listview.onRefreshComplete();
-			listview.setLastUpdated(getResources().getString(
-					R.string.lastUpdate)
-					+ getUpdateTime());
+			String updateTimeStr = getResources()
+					.getString(R.string.lastUpdate) + getUpdateTime();
+			listview.onRefreshComplete(updateTimeStr);
 			super.onPostExecute(result);
 		}
 
