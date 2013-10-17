@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
-import com.intro.compintro.util.Utils;
+import com.intro.compintro.util.NetworkUtils;
 
 public class SampleListFragment extends SherlockFragment implements
 		OnScrollListener, OnClickListener {
@@ -122,7 +122,7 @@ public class SampleListFragment extends SherlockFragment implements
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// also consider the net connection, if not, failure
-			if (!Utils.isNetworkConnected(getSherlockActivity())) {
+			if (!NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 				return false;
 			} else {
 				try {
