@@ -102,7 +102,7 @@ public class SampleListFragment extends SherlockFragment implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// header view considered
+		// header view considered, firstVisibleItem is header view
 		lastVisibleIndex = firstVisibleItem + visibleItemCount - 2;
 	}
 
@@ -126,8 +126,9 @@ public class SampleListFragment extends SherlockFragment implements
 				return false;
 			} else {
 				try {
+					// Simulation
 					moreItems = new ArrayList<SampleItem>();
-					int count = adapter.getCount() - 1;
+					int count = adapter.getCount() + 1;
 					for (int i = count; i < count + 20; i++) {
 						moreItems.add(new SampleItem(content + i,
 								android.R.drawable.ic_menu_search));
