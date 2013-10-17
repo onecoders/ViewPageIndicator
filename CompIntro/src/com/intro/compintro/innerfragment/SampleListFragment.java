@@ -66,7 +66,7 @@ public class SampleListFragment extends SherlockFragment implements
 		loadingAgain.setOnClickListener(this);
 		// init adapter
 		loadedItems = new LinkedList<SampleItem>();
-		adapter = new SampleAdapter(getSherlockActivity(), loadedItems);
+		adapter = new SampleAdapter(getSherlockActivity());
 		// get from server, do task in background
 		new LoadingMoreDataAsyncTask().execute();
 		listview.setAdapter(adapter);
@@ -88,17 +88,13 @@ public class SampleListFragment extends SherlockFragment implements
 
 	public class SampleAdapter extends ArrayAdapter<SampleItem> {
 
-		LinkedList<SampleItem> sampleItemList;
-
-		public SampleAdapter(Context context,
-				LinkedList<SampleItem> sampleItemList) {
+		public SampleAdapter(Context context) {
 			super(context, 0);
-			this.sampleItemList = sampleItemList;
 		}
 
 		@Override
 		public SampleItem getItem(int position) {
-			return sampleItemList.get(position);
+			return loadedItems.get(position);
 		}
 
 		@Override
@@ -108,7 +104,7 @@ public class SampleListFragment extends SherlockFragment implements
 
 		@Override
 		public int getCount() {
-			return sampleItemList.size();
+			return loadedItems.size();
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -140,8 +136,8 @@ public class SampleListFragment extends SherlockFragment implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		// header view considered, firstVisibleItem is header view
-		lastVisibleIndex = firstVisibleItem + visibleItemCount - 2;
+		// header view(second) and pullToRefresh(first) view considered
+		lastVisibleIndex = firstVisibleItem + visibleItemCount - 3;
 	}
 
 	@Override
@@ -167,7 +163,7 @@ public class SampleListFragment extends SherlockFragment implements
 					// Simulation
 					moreItems = new LinkedList<SampleItem>();
 					int count = adapter.getCount() + 1;
-					for (int i = count; i < count + 20 && i < 121; i++) {
+					for (int i = count; i < count + 20; i++) {
 						moreItems.add(new SampleItem(content + i,
 								android.R.drawable.ic_menu_search));
 					}
