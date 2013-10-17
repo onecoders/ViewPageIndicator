@@ -43,14 +43,14 @@ public class SampleListFragment extends SherlockFragment implements
 		View loadingLayout = inflater.inflate(R.layout.slip_to_padding_refresh,
 				null);
 		listview.addFooterView(loadingLayout);
-		// get from server
+		// set adapter
+		adapter = new SampleAdapter(getSherlockActivity());
+		// get from server, do task in background
 		List<SampleItem> initItems = new ArrayList<SampleItem>();
 		for (int i = 0; i < 20; i++) {
-			initItems.add(new SampleItem(content,
+			adapter.add(new SampleItem(content,
 					android.R.drawable.ic_menu_search));
 		}
-		// set adapter
-		adapter = new SampleAdapter(getSherlockActivity(), initItems);
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 
@@ -69,26 +69,8 @@ public class SampleListFragment extends SherlockFragment implements
 
 	public class SampleAdapter extends ArrayAdapter<SampleItem> {
 
-		private List<SampleItem> items;
-
-		public SampleAdapter(Context context, List<SampleItem> items) {
+		public SampleAdapter(Context context) {
 			super(context, 0);
-			this.items = items;
-		}
-
-		@Override
-		public SampleItem getItem(int position) {
-			return items.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public int getCount() {
-			return items.size();
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -120,10 +102,9 @@ public class SampleListFragment extends SherlockFragment implements
 			// get next more from server (do this task in other thread)
 			List<SampleItem> moreItems = new ArrayList<SampleItem>();
 			for (int i = 0; i < 20; i++) {
-				moreItems.add(new SampleItem(content,
+				adapter.add(new SampleItem(content,
 						android.R.drawable.ic_menu_search));
 			}
-			adapter.addAll(moreItems);
 			adapter.notifyDataSetChanged();
 		}
 	}
