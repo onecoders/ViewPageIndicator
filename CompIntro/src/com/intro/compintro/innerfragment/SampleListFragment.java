@@ -1,11 +1,13 @@
 package com.intro.compintro.innerfragment;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -223,9 +225,19 @@ public class SampleListFragment extends SherlockFragment implements
 				loadedItems.addFirst(sampleItem);
 			}
 			listview.onRefreshComplete();
+			listview.setLastUpdated(getResources().getString(
+					R.string.lastUpdate)
+					+ getUpdateTime());
 			super.onPostExecute(result);
 		}
 
+	}
+
+	private String getUpdateTime() {
+		Context context = getSherlockActivity();
+		Date date = new Date();
+		return DateFormat.getTimeFormat(context).format(date) + " "
+				+ DateFormat.getDateFormat(context).format(date);
 	}
 
 }

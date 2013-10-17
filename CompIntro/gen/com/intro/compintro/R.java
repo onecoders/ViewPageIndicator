@@ -1610,6 +1610,7 @@ containing a value of this type.
         public static final int app_name=0x7f050000;
         public static final int basic_info_title=0x7f050012;
         public static final int clickAgain=0x7f050017;
+        public static final int lastUpdate=0x7f05001d;
         public static final int loading=0x7f050019;
         public static final int loadingError=0x7f05001a;
         public static final int main_product_title=0x7f050014;

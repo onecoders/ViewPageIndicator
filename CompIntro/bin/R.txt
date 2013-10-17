@@ -550,6 +550,7 @@ int string allLoaded 0x7f05001c
 int string app_name 0x7f050000
 int string basic_info_title 0x7f050012
 int string clickAgain 0x7f050017
+int string lastUpdate 0x7f05001d
 int string loading 0x7f050019
 int string loadingError 0x7f05001a
 int string main_product_title 0x7f050014
