@@ -4,28 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.util.Utils;
 
 public class SampleListFragment extends SherlockFragment implements
-		OnScrollListener {
+		OnScrollListener, OnClickListener {
 
 	public static final String CONTENT_KEY = "content_key";
 
 	private String content;
 	private int lastVisibleIndex = 0;
 	private SampleAdapter adapter;
+	private View loadingLayout;
+	private LinearLayout loadingProgress;
+	private Button loadingAgain;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,19 +48,19 @@ public class SampleListFragment extends SherlockFragment implements
 				R.layout.listview_image_item, null);
 		imageview.setImageResource(R.drawable.biz_plugin_weather_beijin);
 		listview.addHeaderView(imageview);
-		// add footer view
-		View loadingLayout = inflater.inflate(R.layout.slip_to_padding_refresh,
-				null);
+		// init footer view
+		loadingLayout = inflater
+				.inflate(R.layout.slip_to_padding_refresh, null);
 		listview.addFooterView(loadingLayout);
-		// set adapter
+		// footer view
+		loadingProgress = (LinearLayout) loadingLayout
+				.findViewById(R.id.loadingProgress);
+		loadingAgain = (Button) loadingLayout.findViewById(R.id.loadingAgain);
+		loadingAgain.setOnClickListener(this);
+		// init adapter
 		adapter = new SampleAdapter(getSherlockActivity());
 		// get from server, do task in background
-		List<SampleItem> initItems = new ArrayList<SampleItem>();
-		for (int i = 0; i < 20; i++) {
-			initItems.add(new SampleItem(content,
-					android.R.drawable.ic_menu_search));
-		}
-		adapter.addAll(initItems);
+		new LoadingDataAsyncTask().execute();
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 
@@ -102,13 +111,54 @@ public class SampleListFragment extends SherlockFragment implements
 		if (lastVisibleIndex == adapter.getCount()
 				&& scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
 			// get more 20 from server (do this task in other thread)
-			List<SampleItem> moreItems = new ArrayList<SampleItem>();
-			for (int i = 0; i < 20; i++) {
-				moreItems.add(new SampleItem(content,
-						android.R.drawable.ic_menu_search));
-			}
-			adapter.addAll(moreItems);
-			adapter.notifyDataSetChanged();
+			new LoadingDataAsyncTask().execute();
 		}
 	}
+
+	class LoadingDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+		private List<SampleItem> moreItems;
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// also consider the net connection, if not, failure
+			if (!Utils.isNetworkConnected(getSherlockActivity())) {
+				return false;
+			} else {
+				try {
+					moreItems = new ArrayList<SampleItem>();
+					int count = adapter.getCount() - 1;
+					for (int i = count; i < count + 20; i++) {
+						moreItems.add(new SampleItem(content + i,
+								android.R.drawable.ic_menu_search));
+					}
+					return true;
+				} catch (Exception e) {
+					return false;
+				}
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				loadingProgress.setVisibility(View.VISIBLE);
+				loadingAgain.setVisibility(View.GONE);
+				adapter.addAll(moreItems);
+				adapter.notifyDataSetChanged();
+			} else {
+				Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
+						Toast.LENGTH_SHORT).show();
+				loadingProgress.setVisibility(View.GONE);
+				loadingAgain.setVisibility(View.VISIBLE);
+			}
+		}
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		new LoadingDataAsyncTask().execute();
+	}
+
 }

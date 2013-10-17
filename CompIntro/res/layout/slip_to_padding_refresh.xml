@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
+        android:id="@+id/loadingProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -22,5 +23,15 @@
             android:text="@string/loading"
             android:textSize="15sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/loadingAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:text="@string/loadingError"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

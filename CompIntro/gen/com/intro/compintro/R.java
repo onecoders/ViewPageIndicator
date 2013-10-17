@@ -1453,7 +1453,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f05001d;
         public static final int abs__title=0x7f050025;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f050053;
+        public static final int action_settings=0x7f050055;
         public static final int bottom=0x7f050018;
         public static final int content_frame=0x7f050043;
         public static final int disableHome=0x7f050009;
@@ -1467,6 +1467,8 @@ containing a value of this type.
         public static final int indicator=0x7f05004f;
         public static final int left=0x7f050010;
         public static final int listMode=0x7f050002;
+        public static final int loadingAgain=0x7f050053;
+        public static final int loadingProgress=0x7f050052;
         public static final int main_title=0x7f050041;
         public static final int margin=0x7f050012;
         public static final int menu_btn=0x7f05003c;
@@ -1488,7 +1490,7 @@ containing a value of this type.
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
         public static final int slidingmenumain=0x7f050051;
-        public static final int splash=0x7f050052;
+        public static final int splash=0x7f050054;
         public static final int tabMode=0x7f050003;
         public static final int textview=0x7f050044;
         public static final int title=0x7f05003e;
@@ -1598,8 +1600,10 @@ containing a value of this type.
         public static final int basic_info_title=0x7f0a000e;
         public static final int clickAgain=0x7f0a0013;
         public static final int loading=0x7f0a0015;
+        public static final int loadingError=0x7f0a0016;
         public static final int main_product_title=0x7f0a0010;
         public static final int marketing_title=0x7f0a000f;
+        public static final int netUnavailable=0x7f0a0017;
         public static final int other_product_title=0x7f0a0011;
         public static final int user_center=0x7f0a0014;
     }

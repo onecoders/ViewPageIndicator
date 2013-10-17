@@ -10,5 +10,7 @@
     <string name="clickAgain">再按一次退出程序</string>
     <string name="user_center">用户中心</string>
     <string name="loading">加载中 &#8230;</string>
+    <string name="loadingError">加载失败，点击重试</string>
+    <string name="netUnavailable">网络不给力</string>
 
 </resources>

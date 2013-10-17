@@ -427,7 +427,7 @@ int id abs__submit_area 0x7f050039
 int id abs__textButton 0x7f05001d
 int id abs__title 0x7f050025
 int id abs__up 0x7f05000b
-int id action_settings 0x7f050053
+int id action_settings 0x7f050055
 int id bottom 0x7f050018
 int id content_frame 0x7f050043
 int id disableHome 0x7f050009
@@ -441,6 +441,8 @@ int id homeAsUp 0x7f050006
 int id indicator 0x7f05004f
 int id left 0x7f050010
 int id listMode 0x7f050002
+int id loadingAgain 0x7f050053
+int id loadingProgress 0x7f050052
 int id main_title 0x7f050041
 int id margin 0x7f050012
 int id menu_btn 0x7f05003c
@@ -462,7 +464,7 @@ int id showCustom 0x7f050008
 int id showHome 0x7f050005
 int id showTitle 0x7f050007
 int id slidingmenumain 0x7f050051
-int id splash 0x7f050052
+int id splash 0x7f050054
 int id tabMode 0x7f050003
 int id textview 0x7f050044
 int id title 0x7f05003e
@@ -538,8 +540,10 @@ int string app_name 0x7f0a000d
 int string basic_info_title 0x7f0a000e
 int string clickAgain 0x7f0a0013
 int string loading 0x7f0a0015
+int string loadingError 0x7f0a0016
 int string main_product_title 0x7f0a0010
 int string marketing_title 0x7f0a000f
+int string netUnavailable 0x7f0a0017
 int string other_product_title 0x7f0a0011
 int string user_center 0x7f0a0014
 int style AppBaseTheme 0x7f0b0064
