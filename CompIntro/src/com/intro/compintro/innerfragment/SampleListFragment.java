@@ -95,6 +95,15 @@ public class SampleListFragment extends SherlockFragment implements
 		}
 
 		@Override
+		public void notifyDataSetChanged() {
+			refreshAdapter();
+		}
+
+		private synchronized void refreshAdapter() {
+			super.notifyDataSetChanged();
+		}
+
+		@Override
 		public SampleItem getItem(int position) {
 			return loadedItems.get(position);
 		}
