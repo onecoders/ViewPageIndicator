@@ -35,6 +35,7 @@ public class SampleListFragment extends SherlockFragment implements
 	private View loadingLayout;
 	private LinearLayout loadingProgress;
 	private Button loadingAgain;
+	private TextView allLoaded;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class SampleListFragment extends SherlockFragment implements
 		loadingProgress = (LinearLayout) loadingLayout
 				.findViewById(R.id.loadingProgress);
 		loadingAgain = (Button) loadingLayout.findViewById(R.id.loadingAgain);
+		allLoaded = (TextView) loadingLayout.findViewById(R.id.allLoaded);
 		loadingAgain.setOnClickListener(this);
 		// init adapter
 		adapter = new SampleAdapter(getSherlockActivity());
@@ -129,7 +131,7 @@ public class SampleListFragment extends SherlockFragment implements
 					// Simulation
 					moreItems = new ArrayList<SampleItem>();
 					int count = adapter.getCount() + 1;
-					for (int i = count; i < count + 20; i++) {
+					for (int i = count; i < count + 20 && i < 121; i++) {
 						moreItems.add(new SampleItem(content + i,
 								android.R.drawable.ic_menu_search));
 					}
@@ -143,15 +145,23 @@ public class SampleListFragment extends SherlockFragment implements
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result) {
-				loadingProgress.setVisibility(View.VISIBLE);
-				loadingAgain.setVisibility(View.GONE);
-				adapter.addAll(moreItems);
-				adapter.notifyDataSetChanged();
+				if (moreItems.size() == 0) {
+					allLoaded.setVisibility(View.VISIBLE);
+					loadingProgress.setVisibility(View.GONE);
+					loadingAgain.setVisibility(View.GONE);
+				} else {
+					loadingProgress.setVisibility(View.VISIBLE);
+					loadingAgain.setVisibility(View.GONE);
+					allLoaded.setVisibility(View.GONE);
+					adapter.addAll(moreItems);
+					adapter.notifyDataSetChanged();
+				}
 			} else {
 				Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
 						Toast.LENGTH_SHORT).show();
 				loadingProgress.setVisibility(View.GONE);
 				loadingAgain.setVisibility(View.VISIBLE);
+				allLoaded.setVisibility(View.GONE);
 			}
 		}
 

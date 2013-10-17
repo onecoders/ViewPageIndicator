@@ -26,11 +26,22 @@
 
     <Button
         android:id="@+id/loadingAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:background="@null"
         android:text="@string/loadingError"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/allLoaded"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:padding="15dip"
+        android:text="@string/allLoaded"
         android:textSize="15sp"
         android:visibility="gone" />
 
