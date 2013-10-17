@@ -1,6 +1,6 @@
 package com.intro.compintro.innerfragment;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
@@ -16,21 +16,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.util.NetworkUtils;
+import com.markupartist.android.widget.PullToRefreshListView;
+import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 public class SampleListFragment extends SherlockFragment implements
-		OnScrollListener, OnClickListener {
+		OnScrollListener, OnClickListener, OnRefreshListener {
 
 	public static final String CONTENT_KEY = "content_key";
 
 	private String content;
 	private int lastVisibleIndex = 0;
+	private LinkedList<SampleItem> loadedItems;
+
+	private PullToRefreshListView listview;
 	private SampleAdapter adapter;
 	private View loadingLayout;
 	private LinearLayout loadingProgress;
@@ -43,15 +47,16 @@ public class SampleListFragment extends SherlockFragment implements
 		// get content
 		content = getArguments().getString(CONTENT_KEY);
 		//
-		ListView listview = (ListView) convertView.findViewById(R.id.news_list);
+		listview = (PullToRefreshListView) convertView
+				.findViewById(R.id.news_list);
 		// add header view
 		ImageView imageview = (ImageView) inflater.inflate(
 				R.layout.listview_image_item, null);
 		imageview.setImageResource(R.drawable.biz_plugin_weather_beijin);
 		listview.addHeaderView(imageview);
 		// init footer view
-		loadingLayout = inflater
-				.inflate(R.layout.slip_to_padding_refresh, null);
+		loadingLayout = inflater.inflate(
+				R.layout.slip_to_padding_refresh_footer, null);
 		listview.addFooterView(loadingLayout);
 		// footer view
 		loadingProgress = (LinearLayout) loadingLayout
@@ -60,11 +65,13 @@ public class SampleListFragment extends SherlockFragment implements
 		allLoaded = (TextView) loadingLayout.findViewById(R.id.allLoaded);
 		loadingAgain.setOnClickListener(this);
 		// init adapter
-		adapter = new SampleAdapter(getSherlockActivity());
+		loadedItems = new LinkedList<SampleItem>();
+		adapter = new SampleAdapter(getSherlockActivity(), loadedItems);
 		// get from server, do task in background
-		new LoadingDataAsyncTask().execute();
+		new LoadingMoreDataAsyncTask().execute();
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
+		listview.setOnRefreshListener(this);
 
 		return convertView;
 	}
@@ -81,8 +88,27 @@ public class SampleListFragment extends SherlockFragment implements
 
 	public class SampleAdapter extends ArrayAdapter<SampleItem> {
 
-		public SampleAdapter(Context context) {
+		LinkedList<SampleItem> sampleItemList;
+
+		public SampleAdapter(Context context,
+				LinkedList<SampleItem> sampleItemList) {
 			super(context, 0);
+			this.sampleItemList = sampleItemList;
+		}
+
+		@Override
+		public SampleItem getItem(int position) {
+			return sampleItemList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public int getCount() {
+			return sampleItemList.size();
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -102,6 +128,16 @@ public class SampleListFragment extends SherlockFragment implements
 	}
 
 	@Override
+	public void onClick(View v) {
+		new LoadingMoreDataAsyncTask().execute();
+	}
+
+	@Override
+	public void onRefresh() {
+		new PullToRefreshAsyncTask().execute();
+	}
+
+	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		// header view considered, firstVisibleItem is header view
@@ -113,13 +149,13 @@ public class SampleListFragment extends SherlockFragment implements
 		if (lastVisibleIndex == adapter.getCount()
 				&& scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
 			// get more 20 from server (do this task in other thread)
-			new LoadingDataAsyncTask().execute();
+			new LoadingMoreDataAsyncTask().execute();
 		}
 	}
 
-	class LoadingDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
+	class LoadingMoreDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-		private List<SampleItem> moreItems;
+		private LinkedList<SampleItem> moreItems;
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -129,7 +165,7 @@ public class SampleListFragment extends SherlockFragment implements
 			} else {
 				try {
 					// Simulation
-					moreItems = new ArrayList<SampleItem>();
+					moreItems = new LinkedList<SampleItem>();
 					int count = adapter.getCount() + 1;
 					for (int i = count; i < count + 20 && i < 121; i++) {
 						moreItems.add(new SampleItem(content + i,
@@ -153,7 +189,7 @@ public class SampleListFragment extends SherlockFragment implements
 					loadingProgress.setVisibility(View.VISIBLE);
 					loadingAgain.setVisibility(View.GONE);
 					allLoaded.setVisibility(View.GONE);
-					adapter.addAll(moreItems);
+					loadedItems.addAll(moreItems);
 					adapter.notifyDataSetChanged();
 				}
 			} else {
@@ -163,13 +199,37 @@ public class SampleListFragment extends SherlockFragment implements
 				loadingAgain.setVisibility(View.VISIBLE);
 				allLoaded.setVisibility(View.GONE);
 			}
+			super.onPostExecute(result);
 		}
-
 	}
 
-	@Override
-	public void onClick(View v) {
-		new LoadingDataAsyncTask().execute();
+	class PullToRefreshAsyncTask extends
+			AsyncTask<Void, Void, List<SampleItem>> {
+
+		private List<SampleItem> newAdd;
+
+		@Override
+		protected List<SampleItem> doInBackground(Void... params) {
+			newAdd = new LinkedList<SampleItem>();
+			if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
+				// Simulation
+				for (int i = 0; i < 2; i++) {
+					newAdd.add(new SampleItem(content + "新增",
+							android.R.drawable.ic_menu_search));
+				}
+			}
+			return newAdd;
+		}
+
+		@Override
+		protected void onPostExecute(List<SampleItem> result) {
+			for (SampleItem sampleItem : result) {
+				loadedItems.addFirst(sampleItem);
+			}
+			listview.onRefreshComplete();
+			super.onPostExecute(result);
+		}
+
 	}
 
 }

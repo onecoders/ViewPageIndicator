@@ -529,7 +529,7 @@ int layout sherlock_spinner_dropdown_item 0x7f030023
 int layout sherlock_spinner_item 0x7f030024
 int layout simple_tabs 0x7f030025
 int layout slidingmenumain 0x7f030026
-int layout slip_to_padding_refresh 0x7f030027
+int layout slip_to_padding_refresh_footer 0x7f030027
 int layout splash 0x7f030028
 int menu main 0x7f0d0000
 int string abs__action_bar_home_description 0x7f050005

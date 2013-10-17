@@ -13,5 +13,9 @@
     <string name="loadingError">加载失败，点击重试</string>
     <string name="netUnavailable">网络不给力</string>
     <string name="allLoaded">全部加载完毕</string>
+    <string name="pull_to_refresh_pull_label">下拉可以刷新 &#8230;</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新 &#8230;</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新 &#8230;</string>
+    <string name="pull_to_refresh_tap_label">点击刷新 &#8230;</string>
 
 </resources>

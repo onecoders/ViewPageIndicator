@@ -1559,7 +1559,7 @@ containing a value of this type.
         public static final int sherlock_spinner_item=0x7f030024;
         public static final int simple_tabs=0x7f030025;
         public static final int slidingmenumain=0x7f030026;
-        public static final int slip_to_padding_refresh=0x7f030027;
+        public static final int slip_to_padding_refresh_footer=0x7f030027;
         public static final int splash=0x7f030028;
     }
     public static final class menu {
