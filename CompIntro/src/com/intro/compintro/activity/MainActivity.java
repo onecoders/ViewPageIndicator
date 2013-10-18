@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.mainfragment.BasicInfoFragment;
+import com.intro.compintro.util.MessageToast;
 
 public class MainActivity extends BaseActivity {
 
@@ -44,7 +45,8 @@ public class MainActivity extends BaseActivity {
 			System.exit(0);
 		} else {
 			isExit = true;
-			Toast.makeText(this, R.string.clickAgain, Toast.LENGTH_SHORT)
+			MessageToast
+					.makeText(this, R.string.clickAgain, Toast.LENGTH_SHORT)
 					.show();
 			tExit = new Timer();
 			tExit.schedule(new TimerTask() {
