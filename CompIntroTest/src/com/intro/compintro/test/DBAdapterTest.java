@@ -54,7 +54,7 @@ public class DBAdapterTest extends AndroidTestCase {
 		Column column = new Column(12, "TEST", "Rest", "Github");
 		adapter.insert(column);
 		adapter.delete(1);
-		assertNull(adapter.queryById(1));
+		assertEquals(0, adapter.queryAll().size());
 	}
 
 	private void assertEquals(Column expected, Column actual) {
