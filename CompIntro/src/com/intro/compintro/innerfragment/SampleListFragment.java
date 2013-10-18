@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.util.MessageToast;
 import com.intro.compintro.util.NetworkUtils;
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
@@ -139,8 +140,8 @@ public class SampleListFragment extends SherlockFragment implements
 		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 			new LoadingMoreDataAsyncTask().execute();
 		} else {
-			Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
-					Toast.LENGTH_SHORT).show();
+			MessageToast.makeText(getSherlockActivity(),
+					R.string.netUnavailable, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -242,8 +243,8 @@ public class SampleListFragment extends SherlockFragment implements
 						+ getUpdateTime();
 				listview.onRefreshComplete(updateTimeStr);
 			} else {
-				Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
-						Toast.LENGTH_SHORT).show();
+				MessageToast.makeText(getSherlockActivity(),
+						R.string.netUnavailable, Toast.LENGTH_SHORT).show();
 				listview.onRefreshComplete();
 			}
 			super.onPostExecute(result);
