@@ -8,7 +8,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,12 +68,18 @@ public class SampleListFragment extends SherlockFragment implements
 		loadingAgain.setOnClickListener(this);
 		// init adapter
 		loadedItems = new LinkedList<SampleItem>();
+		// Simulation to get data from cache,do task in background
+		for (int i = 0; i < 20; i++) {
+			loadedItems.add(new SampleItem(content + i,
+					android.R.drawable.ic_menu_search));
+		}
 		adapter = new SampleAdapter(getSherlockActivity());
-		// get from server, do task in background
-		new LoadingMoreDataAsyncTask().execute();
+		// if cache is null,get from server,do task in background
+		// new LoadingMoreDataAsyncTask().execute();
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 		listview.setOnRefreshListener(this);
+		// listview.onRefresh();
 
 		return convertView;
 	}
@@ -93,15 +98,6 @@ public class SampleListFragment extends SherlockFragment implements
 
 		public SampleAdapter(Context context) {
 			super(context, 0);
-		}
-
-		@Override
-		public void notifyDataSetChanged() {
-			refreshAdapter();
-		}
-
-		private synchronized void refreshAdapter() {
-			super.notifyDataSetChanged();
 		}
 
 		@Override
@@ -147,7 +143,6 @@ public class SampleListFragment extends SherlockFragment implements
 
 	@Override
 	public void onRefresh() {
-		Log.d("sampleListFragment", "onRefresh");
 		new PullToRefreshAsyncTask().execute();
 	}
 
