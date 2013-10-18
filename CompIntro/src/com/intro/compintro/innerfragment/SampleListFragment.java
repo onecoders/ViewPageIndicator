@@ -79,7 +79,9 @@ public class SampleListFragment extends SherlockFragment implements
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 		listview.setOnRefreshListener(this);
-		// listview.onRefresh();
+		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
+			listview.onRefresh();
+		}
 
 		return convertView;
 	}
@@ -94,6 +96,7 @@ public class SampleListFragment extends SherlockFragment implements
 		}
 	}
 
+	// view holder
 	public class SampleAdapter extends ArrayAdapter<SampleItem> {
 
 		public SampleAdapter(Context context) {

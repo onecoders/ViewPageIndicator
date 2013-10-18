@@ -23,6 +23,7 @@ public class SplashActivity extends SherlockActivity {
 				Intent i = new Intent(SplashActivity.this, MainActivity.class);
 				SplashActivity.this.startActivity(i);
 				SplashActivity.this.finish();
+				overridePendingTransition(R.anim.zoomout, R.anim.zoomin);
 			}
 		}, SPLASH_DISPLAY_LENGHT);
 	}
