@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -136,11 +137,17 @@ public class SampleListFragment extends SherlockFragment implements
 
 	@Override
 	public void onClick(View v) {
-		new LoadingMoreDataAsyncTask().execute();
+		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
+			new LoadingMoreDataAsyncTask().execute();
+		} else {
+			Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
 	public void onRefresh() {
+		Log.d("sampleListFragment", "onRefresh");
 		new PullToRefreshAsyncTask().execute();
 	}
 
@@ -200,8 +207,6 @@ public class SampleListFragment extends SherlockFragment implements
 					adapter.notifyDataSetChanged();
 				}
 			} else {
-				Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
-						Toast.LENGTH_SHORT).show();
 				loadingProgress.setVisibility(View.GONE);
 				loadingAgain.setVisibility(View.VISIBLE);
 				allLoaded.setVisibility(View.GONE);
@@ -210,13 +215,12 @@ public class SampleListFragment extends SherlockFragment implements
 		}
 	}
 
-	class PullToRefreshAsyncTask extends
-			AsyncTask<Void, Void, List<SampleItem>> {
+	class PullToRefreshAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 		private List<SampleItem> newAdd;
 
 		@Override
-		protected List<SampleItem> doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			newAdd = new LinkedList<SampleItem>();
 			if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 				// Simulation
@@ -224,18 +228,26 @@ public class SampleListFragment extends SherlockFragment implements
 					newAdd.add(new SampleItem(content + "新增",
 							android.R.drawable.ic_menu_search));
 				}
+				return true;
 			}
-			return newAdd;
+			return false;
 		}
 
 		@Override
-		protected void onPostExecute(List<SampleItem> result) {
-			for (SampleItem sampleItem : result) {
-				loadedItems.addFirst(sampleItem);
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				for (SampleItem sampleItem : newAdd) {
+					loadedItems.addFirst(sampleItem);
+				}
+				String updateTimeStr = getResources().getString(
+						R.string.lastUpdate)
+						+ getUpdateTime();
+				listview.onRefreshComplete(updateTimeStr);
+			} else {
+				Toast.makeText(getSherlockActivity(), R.string.netUnavailable,
+						Toast.LENGTH_SHORT).show();
+				listview.onRefreshComplete();
 			}
-			String updateTimeStr = getResources()
-					.getString(R.string.lastUpdate) + getUpdateTime();
-			listview.onRefreshComplete(updateTimeStr);
 			super.onPostExecute(result);
 		}
 
