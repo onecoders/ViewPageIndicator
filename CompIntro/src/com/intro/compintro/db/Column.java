@@ -2,7 +2,7 @@ package com.intro.compintro.db;
 
 public class Column {
 
-	private int _id;
+	private long _id;
 	private int column_1;
 	private String column_2;
 	private String column_3;
@@ -20,11 +20,11 @@ public class Column {
 		this.column_4 = column_4;
 	}
 
-	public int get_id() {
+	public long get_id() {
 		return _id;
 	}
 
-	public void set_id(int _id) {
+	public void set_id(long _id) {
 		this._id = _id;
 	}
 

@@ -19,7 +19,7 @@ public class DBAdapter {
 	static final String KEY_COLUMN_4 = "column_4";
 	static final String TAG = "DBAdapter";
 
-	static final String DATABASE_NAME = "IntroDB";
+	static final String DATABASE_NAME = "IntroDB1";
 	static final String DATABASE_TABLE = "intro";
 	static final int DATABASE_VERSION = 1;
 
@@ -78,7 +78,7 @@ public class DBAdapter {
 		return db.insert(DATABASE_TABLE, null, cv);
 	}
 
-	public boolean delete(int id) {
+	public boolean delete(long id) {
 		return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + id, null) > 0;
 	}
 
@@ -92,13 +92,12 @@ public class DBAdapter {
 				null) > 0;
 	}
 
-	public Column queryById(int id) {
+	public Column queryById(long id) {
 		Column column = null;
 		Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID,
 				KEY_COLUMN_1, KEY_COLUMN_2, KEY_COLUMN_3, KEY_COLUMN_4 },
 				KEY_ROWID + "=" + id, null, null, null, null, null);
-		if (c != null) {
-			c.moveToFirst();
+		if (c != null && c.moveToFirst()) {
 			column = new Column();
 			column.set_id(c.getInt(c.getColumnIndex(KEY_ROWID)));
 			column.setColumn_1(c.getInt(c.getColumnIndex(KEY_COLUMN_1)));
@@ -114,14 +113,16 @@ public class DBAdapter {
 		Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID,
 				KEY_COLUMN_1, KEY_COLUMN_2, KEY_COLUMN_3, KEY_COLUMN_4 }, null,
 				null, null, null, null);
-		while (c.moveToNext()) {
-			Column column = new Column();
-			column.set_id(c.getInt(c.getColumnIndex(KEY_ROWID)));
-			column.setColumn_1(c.getInt(c.getColumnIndex(KEY_COLUMN_1)));
-			column.setColumn_2(c.getString(c.getColumnIndex(KEY_COLUMN_2)));
-			column.setColumn_3(c.getString(c.getColumnIndex(KEY_COLUMN_3)));
-			column.setColumn_4(c.getString(c.getColumnIndex(KEY_COLUMN_4)));
-			columns.add(column);
+		if (c != null) {
+			while (c.moveToNext()) {
+				Column column = new Column();
+				column.set_id(c.getInt(c.getColumnIndex(KEY_ROWID)));
+				column.setColumn_1(c.getInt(c.getColumnIndex(KEY_COLUMN_1)));
+				column.setColumn_2(c.getString(c.getColumnIndex(KEY_COLUMN_2)));
+				column.setColumn_3(c.getString(c.getColumnIndex(KEY_COLUMN_3)));
+				column.setColumn_4(c.getString(c.getColumnIndex(KEY_COLUMN_4)));
+				columns.add(column);
+			}
 		}
 		c.close();
 		return columns;

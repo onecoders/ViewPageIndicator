@@ -1,6 +1,5 @@
 package com.intro.compintro.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.test.AndroidTestCase;
@@ -11,6 +10,7 @@ import com.intro.compintro.db.DBAdapter;
 public class DBAdapterTest extends AndroidTestCase {
 
 	DBAdapter adapter;
+	List<Column> inserts;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -25,36 +25,29 @@ public class DBAdapterTest extends AndroidTestCase {
 		super.tearDown();
 	}
 
-	public void testInsertAndQuery() {
-		List<Column> inserts = new ArrayList<Column>();
-		for (int i = 0; i < 5; i++) {
-			Column column = new Column(i, "TEST" + i, "Rest" + i, "Github" + i);
-			inserts.add(column);
-			adapter.insert(column);
-		}
-		List<Column> querys = adapter.queryAll();
-		for (int i = 0; i < querys.size(); i++) {
-			assertEquals(inserts.get(i), querys.get(i));
-		}
+	public void testQuery() {
+		Column column = new Column(1, "TEST" + 1, "Rest" + 1, "Github" + 1);
+		long id = adapter.insert(column);
+		assertEquals(column, adapter.queryById(id));
 	}
 
 	public void testUpdate() {
-		Column column = new Column(12, "TEST", "Rest", "Github");
-		adapter.insert(column);
-		column.set_id(1);
+		Column column = new Column(2, "TEST" + 2, "Rest" + 2, "Github" + 2);
+		long id = adapter.insert(column);
+		column.set_id(id);
 		column.setColumn_1(13);
 		column.setColumn_2("TSET");
 		column.setColumn_3("tseR");
 		column.setColumn_4("buhtiG");
 		adapter.update(column);
-		assertEquals(column, adapter.queryById(1));
+		assertEquals(column, adapter.queryById(id));
 	}
 
 	public void testDelete() {
-		Column column = new Column(12, "TEST", "Rest", "Github");
-		adapter.insert(column);
-		adapter.delete(1);
-		assertEquals(0, adapter.queryAll().size());
+		Column column = new Column(3, "TEST" + 3, "Rest" + 3, "Github" + 3);
+		long id = adapter.insert(column);
+		assertEquals(true, adapter.delete(id));
+		assertNull(adapter.queryById(id));
 	}
 
 	private void assertEquals(Column expected, Column actual) {
