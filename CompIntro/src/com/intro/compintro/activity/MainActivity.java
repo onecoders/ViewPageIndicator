@@ -23,7 +23,6 @@ public class MainActivity extends BaseActivity {
 		mFragment = new BasicInfoFragment();
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, mFragment).commit();
-
 	}
 
 	@Override
@@ -34,6 +33,7 @@ public class MainActivity extends BaseActivity {
 			}
 		} else {
 			switchContent(new BasicInfoFragment());
+			resetSelectedItem();
 		}
 	}
 

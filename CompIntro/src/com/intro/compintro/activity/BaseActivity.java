@@ -17,6 +17,8 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
+	
+	protected BehindContentFragment mFrag;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		setBehindContentView(R.layout.menu_frame);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		BehindContentFragment mFrag = new BehindContentFragment();
+		mFrag = new BehindContentFragment();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
 
@@ -98,6 +100,10 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		default:
 			break;
 		}
+	}
+	
+	protected void resetSelectedItem(){
+		mFrag.getAdapter().setSelectItem(0);
 	}
 
 }

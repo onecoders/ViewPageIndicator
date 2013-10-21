@@ -85,4 +85,8 @@ public class BehindContentFragment extends SherlockListFragment {
 		}
 	}
 
+	public BehindMenuAdapter getAdapter() {
+		return adapter;
+	}
+	
 }
