@@ -17,7 +17,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
-	
+
 	protected BehindContentFragment mFrag;
 
 	@Override
@@ -35,7 +35,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -101,8 +101,8 @@ public class BaseActivity extends SlidingFragmentActivity implements
 			break;
 		}
 	}
-	
-	protected void resetSelectedItem(){
+
+	protected void resetSelectedItem() {
 		mFrag.getAdapter().setSelectItem(0);
 	}
 

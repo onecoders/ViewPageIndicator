@@ -4,14 +4,12 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.RelativeLayout;
 
-public class MyLayout extends RelativeLayout {
+public class MyViewPager extends ViewPager {
 
-	ViewPager childViewpager;
 	float startX;
 
-	public MyLayout(Context context, AttributeSet attrs) {
+	public MyViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -26,35 +24,31 @@ public class MyLayout extends RelativeLayout {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if (startX == ev.getX()) {
-				if (0 == childViewpager.getCurrentItem()
-						|| childViewpager.getCurrentItem() == childViewpager
-								.getAdapter().getCount() - 1) {
-					getParent().requestDisallowInterceptTouchEvent(false);
+				if (0 == this.getCurrentItem()
+						|| this.getCurrentItem() == this.getAdapter()
+								.getCount() - 1) {
+					getParent().requestDisallowInterceptTouchEvent(true);
 				}
 			} else if (startX > ev.getX()) {
-				if (childViewpager.getCurrentItem() == childViewpager
-						.getAdapter().getCount() - 1) {
+				if (this.getCurrentItem() == this.getAdapter().getCount() - 1) {
 					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			} else if (startX < ev.getX()) {
-				if (childViewpager.getCurrentItem() == 0) {
+				if (this.getCurrentItem() == 0) {
 					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			} else {
 				getParent().requestDisallowInterceptTouchEvent(true);
 			}
+			break;
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_CANCEL:
 			getParent().requestDisallowInterceptTouchEvent(false);
+			break;
 		default:
 			break;
 		}
-
-		return false;
-	}
-
-	public void setChildViewpager(ViewPager childViewpager) {
-		this.childViewpager = childViewpager;
+		return super.onInterceptTouchEvent(ev);
 	}
 
 }

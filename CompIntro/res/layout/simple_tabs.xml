@@ -25,7 +25,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/tab_page_indicator_height" />
 
-    <android.support.v4.view.ViewPager
+    <com.intro.compintro.view.MyViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
