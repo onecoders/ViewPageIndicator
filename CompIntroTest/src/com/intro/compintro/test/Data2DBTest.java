@@ -1,20 +1,17 @@
 package com.intro.compintro.test;
 
-import java.util.List;
-
 import android.test.AndroidTestCase;
 
 import com.intro.compintro.db.Column;
-import com.intro.compintro.db.DBAdapter;
+import com.intro.compintro.db.Data2DB;
 
-public class DBAdapterTest extends AndroidTestCase {
+public class Data2DBTest extends AndroidTestCase {
 
-	DBAdapter adapter;
-	List<Column> inserts;
+	Data2DB adapter;
 
 	@Override
 	protected void setUp() throws Exception {
-		adapter = new DBAdapter(getContext());
+		adapter = new Data2DB(getContext());
 		adapter.open();
 		super.setUp();
 	}

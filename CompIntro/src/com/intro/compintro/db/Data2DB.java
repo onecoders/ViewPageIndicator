@@ -10,7 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBAdapter {
+public class Data2DB {
 
 	static final String KEY_ROWID = "_id";
 	static final String KEY_COLUMN_1 = "column_1";
@@ -33,7 +33,7 @@ public class DBAdapter {
 	DatabaseHelper DBHelper;
 	SQLiteDatabase db;
 
-	public DBAdapter(Context context) {
+	public Data2DB(Context context) {
 		this.context = context;
 		DBHelper = new DatabaseHelper(context);
 	}
@@ -60,7 +60,7 @@ public class DBAdapter {
 		}
 	}
 
-	public DBAdapter open() throws SQLException {
+	public Data2DB open() throws SQLException {
 		db = DBHelper.getWritableDatabase();
 		return this;
 	}

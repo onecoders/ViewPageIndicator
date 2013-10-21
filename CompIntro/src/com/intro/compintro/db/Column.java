@@ -1,7 +1,13 @@
 package com.intro.compintro.db;
 
-public class Column {
+import java.io.Serializable;
 
+public class Column implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5399128925674149672L;
 	private long _id;
 	private int column_1;
 	private String column_2;
