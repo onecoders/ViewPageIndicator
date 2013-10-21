@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -63,7 +64,11 @@ public class MainActivity extends BaseActivity {
 		mFragment = fragment;
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
-		getSlidingMenu().showContent();
+		new Handler().post(new Runnable() {
+			public void run() {
+				getSlidingMenu().showContent();
+			}
+		});
 	}
 
 }
