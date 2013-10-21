@@ -1231,7 +1231,7 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f09001f;
+        public static final int activity_horizontal_margin=0x7f090020;
         public static final int default_circle_indicator_radius=0x7f09000f;
         public static final int default_circle_indicator_stroke_width=0x7f090010;
         public static final int default_line_indicator_gap_width=0x7f090012;
@@ -1248,6 +1248,7 @@ containing a value of this type.
         public static final int list_padding=0x7f09001d;
         public static final int shadow_width=0x7f09001e;
         public static final int slidingmenu_offset=0x7f09001c;
+        public static final int tab_page_indicator_height=0x7f09001f;
     }
     public static final class drawable {
         public static final int abs__ab_bottom_solid_dark_holo=0x7f020000;

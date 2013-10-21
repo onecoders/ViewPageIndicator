@@ -209,7 +209,7 @@ int dimen abs__dropdownitem_text_padding_left 0x7f090008
 int dimen abs__dropdownitem_text_padding_right 0x7f090009
 int dimen abs__search_view_preferred_width 0x7f09000c
 int dimen abs__search_view_text_min_width 0x7f09000b
-int dimen activity_horizontal_margin 0x7f09001f
+int dimen activity_horizontal_margin 0x7f090020
 int dimen default_circle_indicator_radius 0x7f09000f
 int dimen default_circle_indicator_stroke_width 0x7f090010
 int dimen default_line_indicator_gap_width 0x7f090012
@@ -226,6 +226,7 @@ int dimen default_title_indicator_top_padding 0x7f09001b
 int dimen list_padding 0x7f09001d
 int dimen shadow_width 0x7f09001e
 int dimen slidingmenu_offset 0x7f09001c
+int dimen tab_page_indicator_height 0x7f09001f
 int drawable abs__ab_bottom_solid_dark_holo 0x7f020000
 int drawable abs__ab_bottom_solid_inverse_holo 0x7f020001
 int drawable abs__ab_bottom_solid_light_holo 0x7f020002

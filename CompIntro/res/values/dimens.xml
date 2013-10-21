@@ -19,6 +19,7 @@
     <dimen name="slidingmenu_offset">60dip</dimen>
     <dimen name="list_padding">10dip</dimen>
     <dimen name="shadow_width">15dip</dimen>
+    <dimen name="tab_page_indicator_height">45dip</dimen>
 
     <integer name="num_cols">1</integer>
 
