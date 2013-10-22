@@ -92,7 +92,8 @@ public class ImageListActivity extends AbsListViewBaseActivity {
 		private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 		private class ViewHolder {
-			public TextView text;
+			public TextView text1;
+			public TextView text2;
 			public ImageView image;
 		}
 
@@ -118,14 +119,16 @@ public class ImageListActivity extends AbsListViewBaseActivity {
 			if (convertView == null) {
 				view = getLayoutInflater().inflate(R.layout.item_list_image, parent, false);
 				holder = new ViewHolder();
-				holder.text = (TextView) view.findViewById(R.id.text);
+				holder.text1 = (TextView) view.findViewById(R.id.text1);
+				holder.text2 = (TextView) view.findViewById(R.id.text2);
 				holder.image = (ImageView) view.findViewById(R.id.image);
 				view.setTag(holder);
 			} else {
 				holder = (ViewHolder) view.getTag();
 			}
 
-			holder.text.setText("Item " + (position + 1));
+			holder.text1.setText("Item " + (position + 1));
+			holder.text2.setText("Item " + (position + 1));
 
 			imageLoader.displayImage(imageUrls[position], holder.image, options, animateFirstListener);
 
