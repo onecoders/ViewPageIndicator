@@ -39,6 +39,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
+		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
 		mFrag = new BehindContentFragment();
