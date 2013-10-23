@@ -55,7 +55,7 @@ public class MarketingFragment extends SherlockFragment {
 		if (savedInstanceState != null) {
 			currentPos = savedInstanceState.getInt(MARKETING_POS);
 		}
-		pager.setCurrentItem(currentPos);
+		indicator.setCurrentItem(currentPos);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 

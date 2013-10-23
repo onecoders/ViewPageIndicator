@@ -339,13 +339,13 @@ public final class R {
 		public static final int abs__textfield_searchview_right_holo_dark = 0x7f02006d;
 		public static final int abs__textfield_searchview_right_holo_light = 0x7f02006e;
 		public static final int abs__toast_frame = 0x7f02006f;
-		public static final int vpi__tab_indicator = 0x7f02009e;
-		public static final int vpi__tab_selected_focused_holo = 0x7f02009f;
-		public static final int vpi__tab_selected_holo = 0x7f0200a0;
-		public static final int vpi__tab_selected_pressed_holo = 0x7f0200a1;
-		public static final int vpi__tab_unselected_focused_holo = 0x7f0200a2;
-		public static final int vpi__tab_unselected_holo = 0x7f0200a3;
-		public static final int vpi__tab_unselected_pressed_holo = 0x7f0200a4;
+		public static final int vpi__tab_indicator = 0x7f02009f;
+		public static final int vpi__tab_selected_focused_holo = 0x7f0200a0;
+		public static final int vpi__tab_selected_holo = 0x7f0200a1;
+		public static final int vpi__tab_selected_pressed_holo = 0x7f0200a2;
+		public static final int vpi__tab_unselected_focused_holo = 0x7f0200a3;
+		public static final int vpi__tab_unselected_holo = 0x7f0200a4;
+		public static final int vpi__tab_unselected_pressed_holo = 0x7f0200a5;
 	}
 	public static final class id {
 		public static final int abs__action_bar = 0x7f06002a;

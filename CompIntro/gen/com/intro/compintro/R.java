@@ -1409,13 +1409,14 @@ containing a value of this type.
         public static final int shadow=0x7f02009b;
         public static final int shadowright=0x7f02009c;
         public static final int tab_indicator=0x7f02009d;
-        public static final int vpi__tab_indicator=0x7f02009e;
-        public static final int vpi__tab_selected_focused_holo=0x7f02009f;
-        public static final int vpi__tab_selected_holo=0x7f0200a0;
-        public static final int vpi__tab_selected_pressed_holo=0x7f0200a1;
-        public static final int vpi__tab_unselected_focused_holo=0x7f0200a2;
-        public static final int vpi__tab_unselected_holo=0x7f0200a3;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f0200a4;
+        public static final int tab_text_color=0x7f02009e;
+        public static final int vpi__tab_indicator=0x7f02009f;
+        public static final int vpi__tab_selected_focused_holo=0x7f0200a0;
+        public static final int vpi__tab_selected_holo=0x7f0200a1;
+        public static final int vpi__tab_selected_pressed_holo=0x7f0200a2;
+        public static final int vpi__tab_unselected_focused_holo=0x7f0200a3;
+        public static final int vpi__tab_unselected_holo=0x7f0200a4;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f0200a5;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f06002a;

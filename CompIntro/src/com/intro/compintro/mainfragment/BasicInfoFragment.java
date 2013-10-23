@@ -56,7 +56,7 @@ public class BasicInfoFragment extends SherlockFragment {
 		if (savedInstanceState != null) {
 			currentPos = savedInstanceState.getInt(BASIC_INFO_POS);
 		}
-		pager.setCurrentItem(currentPos);
+		indicator.setCurrentItem(currentPos);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
