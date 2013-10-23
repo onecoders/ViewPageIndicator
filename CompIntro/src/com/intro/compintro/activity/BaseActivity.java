@@ -35,6 +35,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
+		sm.setBehindScrollScale(0.0f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
 		// set the Behind View
