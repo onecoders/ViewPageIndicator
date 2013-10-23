@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
+import cn.sharesdk.framework.ShareSDK;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
@@ -20,6 +21,7 @@ public class MainActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_frame);
+		ShareSDK.initSDK(this);
 		mFragment = new BasicInfoFragment();
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, mFragment).commit();
@@ -69,6 +71,12 @@ public class MainActivity extends BaseActivity {
 				getSlidingMenu().showContent();
 			}
 		});
+	}
+
+	@Override
+	protected void onDestroy() {
+		ShareSDK.stopSDK(this);
+		super.onDestroy();
 	}
 
 }
