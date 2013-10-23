@@ -41,7 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="30dip"
-        android:gravity="center"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:indeterminate="true"
         android:src="@drawable/ic_pulltorefresh_arrow"
         android:visibility="gone" />
 
@@ -54,6 +56,8 @@
         android:paddingTop="5dip"
         android:text="@string/pull_to_refresh_tap_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#6D6D6D"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -64,6 +68,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#6D6D6D"
+        android:textSize="13sp"
         android:visibility="gone" />
 
 </RelativeLayout>
