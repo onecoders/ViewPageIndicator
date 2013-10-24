@@ -61,8 +61,8 @@
         <item name="android:divider">@drawable/custom_tab_indicator_divider</item>
         <item name="android:dividerPadding">10dip</item>
         <item name="android:showDividers">middle</item>
-        <item name="android:paddingLeft">8dip</item>
-        <item name="android:paddingRight">8dip</item>
+        <item name="android:paddingLeft">18dip</item>
+        <item name="android:paddingRight">18dip</item>
         <item name="android:fadingEdge">horizontal</item>
         <item name="android:fadingEdgeLength">8dip</item>
     </style>

@@ -43,16 +43,16 @@ public final class R {
 		public static final int logo_wechat = 0x7f0200af;
 		public static final int logo_wechatmoments = 0x7f0200b0;
 		public static final int logo_youdao = 0x7f0200b1;
-		public static final int pin = 0x7f0200bc;
-		public static final int share_tb_back = 0x7f0200c1;
-		public static final int share_vp_back = 0x7f0200c2;
-		public static final int ssdk_auth_title_back = 0x7f0200c3;
-		public static final int ssdk_back_arr = 0x7f0200c4;
-		public static final int ssdk_logo = 0x7f0200c5;
-		public static final int ssdk_title_div = 0x7f0200c6;
-		public static final int title_back = 0x7f0200c9;
-		public static final int title_shadow = 0x7f0200ca;
-		public static final int white_point = 0x7f0200d2;
+		public static final int pin = 0x7f0200b9;
+		public static final int share_tb_back = 0x7f0200be;
+		public static final int share_vp_back = 0x7f0200bf;
+		public static final int ssdk_auth_title_back = 0x7f0200c0;
+		public static final int ssdk_back_arr = 0x7f0200c1;
+		public static final int ssdk_logo = 0x7f0200c2;
+		public static final int ssdk_title_div = 0x7f0200c3;
+		public static final int title_back = 0x7f0200c6;
+		public static final int title_shadow = 0x7f0200c7;
+		public static final int white_point = 0x7f0200cf;
 	}
 	public static final class string {
 		public static final int cancel = 0x7f050023;

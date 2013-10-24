@@ -8,10 +8,10 @@ package cn.sharesdk;
 
 public final class R {
 	public static final class drawable {
-		public static final int ssdk_auth_title_back = 0x7f0200c3;
-		public static final int ssdk_back_arr = 0x7f0200c4;
-		public static final int ssdk_logo = 0x7f0200c5;
-		public static final int ssdk_title_div = 0x7f0200c6;
+		public static final int ssdk_auth_title_back = 0x7f0200c0;
+		public static final int ssdk_back_arr = 0x7f0200c1;
+		public static final int ssdk_logo = 0x7f0200c2;
+		public static final int ssdk_title_div = 0x7f0200c3;
 	}
 	public static final class string {
 		public static final int douban = 0x7f050016;

@@ -14,7 +14,6 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.innerfragment.SampleListFragment;
 import com.intro.compintro.util.ViewHelper;
-import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
 public class BasicInfoFragment extends SherlockFragment {
@@ -36,10 +35,6 @@ public class BasicInfoFragment extends SherlockFragment {
 
 	private static final String[] CONTENT = new String[] { "公司介绍", "发展历程",
 			"公司实力", "资质荣誉", "联系我们" };
-	private static final int[] ICONS = new int[] {
-			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
-			R.drawable.perm_group_calendar, R.drawable.perm_group_calendar,
-			R.drawable.perm_group_calendar, };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,8 +73,8 @@ public class BasicInfoFragment extends SherlockFragment {
 		return convertView;
 	}
 
-	class BasicInfoAdapter extends FragmentPagerAdapter implements
-			IconPagerAdapter {
+	class BasicInfoAdapter extends FragmentPagerAdapter {
+
 		public BasicInfoAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -96,11 +91,6 @@ public class BasicInfoFragment extends SherlockFragment {
 		@Override
 		public CharSequence getPageTitle(int position) {
 			return CONTENT[position % CONTENT.length];
-		}
-
-		@Override
-		public int getIconResId(int index) {
-			return ICONS[index];
 		}
 
 		@Override
