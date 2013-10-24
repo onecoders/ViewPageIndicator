@@ -71,7 +71,7 @@ public class SampleListFragment extends SherlockFragment implements
 		loadedItems = new LinkedList<SampleItem>();
 		// Simulation to get data from cache,do task in background
 		for (int i = 0; i < 20; i++) {
-			loadedItems.add(new SampleItem(content + i,
+			loadedItems.add(new SampleItem(content + i, content + i,
 					android.R.drawable.ic_menu_search));
 		}
 		adapter = new SampleAdapter(getSherlockActivity());
@@ -88,11 +88,13 @@ public class SampleListFragment extends SherlockFragment implements
 	}
 
 	private class SampleItem {
-		public String tag;
+		public String title;
+		public String content;
 		public int iconRes;
 
-		public SampleItem(String tag, int iconRes) {
-			this.tag = tag;
+		public SampleItem(String title, String content, int iconRes) {
+			this.title = title;
+			this.content = content;
 			this.iconRes = iconRes;
 		}
 	}
@@ -129,7 +131,10 @@ public class SampleListFragment extends SherlockFragment implements
 			icon.setImageResource(getItem(position).iconRes);
 			TextView title = (TextView) convertView
 					.findViewById(R.id.row_title);
-			title.setText(getItem(position).tag);
+			title.setText(getItem(position).title);
+			TextView content = (TextView) convertView
+					.findViewById(R.id.row_content);
+			content.setText(getItem(position).content);
 
 			return convertView;
 		}
@@ -181,7 +186,7 @@ public class SampleListFragment extends SherlockFragment implements
 					moreItems = new LinkedList<SampleItem>();
 					int count = adapter.getCount() + 1;
 					for (int i = count; i < count + 20; i++) {
-						moreItems.add(new SampleItem(content + i,
+						moreItems.add(new SampleItem(content + i, content + i,
 								android.R.drawable.ic_menu_search));
 					}
 					return true;
@@ -224,7 +229,7 @@ public class SampleListFragment extends SherlockFragment implements
 			if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 				// Simulation
 				for (int i = 0; i < 2; i++) {
-					newAdd.add(new SampleItem(content + "新增",
+					newAdd.add(new SampleItem(content + "新增", content + "新增",
 							android.R.drawable.ic_menu_search));
 				}
 				return true;
