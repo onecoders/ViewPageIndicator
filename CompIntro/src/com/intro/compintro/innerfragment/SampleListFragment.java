@@ -264,4 +264,9 @@ public class SampleListFragment extends SherlockFragment implements
 				+ DateFormat.getDateFormat(context).format(date);
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	}
+
 }
