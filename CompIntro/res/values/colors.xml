@@ -20,7 +20,7 @@
 
 <resources>
 
-    <color name="pressed_w">#342224</color>
+    <color name="pressed_w">#32333b</color>
     <color name="red">#900</color>
     <color name="green">#090</color>
     <color name="blue">#009</color>
