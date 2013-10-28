@@ -13,6 +13,7 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="learn2crack.jsonparsing" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"

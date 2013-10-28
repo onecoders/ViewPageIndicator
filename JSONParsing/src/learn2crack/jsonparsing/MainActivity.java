@@ -1,6 +1,7 @@
 package learn2crack.jsonparsing;
 
 import learn2crack.jsonparsing.library.JSONParser;
+import learn2crack.jsonparsing.util.NetworkUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -30,7 +32,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		// do network task in background
-		new MyAsyncTask().execute(url);
+		if (NetworkUtils.isNetworkConnected(this)) {
+			new MyAsyncTask().execute(url);
+		} else {
+			Toast.makeText(this, R.string.networkUnavailable, Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	class MyAsyncTask extends AsyncTask<String, Void, JSONObject> {
