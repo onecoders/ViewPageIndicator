@@ -8,16 +8,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/xmlStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <learn2crack.xmlparsing.view.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
-    <TextView
-        android:id="@+id/personStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/xmlStr"
-        android:layout_marginTop="10dip" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/xmlStr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/personStr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip" />
+        </LinearLayout>
+    </learn2crack.xmlparsing.view.MyScrollView>
 
 </RelativeLayout>
