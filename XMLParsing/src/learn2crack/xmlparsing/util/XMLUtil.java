@@ -48,7 +48,7 @@ public class XMLUtil {
 				xmlSerializer.endTag(null, "city");
 
 				xmlSerializer.startTag(null, "state");
-				xmlSerializer.text(person.getAddress().getCity());
+				xmlSerializer.text(person.getAddress().getState());
 				xmlSerializer.endTag(null, "state");
 
 				xmlSerializer.endTag(null, "addresse");
@@ -102,7 +102,6 @@ public class XMLUtil {
 			PhoneNumber phoneNumber = null;
 			while (XmlPullParser.END_DOCUMENT != eventType) {
 				String nodeName = parser.getName();
-
 				switch (eventType) {
 				case XmlPullParser.START_TAG:
 					if (nodeName.equals("person")) {
@@ -156,6 +155,7 @@ public class XMLUtil {
 				default:
 					break;
 				}
+				eventType = parser.next();
 			}
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();

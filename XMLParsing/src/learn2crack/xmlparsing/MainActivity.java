@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
 		xmlStrTextView.setText(xmlStr);
 
 		InputStream is = new ByteArrayInputStream(xmlStr.getBytes());
-		Person person = XMLUtil.fromXML(is).get(0);
-		personStrTextView.setText(person.toString());
+		Person personFromXML = XMLUtil.fromXML(is).get(0);
+		personStrTextView.setText(personFromXML.toString());
 
 	}
 
