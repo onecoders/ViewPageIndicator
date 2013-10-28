@@ -1,17 +1,26 @@
-package learn2crack.jsonparsing.test;
+package learn2crack.xmlparsing.test;
 
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.jsonparsing.bean.Person;
-import learn2crack.jsonparsing.bean.Person.Address;
-import learn2crack.jsonparsing.bean.Person.PhoneNumber;
-import learn2crack.jsonparsing.util.JsonUtil;
+import learn2crack.xmlparsing.bean.Person;
+import learn2crack.xmlparsing.bean.Person.Address;
+import learn2crack.xmlparsing.bean.Person.PhoneNumber;
+import learn2crack.xmlparsing.util.XMLUtil;
+import android.os.Environment;
 import android.test.AndroidTestCase;
 
-public class JSONParsingTest extends AndroidTestCase {
+public class XMLParsingTest extends AndroidTestCase {
 
 	private Person person;
+	private String path = Environment.getExternalStorageDirectory()
+			.getAbsolutePath() + "/person.xml";
 
 	@Override
 	protected void setUp() throws Exception {
@@ -38,10 +47,42 @@ public class JSONParsingTest extends AndroidTestCase {
 		super.setUp();
 	}
 
-	public void testParseBetweenJSONAndBean() {
-		String jsonStr = JsonUtil.toJSON(person);
-		Person personFromJSON = JsonUtil.fromJSON(jsonStr);
-		assertEquals(person, personFromJSON);
+	public void testParseBetweenXMLAndBean() {
+		String xmlStr = XMLUtil.toXML(person);
+		BufferedOutputStream bos = null;
+		try {
+			bos = new BufferedOutputStream(new FileOutputStream(path));
+			bos.write(xmlStr.getBytes());
+			bos.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (bos != null) {
+				try {
+					bos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		InputStream is = null;
+		try {
+			is = new FileInputStream(path);
+			Person xmlPerson = XMLUtil.fromXML(is).get(0);
+			assertEquals(person, xmlPerson);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private void assertEquals(Person expected, Person actual) {
