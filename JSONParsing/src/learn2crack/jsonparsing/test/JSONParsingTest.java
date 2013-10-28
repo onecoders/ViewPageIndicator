@@ -3,9 +3,9 @@ package learn2crack.jsonparsing.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.jsonparsing.bean.Address;
 import learn2crack.jsonparsing.bean.Person;
-import learn2crack.jsonparsing.bean.PhoneNumber;
+import learn2crack.jsonparsing.bean.Person.Address;
+import learn2crack.jsonparsing.bean.Person.PhoneNumber;
 import learn2crack.jsonparsing.util.JsonUtil;
 import android.test.AndroidTestCase;
 
@@ -18,13 +18,13 @@ public class JSONParsingTest extends AndroidTestCase {
 		person = new Person();
 		person.setName("Silicon");
 		person.setSurname("松花江河畔");
-		Address address = new Address();
+		learn2crack.jsonparsing.bean.Person.Address address = person.new Address();
 		address.setAddress("Jiangsu常州市武进区");
 		address.setCity("常州市");
 		address.setState("Jiangsu");
 		person.setAddress(address);
 		List<PhoneNumber> phoneList = new ArrayList<PhoneNumber>();
-		PhoneNumber pn = new PhoneNumber();
+		PhoneNumber pn = person.new PhoneNumber();
 		pn.setNumber("66668888");
 		pn.setType("PHONE");
 		phoneList.add(pn);

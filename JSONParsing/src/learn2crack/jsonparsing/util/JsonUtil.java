@@ -3,9 +3,9 @@ package learn2crack.jsonparsing.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.jsonparsing.bean.Address;
 import learn2crack.jsonparsing.bean.Person;
-import learn2crack.jsonparsing.bean.PhoneNumber;
+import learn2crack.jsonparsing.bean.Person.Address;
+import learn2crack.jsonparsing.bean.Person.PhoneNumber;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +51,7 @@ public class JsonUtil {
 			person.setSurname(jObj.getString("surname"));
 			person.setName(jObj.getString("name"));
 			JSONObject jsonAdd = jObj.getJSONObject("address");
-			Address address = new Address();
+			Address address = person.new Address();
 			address.setAddress(jsonAdd.getString("address"));
 			address.setCity(jsonAdd.getString("city"));
 			address.setState(jsonAdd.getString("state"));
@@ -59,7 +59,7 @@ public class JsonUtil {
 			JSONArray jsonArr = jObj.getJSONArray("phoneNumber");
 			List<PhoneNumber> phoneList = new ArrayList<PhoneNumber>();
 			for (int i = 0; i < jsonArr.length(); i++) {
-				PhoneNumber pn = new PhoneNumber();
+				PhoneNumber pn = person.new PhoneNumber();
 				JSONObject jsonPhone = jsonArr.getJSONObject(i);
 				pn.setNumber(jsonPhone.getString("num"));
 				pn.setType(jsonPhone.getString("type"));
