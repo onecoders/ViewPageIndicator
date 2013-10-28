@@ -9,8 +9,10 @@ import learn2crack.xmlparsing.bean.Person;
 import learn2crack.xmlparsing.bean.Person.PhoneNumber;
 import learn2crack.xmlparsing.util.XMLUtil;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -64,6 +66,15 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if (item.getItemId() == R.id.second) {
+			startActivity(new Intent(this, ScrollListViewTest.class));
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

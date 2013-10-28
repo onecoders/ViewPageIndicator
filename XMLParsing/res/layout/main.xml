@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <learn2crack.xmlparsing.view.MyScrollView
+    <learn2crack.xmlparsing.view.ScrollLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none" >
@@ -29,6 +29,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip" />
         </LinearLayout>
-    </learn2crack.xmlparsing.view.MyScrollView>
+    </learn2crack.xmlparsing.view.ScrollLayout>
 
 </RelativeLayout>

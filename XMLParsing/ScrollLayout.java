@@ -1,4 +1,5 @@
 package learn2crack.xmlparsing.view;
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -7,13 +8,13 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
-public class MyScrollView extends ScrollView {
+public class ScrollLayout extends ScrollView {
 
 	private View inner;
 	private float y;
 	private Rect normal = new Rect();
 
-	public MyScrollView(Context context, AttributeSet attrs) {
+	public ScrollLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
