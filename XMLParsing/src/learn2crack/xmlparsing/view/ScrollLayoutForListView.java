@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
 
-public class ScrollListView extends ScrollView {
+public class ScrollLayoutForListView extends ScrollView {
 
 	private View inner;
 	private float y;
 	private Rect normal = new Rect();
 	private boolean isCount = false;
 
-	public ScrollListView(Context context, AttributeSet attrs) {
+	public ScrollLayoutForListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
