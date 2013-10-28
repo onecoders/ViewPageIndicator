@@ -1,6 +1,7 @@
 package learn2crack.xmlparsing.test;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,6 +16,7 @@ import learn2crack.xmlparsing.bean.Person.PhoneNumber;
 import learn2crack.xmlparsing.util.XMLUtil;
 import android.os.Environment;
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 public class XMLParsingTest extends AndroidTestCase {
 
@@ -50,7 +52,11 @@ public class XMLParsingTest extends AndroidTestCase {
 	public void testParseBetweenXMLAndBean() {
 		String xmlStr = XMLUtil.toXML(person);
 		BufferedOutputStream bos = null;
+		File file = new File(path);
 		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
 			bos = new BufferedOutputStream(new FileOutputStream(path));
 			bos.write(xmlStr.getBytes());
 			bos.flush();
@@ -88,6 +94,8 @@ public class XMLParsingTest extends AndroidTestCase {
 	private void assertEquals(Person expected, Person actual) {
 		assertEquals(expected.getName(), actual.getName());
 		assertEquals(expected.getSurname(), actual.getSurname());
+		Log.d("expected.getName()", expected.getName());
+		Log.d("actual.getName()", actual.getName());
 		Address address1 = expected.getAddress();
 		Address address2 = actual.getAddress();
 		assertEquals(address1.getAddress(), address2.getAddress());

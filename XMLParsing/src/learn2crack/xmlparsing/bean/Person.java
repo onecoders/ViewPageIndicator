@@ -41,6 +41,18 @@ public class Person {
 		this.phoneList = phoneList;
 	}
 
+	@Override
+	public String toString() {
+		String info = "---Person---\n";
+		info += "name:" + name + " ,surname:" + surname + " ,address:"
+				+ address.address + " ,city:" + address.city + " ,state:"
+				+ address.state;
+		for (PhoneNumber pn : phoneList) {
+			info += " ,number:" + pn.number + " ,type:" + pn.type;
+		}
+		return info;
+	}
+
 	public class Address {
 
 		private String address;
