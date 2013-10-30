@@ -1,4 +1,4 @@
-package learn2crack.jsonparsing.bean;
+package learn2crack.jsonparsing.model;
 
 import java.util.List;
 

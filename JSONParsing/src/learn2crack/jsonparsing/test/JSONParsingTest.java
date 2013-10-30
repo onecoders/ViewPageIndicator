@@ -3,9 +3,9 @@ package learn2crack.jsonparsing.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.jsonparsing.bean.Person;
-import learn2crack.jsonparsing.bean.Person.Address;
-import learn2crack.jsonparsing.bean.Person.PhoneNumber;
+import learn2crack.jsonparsing.model.Person;
+import learn2crack.jsonparsing.model.Person.Address;
+import learn2crack.jsonparsing.model.Person.PhoneNumber;
 import learn2crack.jsonparsing.util.JsonUtil;
 import android.test.AndroidTestCase;
 

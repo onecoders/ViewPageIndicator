@@ -1,4 +1,4 @@
-package com.intro.compintro.datastruct;
+package com.intro.compintro.model;
 
 public class MenuItem {
 	private int iconId;

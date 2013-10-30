@@ -14,7 +14,7 @@ import android.widget.GridView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.adapter.SecondaryMenuAdapter;
-import com.intro.compintro.datastruct.SecondaryMenuItem;
+import com.intro.compintro.model.SecondaryMenuItem;
 
 public class SecondaryMenuFragment extends SherlockFragment {
 

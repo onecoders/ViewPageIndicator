@@ -15,7 +15,7 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import com.intro.compintro.R;
 import com.intro.compintro.activity.MainActivity;
 import com.intro.compintro.adapter.BehindMenuAdapter;
-import com.intro.compintro.datastruct.MenuItem;
+import com.intro.compintro.model.MenuItem;
 
 public class BehindContentFragment extends SherlockListFragment {
 

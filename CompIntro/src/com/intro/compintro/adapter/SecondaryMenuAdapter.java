@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.intro.compintro.R;
-import com.intro.compintro.datastruct.SecondaryMenuItem;
+import com.intro.compintro.model.SecondaryMenuItem;
 
 public class SecondaryMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
 

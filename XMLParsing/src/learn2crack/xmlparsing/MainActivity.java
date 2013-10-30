@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.xmlparsing.bean.Person;
-import learn2crack.xmlparsing.bean.Person.PhoneNumber;
+import learn2crack.xmlparsing.model.Person;
+import learn2crack.xmlparsing.model.Person.PhoneNumber;
 import learn2crack.xmlparsing.util.XMLUtil;
 import android.app.Activity;
 import android.content.Intent;

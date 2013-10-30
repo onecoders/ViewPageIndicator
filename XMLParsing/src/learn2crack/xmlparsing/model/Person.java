@@ -1,4 +1,4 @@
-package learn2crack.xmlparsing.bean;
+package learn2crack.xmlparsing.model;
 
 import java.util.List;
 

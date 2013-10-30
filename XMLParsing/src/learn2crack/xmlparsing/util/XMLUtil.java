@@ -6,9 +6,9 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import learn2crack.xmlparsing.bean.Person;
-import learn2crack.xmlparsing.bean.Person.Address;
-import learn2crack.xmlparsing.bean.Person.PhoneNumber;
+import learn2crack.xmlparsing.model.Person;
+import learn2crack.xmlparsing.model.Person.Address;
+import learn2crack.xmlparsing.model.Person.PhoneNumber;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

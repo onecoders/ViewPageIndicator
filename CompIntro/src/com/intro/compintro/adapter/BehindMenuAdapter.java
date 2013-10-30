@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.intro.compintro.R;
-import com.intro.compintro.datastruct.MenuItem;
+import com.intro.compintro.model.MenuItem;
 
 public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 
