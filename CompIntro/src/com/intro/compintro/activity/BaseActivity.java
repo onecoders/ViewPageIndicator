@@ -72,7 +72,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		actionBar.setDisplayShowTitleEnabled(false);
 		// Get custom view
 		View actionbarView = LayoutInflater.from(this).inflate(
-				R.layout.actionbar, null);
+				R.layout.actionbar_main, null);
 		ImageButton menuBtn = (ImageButton) actionbarView
 				.findViewById(R.id.menu_btn);
 		menuBtn.setOnClickListener(this);

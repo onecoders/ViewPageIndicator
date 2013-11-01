@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/base_actionbar_bg"
-    android:padding="2dip" >
+    android:background="@drawable/base_actionbar_bg" >
 
     <ImageButton
         android:id="@+id/menu_btn"
@@ -26,8 +25,9 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
         android:layout_toRightOf="@id/divider"
+        android:paddingLeft="10dip"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <ImageButton

@@ -18,5 +18,6 @@
     <string name="pull_to_refresh_refreshing_label">正在刷新 &#8230;</string>
     <string name="pull_to_refresh_tap_label">点击刷新 &#8230;</string>
     <string name="lastUpdate">上次更新：</string>
+    <string name="configure">设置</string>
 
 </resources>

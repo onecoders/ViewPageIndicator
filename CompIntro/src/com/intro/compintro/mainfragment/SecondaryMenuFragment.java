@@ -3,6 +3,7 @@ package com.intro.compintro.mainfragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.activity.SettingActivity;
 import com.intro.compintro.adapter.SecondaryMenuAdapter;
 import com.intro.compintro.model.SecondaryMenuItem;
 
@@ -23,6 +25,9 @@ public class SecondaryMenuFragment extends SherlockFragment implements
 		OnItemClickListener {
 
 	private GridView gridview;
+	private static final int POS_CONFIG = 0;
+	private static final int POS_COLLECTION = 1;
+	private static final int POS_SHARE = 2;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -49,11 +54,13 @@ public class SecondaryMenuFragment extends SherlockFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		switch (position) {
-		case 0:
+		case POS_CONFIG:
+			startActivity(new Intent(getSherlockActivity(),
+					SettingActivity.class));
 			break;
-		case 1:
+		case POS_COLLECTION:
 			break;
-		case 2:
+		case POS_SHARE:
 			toOnekeyShare();
 			break;
 		default:
@@ -63,7 +70,8 @@ public class SecondaryMenuFragment extends SherlockFragment implements
 
 	private void toOnekeyShare() {
 		OnekeyShare oks = new OnekeyShare();
-		oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+		oks.setNotification(R.drawable.ic_launcher,
+				getString(R.string.app_name));
 		oks.setTitle(getString(R.string.app_name));
 		oks.setText(getString(R.string.app_name));
 		oks.setUrl("http://sharesdk.cn");
