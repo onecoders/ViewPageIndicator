@@ -2,7 +2,6 @@ package com.intro.compintro.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +12,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.intro.compintro.R;
 import com.intro.compintro.mainfragment.BehindContentFragment;
 import com.intro.compintro.mainfragment.SecondaryMenuFragment;
+import com.intro.compintro.util.ViewHelper;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -57,20 +57,15 @@ public class BaseActivity extends SlidingFragmentActivity implements
 				.commit();
 	}
 
-	public void initActinBar() {
+	private void initActinBar() {
 		ActionBar actionBar = getSupportActionBar();
-		// set LayoutParams
-		ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-				ActionBar.LayoutParams.WRAP_CONTENT,
-				ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-		// Set display to custom next
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-		// Do any other config to the action bar
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		actionBar.setDisplayShowTitleEnabled(false);
 		// Get custom view
+		View customerView = loadCustomerView();
+		// Now set custom view
+		ViewHelper.initActionBarAndSetCustomerView(actionBar, customerView);
+	}
+
+	private View loadCustomerView() {
 		View actionbarView = LayoutInflater.from(this).inflate(
 				R.layout.actionbar_main, null);
 		ImageButton menuBtn = (ImageButton) actionbarView
@@ -79,8 +74,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		ImageButton personalBtn = (ImageButton) actionbarView
 				.findViewById(R.id.personal_btn);
 		personalBtn.setOnClickListener(this);
-		// Now set custom view
-		actionBar.setCustomView(actionbarView, params);
+		return actionbarView;
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.intro.compintro.R;
+import com.intro.compintro.activity.CollectionsActivity;
 import com.intro.compintro.activity.SettingActivity;
 import com.intro.compintro.adapter.SecondaryMenuAdapter;
 import com.intro.compintro.model.SecondaryMenuItem;
@@ -59,6 +60,8 @@ public class SecondaryMenuFragment extends SherlockFragment implements
 					SettingActivity.class));
 			break;
 		case POS_COLLECTION:
+			startActivity(new Intent(getSherlockActivity(),
+					CollectionsActivity.class));
 			break;
 		case POS_SHARE:
 			toOnekeyShare();

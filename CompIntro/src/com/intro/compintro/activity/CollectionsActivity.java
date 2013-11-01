@@ -1,25 +1,49 @@
 package com.intro.compintro.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
 import com.intro.compintro.R;
 import com.intro.compintro.util.ViewHelper;
 
-public class SettingActivity extends SherlockPreferenceActivity implements
+public class CollectionsActivity extends SherlockListActivity implements
 		OnClickListener {
+
+	private List<String> collections = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.collection_listview);
 		initActinBar();
-		addPreferencesFromResource(R.xml.preference);
+		// simulation load collections from database
+		for (int i = 0; i < 10; i++) {
+			collections.add("收藏" + i);
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1,
+				collections);
+		setListAdapter(adapter);
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+
+			}
+		});
 	}
 
 	private void initActinBar() {
@@ -37,7 +61,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 				.findViewById(R.id.back_btn);
 		menuBtn.setOnClickListener(this);
 		TextView title = (TextView) actionbarView.findViewById(R.id.title);
-		title.setText(R.string.configure);
+		title.setText(R.string.collections);
 		return actionbarView;
 	}
 
@@ -47,4 +71,5 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 			onBackPressed();
 		}
 	}
+
 }

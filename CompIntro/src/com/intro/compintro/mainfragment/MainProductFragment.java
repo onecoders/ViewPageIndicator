@@ -25,7 +25,7 @@ public class MainProductFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarContent(actionBar, R.drawable.main_product_back,
+		ViewHelper.setActionBarCustomerViewContent(actionBar, R.drawable.main_product_back,
 				R.string.main_product_title);
 	}
 

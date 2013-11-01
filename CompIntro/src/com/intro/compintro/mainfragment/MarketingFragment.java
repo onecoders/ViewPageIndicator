@@ -25,7 +25,7 @@ public class MarketingFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarContent(actionBar, R.drawable.marketing_back,
+		ViewHelper.setActionBarCustomerViewContent(actionBar, R.drawable.marketing_back,
 				R.string.marketing_title);
 	}
 

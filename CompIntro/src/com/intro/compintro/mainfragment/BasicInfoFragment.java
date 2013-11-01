@@ -25,7 +25,7 @@ public class BasicInfoFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarContent(actionBar, R.drawable.basic_info_back,
+		ViewHelper.setActionBarCustomerViewContent(actionBar, R.drawable.basic_info_back,
 				R.string.basic_info_title);
 	}
 
