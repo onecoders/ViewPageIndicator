@@ -53,11 +53,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingTop="5dip"
+        android:paddingTop="15dip"
         android:text="@string/pull_to_refresh_tap_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#6D6D6D"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
