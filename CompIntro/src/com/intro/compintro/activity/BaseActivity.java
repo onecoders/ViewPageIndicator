@@ -19,7 +19,8 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	protected BehindContentFragment mFrag;
+	BehindContentFragment mFrag;
+	SlidingMenu sm;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,13 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	}
 
 	private void initSlidingMenu() {
-		// customize the SlidingMenu
-		SlidingMenu sm = getSlidingMenu();
+		sm = getSlidingMenu();
+		customizeSlidingMenu();
+		setBehindView();
+		setSecondaryMenu();
+	}
+
+	private void customizeSlidingMenu() {
 		sm.setMode(SlidingMenu.LEFT_RIGHT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);
 		sm.setShadowDrawable(R.drawable.shadow);
@@ -39,8 +45,9 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setFadeDegree(0.35f);
 		sm.setBehindScrollScale(0.0f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+	}
 
-		// set the Behind View
+	private void setBehindView() {
 		setBehindContentView(R.layout.menu_frame);
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		FragmentTransaction t = this.getSupportFragmentManager()
@@ -48,8 +55,9 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		mFrag = new BehindContentFragment();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
+	}
 
-		// set the secondaryMenu
+	private void setSecondaryMenu() {
 		sm.setSecondaryMenu(R.layout.menu_frame_two);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSupportFragmentManager().beginTransaction()
@@ -79,7 +87,6 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		SlidingMenu sm = getSlidingMenu();
 		switch (v.getId()) {
 		case R.id.menu_btn:
 			if (sm.isMenuShowing()) {

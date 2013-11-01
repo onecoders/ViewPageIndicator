@@ -24,9 +24,10 @@ public class BasicInfoFragment extends SherlockFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarCustomerViewContent(actionBar, R.drawable.basic_info_back,
-				R.string.basic_info_title);
+		ViewHelper.setActionBarCustomerViewContent(actionBar,
+				R.drawable.basic_info_back, R.string.basic_info_title);
 	}
 
 	private FragmentPagerAdapter adapter;
@@ -101,8 +102,8 @@ public class BasicInfoFragment extends SherlockFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		currentPos = pager.getCurrentItem();
 		super.onSaveInstanceState(outState);
+		currentPos = pager.getCurrentItem();
 		outState.putInt(BASIC_INFO_POS, currentPos);
 	}
 
