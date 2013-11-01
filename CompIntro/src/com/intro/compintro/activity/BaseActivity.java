@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import cn.sharesdk.framework.ShareSDK;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.intro.compintro.R;
@@ -23,6 +24,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ShareSDK.initSDK(this);
 		initActinBar();
 		initSlidingMenu();
 	}
@@ -106,6 +108,12 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	protected void resetSelectedItem() {
 		mFrag.getAdapter().setSelectItem(0);
+	}
+
+	@Override
+	protected void onDestroy() {
+		ShareSDK.stopSDK(this);
+		super.onDestroy();
 	}
 
 }
