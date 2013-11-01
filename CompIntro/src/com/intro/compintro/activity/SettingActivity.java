@@ -1,5 +1,7 @@
 package com.intro.compintro.activity;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +17,16 @@ import com.intro.compintro.util.ViewHelper;
 public class SettingActivity extends SherlockPreferenceActivity implements
 		OnClickListener {
 
+	private static final String PREFS_NAME = "compintro";
+	private SharedPreferences m_prefs;
+	private Editor editor;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initActinBar();
+		m_prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+		editor = m_prefs.edit();
 		addPreferencesFromResource(R.xml.preference);
 	}
 
