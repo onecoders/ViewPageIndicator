@@ -1,5 +1,5 @@
 package com.intro.compintro.util;
 
-public class Action {
+public class Constants {
 
 }

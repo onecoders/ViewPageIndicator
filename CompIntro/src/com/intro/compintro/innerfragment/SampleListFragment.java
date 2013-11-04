@@ -232,6 +232,11 @@ public class SampleListFragment extends SherlockFragment implements
 					newAdd.add(new SampleItem(content + "新增", content + "新增",
 							android.R.drawable.ic_menu_search));
 				}
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				return true;
 			}
 			return false;
