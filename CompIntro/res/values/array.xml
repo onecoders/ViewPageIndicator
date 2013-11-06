@@ -2,16 +2,16 @@
 <resources>
 
     <string-array name="menu_items_name_zh">
-        <item>基本情况</item>
+        <item>公司简介</item>
         <item>营销活动</item>
-        <item>主打产品</item>
-        <item>更多介绍</item>
+        <item>产品介绍</item>
+        <item>企业通讯录</item>
     </string-array>
     <string-array name="menu_items_name_en">
-        <item>Basic Information</item>
-        <item>Marketing Activity</item>
-        <item>Main Product</item>
-        <item>More Product</item>
+        <item>Brief</item>
+        <item>Marketing</item>
+        <item>Product</item>
+        <item>Contacts</item>
     </string-array>
 
     <integer-array name="menu_item_icon">

@@ -62,7 +62,7 @@ public class BehindContentFragment extends SherlockListFragment {
 			newContent = new MainProductFragment();
 			break;
 		case 3:
-			newContent = new MoreProductFragment();
+			newContent = new ContactsFragment();
 			break;
 		}
 		if (newContent != null)
