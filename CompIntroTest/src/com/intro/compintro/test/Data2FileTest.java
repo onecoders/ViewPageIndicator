@@ -3,10 +3,11 @@ package com.intro.compintro.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.jsip.market.db.Column;
+import net.jsip.market.io.Data2File;
+
 import android.test.AndroidTestCase;
 
-import com.intro.compintro.db.Column;
-import com.intro.compintro.io.Data2File;
 
 public class Data2FileTest extends AndroidTestCase {
 

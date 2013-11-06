@@ -1,9 +1,9 @@
 package com.intro.compintro.test;
 
+import net.jsip.market.db.Column;
+import net.jsip.market.db.Data2DB;
 import android.test.AndroidTestCase;
 
-import com.intro.compintro.db.Column;
-import com.intro.compintro.db.Data2DB;
 
 public class Data2DBTest extends AndroidTestCase {
 
