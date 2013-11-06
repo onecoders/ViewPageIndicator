@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.innerfragment.SampleListFragment;
 import com.intro.compintro.util.ViewHelper;
 import com.viewpagerindicator.TabPageIndicator;

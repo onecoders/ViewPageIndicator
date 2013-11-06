@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockListActivity;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.util.ViewHelper;
 
 public class CollectionsActivity extends SherlockListActivity implements

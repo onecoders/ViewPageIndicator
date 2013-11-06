@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import cn.sharesdk.framework.ShareSDK;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.mainfragment.BehindContentFragment;
 import com.intro.compintro.mainfragment.SecondaryMenuFragment;
 import com.intro.compintro.util.ViewHelper;

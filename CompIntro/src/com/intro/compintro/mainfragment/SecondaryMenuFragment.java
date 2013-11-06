@@ -16,7 +16,7 @@ import android.widget.GridView;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.activity.CollectionsActivity;
 import com.intro.compintro.activity.SettingActivity;
 import com.intro.compintro.adapter.SecondaryMenuAdapter;

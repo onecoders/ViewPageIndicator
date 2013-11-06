@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.activity.MainActivity;
 import com.intro.compintro.adapter.BehindMenuAdapter;
 import com.intro.compintro.model.MenuItem;

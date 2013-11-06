@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 
 public class ViewHelper {
 

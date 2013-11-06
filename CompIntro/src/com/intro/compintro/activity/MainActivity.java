@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.mainfragment.BasicInfoFragment;
 import com.intro.compintro.util.MessageToast;
 

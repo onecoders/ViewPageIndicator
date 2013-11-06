@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.model.MenuItem;
 
 public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {

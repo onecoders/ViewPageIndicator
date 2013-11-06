@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.util.ViewHelper;
 
 public class SettingActivity extends SherlockPreferenceActivity implements

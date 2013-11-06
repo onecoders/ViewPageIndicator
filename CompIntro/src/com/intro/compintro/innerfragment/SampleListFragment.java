@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 import com.intro.compintro.util.MessageToast;
 import com.intro.compintro.util.NetworkUtils;
 import com.markupartist.android.widget.PullToRefreshListView;

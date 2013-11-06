@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 
 public class ItemFragment extends SherlockFragment {
 

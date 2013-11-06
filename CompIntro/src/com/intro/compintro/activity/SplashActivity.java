@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.intro.compintro.R;
+import net.jsip.market.R;
 
 public class SplashActivity extends SherlockActivity {
 
