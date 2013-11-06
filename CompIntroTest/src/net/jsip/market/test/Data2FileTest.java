@@ -1,4 +1,4 @@
-package com.intro.compintro.test;
+package net.jsip.market.test;
 
 import java.util.ArrayList;
 import java.util.List;

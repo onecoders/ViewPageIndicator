@@ -1,4 +1,4 @@
-package com.intro.compintro.test;
+package net.jsip.market.test;
 
 import net.jsip.market.db.Column;
 import net.jsip.market.db.Data2DB;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">公司介绍应用</string>
+    <string name="app_name">掌上营销系统</string>
     <string name="basic_info_title">基本情况介绍</string>
     <string name="marketing_title">营销活动宣传</string>
     <string name="main_product_title">主打产品</string>
