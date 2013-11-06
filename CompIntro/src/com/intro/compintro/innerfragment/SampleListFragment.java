@@ -80,6 +80,7 @@ public class SampleListFragment extends SherlockFragment implements
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 		listview.setOnRefreshListener(this);
+		// if network available and the cache is out of date
 		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 			listview.onRefresh();
 		}
@@ -231,11 +232,6 @@ public class SampleListFragment extends SherlockFragment implements
 				for (int i = 0; i < 2; i++) {
 					newAdd.add(new SampleItem(content + "新增", content + "新增",
 							android.R.drawable.ic_menu_search));
-				}
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
 				}
 				return true;
 			}
