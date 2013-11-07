@@ -17,7 +17,6 @@ public class ContactDBHelper {
 	static final String KEY_NAME = "name";
 	static final String KEY_NUMBER = "number";
 	static final String KEY_EMAIL = "email";
-	static final String TAG = "ContactDBAdapter";
 
 	static final String DATABASE_NAME = "PocketMarketing";
 	static final String DATABASE_TABLE = "contact";
@@ -107,7 +106,7 @@ public class ContactDBHelper {
 	public List<ContactItem> queryAll() {
 		List<ContactItem> items = new ArrayList<ContactItem>();
 		Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID, KEY_NAME,
-				KEY_NUMBER, KEY_EMAIL }, null, null, null, null, KEY_NAME);
+				KEY_NUMBER, KEY_EMAIL }, null, null, null, null, KEY_NAME + " ASC");
 		if (c != null) {
 			while (c.moveToNext()) {
 				ContactItem item = new ContactItem();

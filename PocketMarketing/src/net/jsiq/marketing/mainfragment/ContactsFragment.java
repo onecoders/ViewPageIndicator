@@ -102,10 +102,16 @@ public class ContactsFragment extends SherlockFragment implements
 	private class ContactQuery extends AsyncTask<Void, Void, Void> {
 
 		List<ContactItem> items;
+		ContactDBHelper DBHelper;
+
+		public ContactQuery() {
+			DBHelper = new ContactDBHelper(getSherlockActivity());
+			DBHelper.open();
+		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			items = new ContactDBHelper(getSherlockActivity()).queryAll();
+			items = DBHelper.queryAll();
 			return null;
 		}
 
@@ -119,6 +125,7 @@ public class ContactsFragment extends SherlockFragment implements
 			if (list.size() > 0) {
 				setAdapter();
 			}
+			DBHelper.close();
 		}
 
 	}
