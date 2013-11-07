@@ -1,8 +1,10 @@
-package net.jsiq.marketing.view;
+package net.jsiq.marketing.model;
 
 public class ContactItem {
+	private int _id;
 	private String name;
 	private String number;
+	private String email;
 	private String alpha;
 
 	public String getName() {
@@ -27,6 +29,22 @@ public class ContactItem {
 
 	public void setAlpha(String alpha) {
 		this.alpha = alpha;
+	}
+
+	public int get_id() {
+		return _id;
+	}
+
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 public class AlphaView extends ImageView {
 	private Drawable alphaDrawable;
-	private boolean showBkg; // 是否显示背景
-	private int choose; // 当前选中首字母的位置
+	private boolean showBkg;
+	private int choose;
 	private String[] ALPHAS;
 	private OnAlphaChangedListener listener;
 
@@ -37,7 +37,7 @@ public class AlphaView extends ImageView {
 		alphaDrawable = getDrawable();
 
 		ALPHAS = new String[28];
-		ALPHAS[0] = " "; // " "代表搜索
+		ALPHAS[0] = " ";
 		ALPHAS[27] = "#";
 		for (int i = 0; i < 26; i++) {
 			ALPHAS[i + 1] = String.valueOf((char) (65 + i));
@@ -100,12 +100,10 @@ public class AlphaView extends ImageView {
 		return true;
 	}
 
-	// 设置事件
 	public void setOnAlphaChangedListener(OnAlphaChangedListener listener) {
 		this.listener = listener;
 	}
 
-	// 事件接口
 	public interface OnAlphaChangedListener {
 		public void OnAlphaChanged(String s, int index);
 	}

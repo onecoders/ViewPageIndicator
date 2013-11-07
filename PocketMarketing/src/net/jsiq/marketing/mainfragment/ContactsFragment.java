@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.model.ContactItem;
 import net.jsiq.marketing.util.Utils;
 import net.jsiq.marketing.util.ViewHelper;
 import net.jsiq.marketing.view.AlphaView;
-import net.jsiq.marketing.view.ContactItem;
 import net.jsiq.marketing.view.AlphaView.OnAlphaChangedListener;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
@@ -41,7 +41,7 @@ public class ContactsFragment extends SherlockFragment implements
 	private AsyncQueryHandler queryHandler;
 	private List<ContactItem> list;
 	private ListAdapter adapter;
-	private HashMap<String, Integer> alphaIndexer; // 存放存在的汉语拼音首字母和与之对应的列表位置
+	private HashMap<String, Integer> alphaIndexer;
 	private OverlayThread overlayThread;
 
 	private static final Uri uri = Uri
@@ -91,7 +91,6 @@ public class ContactsFragment extends SherlockFragment implements
 		super.onStop();
 	}
 
-	// 初始化汉语拼音首字母弹出提示框
 	private void initOverlay() {
 		LayoutInflater inflater = LayoutInflater.from(getSherlockActivity());
 		overlay = (TextView) inflater.inflate(R.layout.overlay, null);
@@ -112,7 +111,6 @@ public class ContactsFragment extends SherlockFragment implements
 				null, "sort_key COLLATE LOCALIZED asc");
 	}
 
-	// 异步查询类
 	private class MyAsyncQueryHandler extends AsyncQueryHandler {
 
 		public MyAsyncQueryHandler(ContentResolver cr) {
@@ -154,9 +152,7 @@ public class ContactsFragment extends SherlockFragment implements
 		public ListAdapter() {
 			this.inflater = LayoutInflater.from(getSherlockActivity());
 			for (int i = 0; i < list.size(); i++) {
-				// 当前汉语拼音首字母
 				String currentAlpha = list.get(i).getAlpha();
-				// 上一个汉语拼音首字母，如果不存在为“ ”
 				String previewAlpha = (i - 1) >= 0 ? list.get(i - 1).getAlpha()
 						: " ";
 				if (!previewAlpha.equals(currentAlpha)) {
@@ -224,7 +220,6 @@ public class ContactsFragment extends SherlockFragment implements
 
 	private Handler handler = new Handler();
 
-	// 设置overlay不可见
 	private class OverlayThread implements Runnable {
 
 		@Override
