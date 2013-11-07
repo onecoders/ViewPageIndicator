@@ -105,6 +105,7 @@ public class Data2DB {
 			column.setColumn_3(c.getString(c.getColumnIndex(KEY_COLUMN_3)));
 			column.setColumn_4(c.getString(c.getColumnIndex(KEY_COLUMN_4)));
 		}
+		c.close();
 		return column;
 	}
 

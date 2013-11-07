@@ -5,17 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.db.ContactDBHelper;
 import net.jsiq.marketing.model.ContactItem;
-import net.jsiq.marketing.util.Utils;
 import net.jsiq.marketing.util.ViewHelper;
 import net.jsiq.marketing.view.AlphaView;
 import net.jsiq.marketing.view.AlphaView.OnAlphaChangedListener;
-import android.content.AsyncQueryHandler;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.PixelFormat;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -38,16 +35,10 @@ public class ContactsFragment extends SherlockFragment implements
 	private TextView overlay;
 
 	private WindowManager windowManager;
-	private AsyncQueryHandler queryHandler;
 	private List<ContactItem> list;
 	private ListAdapter adapter;
 	private HashMap<String, Integer> alphaIndexer;
 	private OverlayThread overlayThread;
-
-	private static final Uri uri = Uri
-			.parse("content://com.android.contacts/data/phones");
-	private static final String[] projection = { "_id", "display_name",
-			"data1", "sort_key" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +53,6 @@ public class ContactsFragment extends SherlockFragment implements
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.contacts_main, container,
 				false);
-		queryHandler = new MyAsyncQueryHandler(getSherlockActivity()
-				.getContentResolver());
 		list = new ArrayList<ContactItem>();
 		alphaIndexer = new HashMap<String, Integer>();
 		overlayThread = new OverlayThread();
@@ -107,28 +96,25 @@ public class ContactsFragment extends SherlockFragment implements
 	}
 
 	private void startQuery() {
-		queryHandler.startQuery(1, null, uri, projection, "data1 is not null",
-				null, "sort_key COLLATE LOCALIZED asc");
+		new ContactQuery().execute();
 	}
 
-	private class MyAsyncQueryHandler extends AsyncQueryHandler {
+	private class ContactQuery extends AsyncTask<Void, Void, Void> {
 
-		public MyAsyncQueryHandler(ContentResolver cr) {
-			super(cr);
+		List<ContactItem> items;
 
+		@Override
+		protected Void doInBackground(Void... params) {
+			items = new ContactDBHelper(getSherlockActivity()).queryAll();
+			return null;
 		}
 
 		@Override
-		protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
 			list.clear();
-			if (cursor != null) {
-				while (cursor.moveToNext()) {
-					ContactItem item = new ContactItem();
-					item.setName(cursor.getString(1));
-					item.setNumber(Utils.formatNumber(cursor.getString(2)));
-					item.setAlpha(Utils.formatAlpha(cursor.getString(3)));
-					list.add(item);
-				}
+			if (items.size() > 0) {
+				list.addAll(items);
 			}
 			if (list.size() > 0) {
 				setAdapter();
@@ -190,7 +176,6 @@ public class ContactsFragment extends SherlockFragment implements
 
 			ContactItem item = list.get(position);
 			holder.name.setText(item.getName());
-			holder.number.setText(item.getNumber());
 
 			String currentAlpha = list.get(position).getAlpha();
 			String previewAlpha = (position - 1) >= 0 ? list.get(position - 1)
@@ -209,12 +194,10 @@ public class ContactsFragment extends SherlockFragment implements
 	private final class ViewHolder {
 		TextView alpha;
 		TextView name;
-		TextView number;
 
 		public ViewHolder(View v) {
 			alpha = (TextView) v.findViewById(R.id.alpha_text);
 			name = (TextView) v.findViewById(R.id.name);
-			number = (TextView) v.findViewById(R.id.number);
 		}
 	}
 
