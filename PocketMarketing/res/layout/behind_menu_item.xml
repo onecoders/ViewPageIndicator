@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dip"
-    android:alpha="0.8" >
+    android:alpha="0.8"
+    android:padding="10dip" >
 
     <ImageView
         android:id="@+id/menu_icon"
@@ -13,35 +13,18 @@
         android:layout_centerVertical="true"
         android:layout_margin="10dip" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="10dip"
         android:layout_toRightOf="@id/menu_icon"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/main_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="#7d7475"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/second_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="#7d7475"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
-            android:textColor="@color/white"
-            android:textSize="13sp" />
-    </LinearLayout>
+        android:shadowColor="#7d7475"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </RelativeLayout>

@@ -40,7 +40,7 @@ public class CustomerHttpClient {
 
 	}
 
-	public static synchronized HttpClient getHttpClient() {
+	public static synchronized HttpClient getInstance() {
 		if (null == customerHttpClient) {
 			HttpParams params = new BasicHttpParams();
 			HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
@@ -77,7 +77,7 @@ public class CustomerHttpClient {
 			HttpPost request = new HttpPost(url);
 			request.setEntity(entity);
 
-			HttpClient httpClient = getHttpClient();
+			HttpClient httpClient = getInstance();
 			HttpResponse response = httpClient.execute(request);
 			if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
 				throw new RuntimeException("Request Failed");

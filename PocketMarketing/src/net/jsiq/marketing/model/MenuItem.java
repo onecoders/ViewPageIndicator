@@ -1,38 +1,32 @@
 package net.jsiq.marketing.model;
 
 public class MenuItem {
-	private int iconId;
-	private String titleZh;
-	private String titleEn;
+	private int menuId;
+	private String menuName;
+	private String menuIco;
 
-	public MenuItem(int iconId, String titleCh, String titleEn) {
-		this.iconId = iconId;
-		this.titleZh = titleCh;
-		this.titleEn = titleEn;
+	public int getMenuId() {
+		return menuId;
 	}
 
-	public int getIconId() {
-		return iconId;
+	public void setMenuId(int menuId) {
+		this.menuId = menuId;
 	}
 
-	public void setIconId(int iconId) {
-		this.iconId = iconId;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public String getTitleZh() {
-		return titleZh;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
-	public void setTitleZh(String titleZh) {
-		this.titleZh = titleZh;
+	public String getMenuIco() {
+		return menuIco;
 	}
 
-	public String getTitleEn() {
-		return titleEn;
-	}
-
-	public void setTitleEn(String titleEn) {
-		this.titleEn = titleEn;
+	public void setMenuIco(String menuIco) {
+		this.menuIco = menuIco;
 	}
 
 }

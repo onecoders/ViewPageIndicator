@@ -2,7 +2,7 @@ package net.jsiq.marketing.util;
 
 import java.util.regex.Pattern;
 
-public class Utils {
+public class ContactUtils {
 	/**
 	 * 去除电话号码 前缀和-
 	 * 

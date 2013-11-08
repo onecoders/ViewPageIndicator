@@ -1,9 +1,14 @@
 package net.jsiq.marketing.mainfragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.content.res.TypedArray;
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.activity.MainActivity;
+import net.jsiq.marketing.adapter.BehindMenuAdapter;
+import net.jsiq.marketing.model.MenuItem;
+import net.jsiq.marketing.util.JSONParser;
+import net.jsiq.marketing.util.URLStrings;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +17,6 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.activity.MainActivity;
-import net.jsiq.marketing.adapter.BehindMenuAdapter;
-import net.jsiq.marketing.model.MenuItem;
-
 
 public class BehindContentFragment extends SherlockListFragment {
 
@@ -31,21 +31,28 @@ public class BehindContentFragment extends SherlockListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		String[] menuItemNamesZh = getResources().getStringArray(
-				R.array.menu_items_name_zh);
-		String[] menuItemNamesEn = getResources().getStringArray(
-				R.array.menu_items_name_en);
-		TypedArray iconArray = getResources().obtainTypedArray(
-				R.array.menu_item_icon);
-		List<MenuItem> menuList = new ArrayList<MenuItem>();
+		new InitMenuAsyncTask().execute(URLStrings.GET_MENUS);
+	}
 
-		for (int i = 0; i < iconArray.length(); i++) {
-			menuList.add(new MenuItem(iconArray.getResourceId(i, 0),
-					menuItemNamesZh[i], menuItemNamesEn[i]));
+	class InitMenuAsyncTask extends AsyncTask<String, Void, List<MenuItem>> {
+
+		@Override
+		protected List<MenuItem> doInBackground(String... params) {
+			return getMenuItems(params[0]);
 		}
-		adapter = new BehindMenuAdapter(getSherlockActivity(), menuList);
-		setListAdapter(adapter);
-		iconArray.recycle();
+
+		@Override
+		protected void onPostExecute(List<MenuItem> result) {
+			super.onPostExecute(result);
+			adapter = new BehindMenuAdapter(getSherlockActivity(), result);
+			setListAdapter(adapter);
+		}
+
+	}
+
+	private List<MenuItem> getMenuItems(String url) {
+		String json = JSONParser.getJSONFromUrl(url);
+		return JSONParser.JSON2MenuItems(json);
 	}
 
 	@Override
@@ -89,5 +96,5 @@ public class BehindContentFragment extends SherlockListFragment {
 	public BehindMenuAdapter getAdapter() {
 		return adapter;
 	}
-	
+
 }
