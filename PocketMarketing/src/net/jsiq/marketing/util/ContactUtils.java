@@ -3,11 +3,7 @@ package net.jsiq.marketing.util;
 import java.util.regex.Pattern;
 
 public class ContactUtils {
-	/**
-	 * 去除电话号码 前缀和-
-	 * 
-	 * @return 处理后的电话号码
-	 */
+
 	public static String formatNumber(String number) {
 		String returnStr;
 		if (number == null || number.length() == 0) {
@@ -29,11 +25,6 @@ public class ContactUtils {
 		}
 	}
 
-	/**
-	 * 处理首字母
-	 * 
-	 * @return 字符串的首字母，不是A~Z范围的返回#
-	 */
 	public static String formatAlpha(String str) {
 		if (str == null) {
 			return "#";

@@ -7,6 +7,7 @@ import net.jsiq.marketing.activity.MainActivity;
 import net.jsiq.marketing.adapter.BehindMenuAdapter;
 import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.JSONParser;
+import net.jsiq.marketing.util.JsonHttpUtils;
 import net.jsiq.marketing.util.URLStrings;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,8 +52,13 @@ public class BehindContentFragment extends SherlockListFragment {
 	}
 
 	private List<MenuItem> getMenuItems(String url) {
-		String json = JSONParser.getJSONFromUrl(url);
-		return JSONParser.JSON2MenuItems(json);
+		try {
+			String json = JsonHttpUtils.getRequest(url);
+			return JSONParser.JSON2MenuItems(json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
