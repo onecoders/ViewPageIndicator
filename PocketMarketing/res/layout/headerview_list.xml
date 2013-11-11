@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="8dip" >
+    android:orientation="vertical" >
 
     <!-- The PullToRefreshListView replaces a standard ListView widget. -->
 
@@ -12,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:scrollbarStyle="outsideInset" />
+        android:scrollbars="none" />
 
 </LinearLayout>

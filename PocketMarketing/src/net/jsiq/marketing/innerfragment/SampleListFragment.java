@@ -1,9 +1,14 @@
 package net.jsiq.marketing.innerfragment;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.util.MessageToast;
+import net.jsiq.marketing.util.NetworkUtils;
+import net.jsiq.marketing.view.ViewFlowHeaderView;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,10 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.util.MessageToast;
-import net.jsiq.marketing.util.NetworkUtils;
-
 import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
@@ -34,9 +35,11 @@ public class SampleListFragment extends SherlockFragment implements
 
 	public static final String CONTENT_KEY = "content_key";
 
+	private Context context;
 	private String content;
 	private int lastVisibleIndex = 0;
 	private LinkedList<SampleItem> loadedItems;
+	private LayoutInflater inflater;
 
 	private PullToRefreshListView listview;
 	private SampleAdapter adapter;
@@ -47,17 +50,21 @@ public class SampleListFragment extends SherlockFragment implements
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		this.inflater = inflater;
+		this.context = getSherlockActivity();
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
 		// get content
 		content = getArguments().getString(CONTENT_KEY);
 		//
 		listview = (PullToRefreshListView) convertView
 				.findViewById(R.id.news_list);
+		List<String> urls = new ArrayList<String>();
+		for (int i = 0; i < 3; i++) {
+			urls.add("http://www.jsiq.net:6060/resource/menuIco/20131022164521.jpg");
+		}
 		// add header view
-		ImageView imageview = (ImageView) inflater.inflate(
-				R.layout.listview_image_item, null);
-		imageview.setImageResource(R.drawable.biz_plugin_weather_beijin);
-		listview.addHeaderView(imageview);
+		View headerView = new ViewFlowHeaderView(context, urls);
+		listview.addHeaderView(headerView);
 		// init footer view
 		loadingLayout = inflater.inflate(
 				R.layout.slip_to_padding_refresh_footer, null);
@@ -75,14 +82,14 @@ public class SampleListFragment extends SherlockFragment implements
 			loadedItems.add(new SampleItem(content + i, content + i,
 					android.R.drawable.ic_menu_search));
 		}
-		adapter = new SampleAdapter(getSherlockActivity());
+		adapter = new SampleAdapter(context);
 		// if cache is null,get from server,do task in background
 		// new LoadingMoreDataAsyncTask().execute();
 		listview.setAdapter(adapter);
 		listview.setOnScrollListener(this);
 		listview.setOnRefreshListener(this);
 		// if network available and the cache is out of date
-		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
+		if (NetworkUtils.isNetworkConnected(context)) {
 			listview.onRefresh();
 		}
 
@@ -125,8 +132,7 @@ public class SampleListFragment extends SherlockFragment implements
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
-				convertView = LayoutInflater.from(getContext()).inflate(
-						R.layout.row, null);
+				convertView = inflater.inflate(R.layout.row, null);
 			}
 			ImageView icon = (ImageView) convertView
 					.findViewById(R.id.row_icon);
@@ -147,8 +153,8 @@ public class SampleListFragment extends SherlockFragment implements
 		if (NetworkUtils.isNetworkConnected(getSherlockActivity())) {
 			new LoadingMoreDataAsyncTask().execute();
 		} else {
-			MessageToast.makeText(getSherlockActivity(),
-					R.string.netUnavailable, Toast.LENGTH_SHORT).show();
+			MessageToast.makeText(context, R.string.netUnavailable,
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -250,8 +256,8 @@ public class SampleListFragment extends SherlockFragment implements
 						+ getUpdateTime();
 				listview.onRefreshComplete(updateTimeStr);
 			} else {
-				MessageToast.makeText(getSherlockActivity(),
-						R.string.netUnavailable, Toast.LENGTH_SHORT).show();
+				MessageToast.makeText(context, R.string.netUnavailable,
+						Toast.LENGTH_SHORT).show();
 				listview.onRefreshComplete();
 			}
 			super.onPostExecute(result);

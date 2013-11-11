@@ -203,6 +203,10 @@ public class ViewFlow extends AdapterView<Adapter> {
 					: TOUCH_STATE_SCROLLING;
 			if (handler != null)
 				handler.removeMessages(0);
+			getParent().requestDisallowInterceptTouchEvent(true);
+			getParent().getParent().getParent().getParent().getParent()
+					.getParent().getParent().getParent()
+					.requestDisallowInterceptTouchEvent(true);
 			break;
 
 		case MotionEvent.ACTION_MOVE:
@@ -213,6 +217,34 @@ public class ViewFlow extends AdapterView<Adapter> {
 			if (xMoved) {
 				// Scroll if the user moved far enough along the X axis
 				mTouchState = TOUCH_STATE_SCROLLING;
+			}
+			if (mLastMotionX == x) {
+				if (0 == getSelectedItemPosition()
+						|| getSelectedItemPosition() == getChildCount() - 1) {
+					getParent().requestDisallowInterceptTouchEvent(true);
+					getParent().getParent().getParent().getParent().getParent()
+							.getParent().getParent().getParent()
+							.requestDisallowInterceptTouchEvent(true);
+				}
+			} else if (mLastMotionX > x) {
+				if (getSelectedItemPosition() == getChildCount() - 1) {
+					getParent().requestDisallowInterceptTouchEvent(false);
+					getParent().getParent().getParent().getParent().getParent()
+							.getParent().getParent().getParent()
+							.requestDisallowInterceptTouchEvent(true);
+				}
+			} else if (mLastMotionX < x) {
+				if (getSelectedItemPosition() == 0) {
+					getParent().requestDisallowInterceptTouchEvent(false);
+					getParent().getParent().getParent().getParent().getParent()
+							.getParent().getParent().getParent()
+							.requestDisallowInterceptTouchEvent(true);
+				}
+			} else {
+				getParent().requestDisallowInterceptTouchEvent(true);
+				getParent().getParent().getParent().getParent().getParent()
+						.getParent().getParent().getParent()
+						.requestDisallowInterceptTouchEvent(true);
 			}
 
 			if (mTouchState == TOUCH_STATE_SCROLLING) {
@@ -233,7 +265,6 @@ public class ViewFlow extends AdapterView<Adapter> {
 						scrollBy(Math.min(availableToScroll, deltaX), 0);
 					}
 				}
-				return true;
 			}
 			break;
 
@@ -265,11 +296,19 @@ public class ViewFlow extends AdapterView<Adapter> {
 				Message message = handler.obtainMessage(0);
 				handler.sendMessageDelayed(message, timeSpan);
 			}
+			getParent().requestDisallowInterceptTouchEvent(false);
+			getParent().getParent().getParent().getParent().getParent()
+					.getParent().getParent().getParent()
+					.requestDisallowInterceptTouchEvent(true);
 			break;
 		case MotionEvent.ACTION_CANCEL:
 			mTouchState = TOUCH_STATE_REST;
+			getParent().requestDisallowInterceptTouchEvent(false);
+			getParent().getParent().getParent().getParent().getParent()
+					.getParent().getParent().getParent()
+					.requestDisallowInterceptTouchEvent(true);
 		}
-		return false;
+		return super.onInterceptTouchEvent(ev);
 	}
 
 	@Override

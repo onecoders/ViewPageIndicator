@@ -24,17 +24,16 @@ public class MyViewPager extends ViewPager {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if (startX == ev.getX()) {
-				if (0 == this.getCurrentItem()
-						|| this.getCurrentItem() == this.getAdapter()
-								.getCount() - 1) {
+				if (0 == getCurrentItem()
+						|| getCurrentItem() == getChildCount() - 1) {
 					getParent().requestDisallowInterceptTouchEvent(true);
 				}
 			} else if (startX > ev.getX()) {
-				if (this.getCurrentItem() == this.getAdapter().getCount() - 1) {
+				if (getCurrentItem() == getChildCount() - 1) {
 					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			} else if (startX < ev.getX()) {
-				if (this.getCurrentItem() == 0) {
+				if (getCurrentItem() == 0) {
 					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			} else {
