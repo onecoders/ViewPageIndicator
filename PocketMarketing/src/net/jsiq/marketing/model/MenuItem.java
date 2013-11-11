@@ -1,11 +1,10 @@
 package net.jsiq.marketing.model;
 
-import android.graphics.Bitmap;
 
 public class MenuItem {
 	private int menuId;
 	private String menuName;
-	private Bitmap bitmap;
+	private String menuIcon;
 
 	public int getMenuId() {
 		return menuId;
@@ -23,12 +22,12 @@ public class MenuItem {
 		this.menuName = menuName;
 	}
 
-	public Bitmap getBitmap() {
-		return bitmap;
+	public String getMenuIcon() {
+		return menuIcon;
 	}
 
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+	public void setMenuIcon(String menuIcon) {
+		this.menuIcon = menuIcon;
 	}
 
 }

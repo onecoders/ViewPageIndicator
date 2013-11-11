@@ -32,8 +32,7 @@ public class JSONParser {
 				JSONObject jsonMenu = jsonArr.getJSONObject(i);
 				item.setMenuId(jsonMenu.getInt("menuId"));
 				item.setMenuName(jsonMenu.getString("menuName"));
-				item.setBitmap(BitmapUtil.getImageFromUrl(jsonMenu
-						.getString("menuIco")));
+				item.setMenuIcon(jsonMenu.getString("menuIco"));
 				menuList.add(item);
 			}
 		} catch (JSONException e) {

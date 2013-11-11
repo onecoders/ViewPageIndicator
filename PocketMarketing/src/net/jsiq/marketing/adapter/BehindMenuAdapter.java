@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.model.MenuItem;
+import net.jsiq.marketing.util.ImageLoaderUtil;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +50,10 @@ public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 			convertView = LayoutInflater.from(getContext()).inflate(
 					R.layout.behind_menu_item, null);
 		}
-		((ImageView) convertView.findViewById(R.id.menu_icon))
-				.setImageBitmap(item.getBitmap());
+		ImageLoaderUtil.getImageLoader(getContext()).displayImage(
+				item.getMenuIcon(),
+				((ImageView) convertView.findViewById(R.id.menu_icon)),
+				ImageLoaderUtil.getDisplayImageOptions());
 		((TextView) convertView.findViewById(R.id.main_title)).setText(item
 				.getMenuName());
 		if (position == selectItem) {
