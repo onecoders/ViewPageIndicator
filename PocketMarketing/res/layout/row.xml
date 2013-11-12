@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="10dip" >
 
     <ImageView
         android:id="@+id/row_icon"
         android:layout_width="80dip"
-        android:layout_height="80dip"
+        android:layout_height="50dip"
+        android:layout_gravity="center_vertical"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -16,6 +18,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="15dip" >
 

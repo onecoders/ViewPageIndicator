@@ -20,5 +20,7 @@
     <string name="lastUpdate">上次更新：</string>
     <string name="configure">设置</string>
     <string name="collections">收藏</string>
+    <string name="notConnected">网络不给力</string>
+    <string name="contentLoading">内容导入中 &#8230;</string>
 
 </resources>
