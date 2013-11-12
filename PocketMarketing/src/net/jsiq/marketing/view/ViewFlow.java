@@ -296,14 +296,14 @@ public class ViewFlow extends AdapterView<Adapter> {
 				Message message = handler.obtainMessage(0);
 				handler.sendMessageDelayed(message, timeSpan);
 			}
-			getParent().requestDisallowInterceptTouchEvent(false);
+			getParent().requestDisallowInterceptTouchEvent(true);
 			getParent().getParent().getParent().getParent().getParent()
 					.getParent().getParent().getParent()
 					.requestDisallowInterceptTouchEvent(true);
 			break;
 		case MotionEvent.ACTION_CANCEL:
 			mTouchState = TOUCH_STATE_REST;
-			getParent().requestDisallowInterceptTouchEvent(false);
+			getParent().requestDisallowInterceptTouchEvent(true);
 			getParent().getParent().getParent().getParent().getParent()
 					.getParent().getParent().getParent()
 					.requestDisallowInterceptTouchEvent(true);
