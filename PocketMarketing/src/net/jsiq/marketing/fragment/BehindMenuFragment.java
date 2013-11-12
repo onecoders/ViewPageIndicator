@@ -1,4 +1,4 @@
-package net.jsiq.marketing.mainfragment;
+package net.jsiq.marketing.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +18,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
 
-public class BehindContentFragment extends SherlockListFragment {
-	
+public class BehindMenuFragment extends SherlockListFragment {
+
+	private Context context;
+
 	private BehindMenuAdapter adapter;
 	private List<MenuItem> menuList;
-	private Context context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,34 +38,39 @@ public class BehindContentFragment extends SherlockListFragment {
 		View behindContentView = inflater.inflate(R.layout.behind_menu, null);
 		return behindContentView;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (NetworkUtils.isNetworkConnected(context)) {
-			new InitMenuAsyncTask().execute(URLStrings.GET_MENUS);
+			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
-			MessageToast.makeText(context, R.string.notConnected,
-					Toast.LENGTH_SHORT).show();
+			MessageToast.showText(context, R.string.notConnected);
 		}
 	}
 
-	class InitMenuAsyncTask extends AsyncTask<String, Void, Void> {
+	class LoadMenuTask extends AsyncTask<String, Void, Void> {
 
 		private ProgressDialog dialog;
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			menuList = new ArrayList<MenuItem>();
 			dialog = new ProgressDialog(context);
 			dialog.setMessage("内容导入中...");
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog.show();
 		}
 
 		@Override
 		protected Void doInBackground(String... params) {
-			menuList = LoaderUtil.loadMenuItems(params[0]);
+			try {
+				menuList = LoaderUtil.loadMenuItems(params[0]);
+			} catch (Exception e) {
+				MessageToast.showText(context, R.string.loadFailed);
+				e.printStackTrace();
+			}
 			return null;
 		}
 
@@ -73,6 +79,8 @@ public class BehindContentFragment extends SherlockListFragment {
 			super.onPostExecute(result);
 			adapter = new BehindMenuAdapter(context, menuList);
 			setListAdapter(adapter);
+			((MainActivity) getSherlockActivity()).setFirstMenuId(menuList.get(
+					0).getMenuId());
 			dialog.dismiss();
 		}
 
@@ -80,38 +88,27 @@ public class BehindContentFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
-		SherlockFragment newContent = null;
-		switch (position) {
-		case 0:
-			newContent = new BasicInfoFragment();
-			break;
-		case 1:
-			newContent = new MarketingFragment();
-			break;
-		case 2:
-			newContent = new MainProductFragment();
-			break;
-		case 3:
-			newContent = new ContactsFragment();
-			break;
-		}
+		int menuId = menuList.get(position).getMenuId();
+		SherlockFragment newContent = getNewCatalogFragmentByMenuId(menuId);
 		if (newContent != null)
 			switchFragment(newContent);
 		adapter.setSelectItem(position);
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
+	private SherlockFragment getNewCatalogFragmentByMenuId(int menuId) {
+		Bundle extra = new Bundle();
+		extra.putInt(CatalogFragment.MENU_ID, menuId);
+		CatalogFragment fragment = new CatalogFragment();
+		fragment.setArguments(extra);
+		return fragment;
 	}
 
 	// the meat of switching the above fragment
 	private void switchFragment(SherlockFragment fragment) {
 		if (getSherlockActivity() == null)
 			return;
-
 		if (getSherlockActivity() instanceof MainActivity) {
-			MainActivity fca = (MainActivity) getActivity();
+			MainActivity fca = (MainActivity) getSherlockActivity();
 			fca.switchContent(fragment);
 		}
 	}

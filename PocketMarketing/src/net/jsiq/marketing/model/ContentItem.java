@@ -1,6 +1,6 @@
 package net.jsiq.marketing.model;
 
-public class Content {
+public class ContentItem {
 
 	private int contentId;
 	private String contentTitle;

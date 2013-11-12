@@ -1,4 +1,4 @@
-package net.jsiq.marketing.mainfragment;
+package net.jsiq.marketing.fragment;
 
 import java.util.ArrayList;
 import java.util.List;

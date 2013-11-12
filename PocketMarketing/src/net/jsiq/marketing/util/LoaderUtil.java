@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.model.CatalogItem;
-import net.jsiq.marketing.model.Content;
+import net.jsiq.marketing.model.ContentItem;
 import net.jsiq.marketing.model.MenuItem;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,28 +27,25 @@ public class LoaderUtil {
 				getDisplayImageOptions());
 	}
 
-	public static List<MenuItem> loadMenuItems(String url) {
+	public static List<MenuItem> loadMenuItems(String url) throws Exception {
 		String json = getRequestViaUrl(url);
 		return JSONParser.JSON2MenuItems(json);
 	}
 
-	public static List<CatalogItem> loadCatalogItems(String url) {
+	public static List<CatalogItem> loadCatalogItems(String url)
+			throws Exception {
 		String json = getRequestViaUrl(url);
 		return JSONParser.JSON2CatalogItems(json);
 	}
 
-	public static List<Content> loadContentItems(String url) {
+	public static List<ContentItem> loadContentItems(String url)
+			throws Exception {
 		String json = getRequestViaUrl(url);
-		return JSONParser.JSON2Content(json);
+		return JSONParser.JSON2ContentItems(json);
 	}
 
-	private static String getRequestViaUrl(String url) {
-		try {
-			return JsonHttpUtils.getRequest(url);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	private static String getRequestViaUrl(String url) throws Exception {
+		return JsonHttpUtils.getRequest(url);
 	}
 
 	private static synchronized ImageLoader getImageLoader(Context context) {

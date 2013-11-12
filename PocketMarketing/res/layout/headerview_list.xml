@@ -6,8 +6,8 @@
 
     <!-- The PullToRefreshListView replaces a standard ListView widget. -->
 
-    <com.markupartist.android.widget.PullToRefreshListView
-        android:id="@+id/news_list"
+    <ListView
+        android:id="@+id/content_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

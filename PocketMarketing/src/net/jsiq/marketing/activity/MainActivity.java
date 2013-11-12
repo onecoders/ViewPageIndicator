@@ -3,39 +3,42 @@ package net.jsiq.marketing.activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.fragment.CatalogFragment;
+import net.jsiq.marketing.util.MessageToast;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.mainfragment.BasicInfoFragment;
-import net.jsiq.marketing.util.MessageToast;
-
 
 public class MainActivity extends BaseActivity {
 
-	SherlockFragment mFragment;
+	private SherlockFragment mFragment;
+	private int firstMenuId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_frame);
-		mFragment = new BasicInfoFragment();
+		Bundle extra = new Bundle();
+		extra.putInt(CatalogFragment.MENU_ID, firstMenuId);
+		mFragment = new CatalogFragment();
+		mFragment.setArguments(extra);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, mFragment).commit();
 	}
 
 	@Override
 	public void onBackPressed() {
-		if (mFragment instanceof BasicInfoFragment) {
+		/*if (mFragment instanceof CatalogFragment) {
 			if (!getSlidingMenu().isMenuShowing()) {
 				exitBy2Click();
 			}
 		} else {
-			switchContent(new BasicInfoFragment());
+			switchContent(new CatalogFragment());
 			resetSelectedItem();
-		}
+		}*/
+		exitBy2Click();
 	}
 
 	private static Boolean isExit = false;
@@ -47,9 +50,7 @@ public class MainActivity extends BaseActivity {
 			System.exit(0);
 		} else {
 			isExit = true;
-			MessageToast
-					.makeText(this, R.string.clickAgain, Toast.LENGTH_SHORT)
-					.show();
+			MessageToast.showText(this, R.string.clickAgain);
 			tExit = new Timer();
 			tExit.schedule(new TimerTask() {
 
@@ -75,6 +76,10 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	public void setFirstMenuId(int firstMenuId) {
+		this.firstMenuId = firstMenuId;
 	}
 
 }

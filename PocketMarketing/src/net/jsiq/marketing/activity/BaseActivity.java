@@ -10,8 +10,8 @@ import cn.sharesdk.framework.ShareSDK;
 
 import com.actionbarsherlock.app.ActionBar;
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.mainfragment.BehindContentFragment;
-import net.jsiq.marketing.mainfragment.SecondaryMenuFragment;
+import net.jsiq.marketing.fragment.BehindMenuFragment;
+import net.jsiq.marketing.fragment.SecondaryMenuFragment;
 import net.jsiq.marketing.util.ViewHelper;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -20,7 +20,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	BehindContentFragment mFrag;
+	BehindMenuFragment mFrag;
 	SlidingMenu sm;
 
 	@Override
@@ -53,7 +53,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		mFrag = new BehindContentFragment();
+		mFrag = new BehindMenuFragment();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
 	}
