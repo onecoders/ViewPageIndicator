@@ -7,8 +7,7 @@ import net.jsiq.marketing.activity.MainActivity;
 import net.jsiq.marketing.adapter.BehindMenuAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.MenuItem;
-import net.jsiq.marketing.util.JSONParser;
-import net.jsiq.marketing.util.JsonHttpUtils;
+import net.jsiq.marketing.util.LoaderUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,7 +38,7 @@ public class BehindContentFragment extends SherlockListFragment {
 
 		@Override
 		protected List<MenuItem> doInBackground(String... params) {
-			return getMenuItems(params[0]);
+			return LoaderUtil.loadMenuItems(params[0]);
 		}
 
 		@Override
@@ -49,16 +48,6 @@ public class BehindContentFragment extends SherlockListFragment {
 			setListAdapter(adapter);
 		}
 
-	}
-
-	private List<MenuItem> getMenuItems(String url) {
-		try {
-			String json = JsonHttpUtils.getRequest(url);
-			return JSONParser.JSON2MenuItems(json);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	@Override

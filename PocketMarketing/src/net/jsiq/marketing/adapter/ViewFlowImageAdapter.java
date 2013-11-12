@@ -3,7 +3,7 @@ package net.jsiq.marketing.adapter;
 import java.util.List;
 
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.util.ImageLoaderUtil;
+import net.jsiq.marketing.util.LoaderUtil;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +46,7 @@ public class ViewFlowImageAdapter extends ArrayAdapter<String> {
 		}
 		ImageView viewFlow = ((ImageView) convertView
 				.findViewById(R.id.imgView));
-		ImageLoaderUtil.displayImage(context, getItem(position), viewFlow);
+		LoaderUtil.displayImage(context, getItem(position), viewFlow);
 		viewFlow.setOnClickListener(new OnClickListener() {
 
 			@Override
