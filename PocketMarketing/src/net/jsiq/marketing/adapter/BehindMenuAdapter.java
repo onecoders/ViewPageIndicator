@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 
+	private Context context;
 	private List<MenuItem> menuList;
 	private int selectItem = 0;
 
 	public BehindMenuAdapter(Context context, List<MenuItem> menuList) {
 		super(context, 0, menuList);
+		this.context = context;
 		this.menuList = menuList;
 	}
 
@@ -47,13 +49,11 @@ public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		MenuItem item = getItem(position);
 		if (convertView == null) {
-			convertView = LayoutInflater.from(getContext()).inflate(
+			convertView = LayoutInflater.from(context).inflate(
 					R.layout.behind_menu_item, null);
 		}
-		ImageLoaderUtil.getImageLoader(getContext()).displayImage(
-				item.getMenuIcon(),
-				((ImageView) convertView.findViewById(R.id.menu_icon)),
-				ImageLoaderUtil.getDisplayImageOptions());
+		ImageLoaderUtil.displayImage(context, item.getMenuIcon(),
+				((ImageView) convertView.findViewById(R.id.menu_icon)));
 		((TextView) convertView.findViewById(R.id.main_title)).setText(item
 				.getMenuName());
 		if (position == selectItem) {

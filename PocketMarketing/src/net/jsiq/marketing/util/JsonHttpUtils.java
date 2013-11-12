@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
@@ -42,7 +43,9 @@ public class JsonHttpUtils {
 			// statusCode == 200 正常
 			statusCode = httpResponse.getStatusLine().getStatusCode();
 			// 处理返回的httpResponse信息
-			result = retrieveInputStream(httpResponse.getEntity());
+			if (statusCode == HttpStatus.SC_OK) {
+				result = retrieveInputStream(httpResponse.getEntity());
+			}
 		} catch (Exception e) {
 			throw new Exception(e);
 		} finally {

@@ -2,6 +2,8 @@ package net.jsiq.marketing.adapter;
 
 import java.util.List;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.model.SecondaryMenuItem;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +12,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.model.SecondaryMenuItem;
-
 public class SecondaryMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
 
+	private Context context;
 	private List<SecondaryMenuItem> menuList;
 
 	public SecondaryMenuAdapter(Context context,
 			List<SecondaryMenuItem> menuList) {
 		super(context, 0, menuList);
+		this.context = context;
 		this.menuList = menuList;
 	}
 
@@ -42,7 +43,7 @@ public class SecondaryMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		SecondaryMenuItem item = getItem(position);
 		if (convertView == null) {
-			convertView = LayoutInflater.from(getContext()).inflate(
+			convertView = LayoutInflater.from(context).inflate(
 					R.layout.secondary_menu_item, null);
 		}
 		((ImageView) convertView.findViewById(R.id.gridview_icon))

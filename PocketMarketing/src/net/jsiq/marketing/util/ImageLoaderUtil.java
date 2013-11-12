@@ -3,6 +3,7 @@ package net.jsiq.marketing.util;
 import net.jsiq.marketing.R;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,7 +16,13 @@ public class ImageLoaderUtil {
 	private static ImageLoader imageLoader;
 	private static DisplayImageOptions options;
 
-	public static synchronized ImageLoader getImageLoader(Context context) {
+	public static void displayImage(Context context, String uri,
+			ImageView imageView) {
+		getImageLoader(context).displayImage(uri, imageView,
+				getDisplayImageOptions());
+	}
+
+	private static synchronized ImageLoader getImageLoader(Context context) {
 		if (null == imageLoader) {
 			imageLoader = ImageLoader.getInstance();
 			ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
@@ -28,7 +35,7 @@ public class ImageLoaderUtil {
 		return imageLoader;
 	}
 
-	public static synchronized DisplayImageOptions getDisplayImageOptions() {
+	private static synchronized DisplayImageOptions getDisplayImageOptions() {
 		if (null == options) {
 			options = new DisplayImageOptions.Builder()
 					.showImageOnLoading(R.drawable.ic_stub)

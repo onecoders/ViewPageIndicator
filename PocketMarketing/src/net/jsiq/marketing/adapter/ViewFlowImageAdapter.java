@@ -14,21 +14,23 @@ import android.widget.ImageView;
 
 public class ViewFlowImageAdapter extends ArrayAdapter<String> {
 
-	private List<String> urls;
+	private Context context;
+	private List<String> uris;
 
-	public ViewFlowImageAdapter(Context context, List<String> urls) {
-		super(context, 0, urls);
-		this.urls = urls;
+	public ViewFlowImageAdapter(Context context, List<String> uris) {
+		super(context, 0, uris);
+		this.context = context;
+		this.uris = uris;
 	}
 
 	@Override
 	public int getCount() {
-		return urls.size();
+		return uris.size();
 	}
 
 	@Override
 	public String getItem(int position) {
-		return urls.get(position);
+		return uris.get(position);
 	}
 
 	@Override
@@ -39,14 +41,12 @@ public class ViewFlowImageAdapter extends ArrayAdapter<String> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (null == convertView) {
-			convertView = LayoutInflater.from(getContext()).inflate(
+			convertView = LayoutInflater.from(context).inflate(
 					R.layout.viewflow_item, null);
 		}
 		ImageView viewFlow = ((ImageView) convertView
 				.findViewById(R.id.imgView));
-		ImageLoaderUtil.getImageLoader(getContext()).displayImage(
-				getItem(position), viewFlow,
-				ImageLoaderUtil.getDisplayImageOptions());
+		ImageLoaderUtil.displayImage(context, getItem(position), viewFlow);
 		viewFlow.setOnClickListener(new OnClickListener() {
 
 			@Override
