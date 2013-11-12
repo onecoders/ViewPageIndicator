@@ -1,4 +1,4 @@
-package net.jsiq.marketing.util;
+package net.jsiq.marketing.constants;
 
 public class URLStrings {
 

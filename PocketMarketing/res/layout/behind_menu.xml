@@ -7,4 +7,5 @@
     android:layout_marginTop="@dimen/list_padding"
     android:background="@drawable/biz_pc_main_bg"
     android:listSelector="@drawable/list_selector"
-    android:padding="@dimen/list_padding" />
+    android:padding="@dimen/list_padding"
+    android:scrollbars="none" />
