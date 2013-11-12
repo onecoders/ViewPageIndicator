@@ -57,9 +57,6 @@ public class ContentFragment extends SherlockFragment {
 		// add header view
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
-		// init adapter
-		adapter = new ContentAdapter(context, contentList);
-		listview.setAdapter(adapter);
 		return convertView;
 	}
 
@@ -92,6 +89,7 @@ public class ContentFragment extends SherlockFragment {
 		protected Void doInBackground(String... params) {
 			try {
 				contentList = LoaderUtil.loadContentItems(params[0]);
+				System.out.println(contentList.size());
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
@@ -102,7 +100,8 @@ public class ContentFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			adapter.notifyDataSetChanged();
+			adapter = new ContentAdapter(context, contentList);
+			listview.setAdapter(adapter);
 			dialog.dismiss();
 		}
 

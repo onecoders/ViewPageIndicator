@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.CatalogFragment;
+import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.MessageToast;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,30 +15,20 @@ import com.actionbarsherlock.app.SherlockFragment;
 public class MainActivity extends BaseActivity {
 
 	private SherlockFragment mFragment;
-	private int firstMenuId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_frame);
-		Bundle extra = new Bundle();
-		extra.putInt(CatalogFragment.MENU_ID, firstMenuId);
-		mFragment = new CatalogFragment();
-		mFragment.setArguments(extra);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, mFragment).commit();
 	}
 
 	@Override
 	public void onBackPressed() {
-		/*if (mFragment instanceof CatalogFragment) {
-			if (!getSlidingMenu().isMenuShowing()) {
-				exitBy2Click();
-			}
-		} else {
-			switchContent(new CatalogFragment());
-			resetSelectedItem();
-		}*/
+		/*
+		 * if (mFragment instanceof CatalogFragment) { if
+		 * (!getSlidingMenu().isMenuShowing()) { exitBy2Click(); } } else {
+		 * switchContent(new CatalogFragment()); resetSelectedItem(); }
+		 */
 		exitBy2Click();
 	}
 
@@ -78,8 +69,14 @@ public class MainActivity extends BaseActivity {
 		super.onSaveInstanceState(outState);
 	}
 
-	public void setFirstMenuId(int firstMenuId) {
-		this.firstMenuId = firstMenuId;
+	public void setFirstFragment(MenuItem item) {
+		Bundle extra = new Bundle();
+		extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
+		extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
+		mFragment = new CatalogFragment();
+		mFragment.setArguments(extra);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.content_frame, mFragment).commit();
 	}
 
 }

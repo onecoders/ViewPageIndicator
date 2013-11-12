@@ -79,8 +79,8 @@ public class BehindMenuFragment extends SherlockListFragment {
 			super.onPostExecute(result);
 			adapter = new BehindMenuAdapter(context, menuList);
 			setListAdapter(adapter);
-			((MainActivity) getSherlockActivity()).setFirstMenuId(menuList.get(
-					0).getMenuId());
+			((MainActivity) getSherlockActivity()).setFirstFragment(menuList.get(
+					0));
 			dialog.dismiss();
 		}
 
@@ -88,16 +88,17 @@ public class BehindMenuFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
-		int menuId = menuList.get(position).getMenuId();
-		SherlockFragment newContent = getNewCatalogFragmentByMenuId(menuId);
+		MenuItem selectedItem = menuList.get(position);
+		SherlockFragment newContent = getNewCatalogFragmentByMenu(selectedItem);
 		if (newContent != null)
 			switchFragment(newContent);
 		adapter.setSelectItem(position);
 	}
 
-	private SherlockFragment getNewCatalogFragmentByMenuId(int menuId) {
+	private SherlockFragment getNewCatalogFragmentByMenu(MenuItem item) {
 		Bundle extra = new Bundle();
-		extra.putInt(CatalogFragment.MENU_ID, menuId);
+		extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
+		extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
 		CatalogFragment fragment = new CatalogFragment();
 		fragment.setArguments(extra);
 		return fragment;

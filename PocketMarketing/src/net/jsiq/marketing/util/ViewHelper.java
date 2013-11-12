@@ -1,12 +1,12 @@
 package net.jsiq.marketing.util;
 
+import net.jsiq.marketing.R;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import net.jsiq.marketing.R;
 
 public class ViewHelper {
 
@@ -28,14 +28,14 @@ public class ViewHelper {
 	}
 
 	public static void setActionBarCustomerViewContent(ActionBar actionbar,
-			int backIconId, int titleId) {
+			int backIconId, String title) {
 		View actionbarView = actionbar.getCustomView();
 		if (actionbarView != null) {
 			ImageButton menuBtn = (ImageButton) actionbarView
 					.findViewById(R.id.menu_btn);
 			menuBtn.setBackgroundResource(backIconId);
 			TextView tv = (TextView) actionbarView.findViewById(R.id.title);
-			tv.setText(titleId);
+			tv.setText(title);
 		}
 	}
 
