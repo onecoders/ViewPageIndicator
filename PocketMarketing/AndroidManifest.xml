@@ -70,6 +70,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="net.jsiq.marketing.activity.ContentDisplayActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.ContentDisplayActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"

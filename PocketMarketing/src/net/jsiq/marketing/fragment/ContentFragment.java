@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.activity.ContentDisplayActivity;
 import net.jsiq.marketing.adapter.ContentAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.ContentItem;
@@ -13,12 +14,15 @@ import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.view.ViewFlowHeaderView;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -100,11 +104,23 @@ public class ContentFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+			// TODO
 			adapter = new ContentAdapter(context, contentList);
 			listview.setAdapter(adapter);
+			listview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int position, long id) {
+					Intent i = new Intent(
+							"android.intent.action.ContentDisplayActivity");
+					i.putExtra(ContentDisplayActivity.CONTENT_ID, contentList
+							.get(position - 1).getContentId());
+					startActivity(i);
+				}
+			});
 			dialog.dismiss();
 		}
-
 	}
 
 	@Override
