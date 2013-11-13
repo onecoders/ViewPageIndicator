@@ -13,6 +13,8 @@ import android.os.Handler;
 public class MainActivity extends BaseActivity {
 
 	private static Boolean isExit = false;
+	private MenuItem firstMenu;
+	private MenuItem currentMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -21,15 +23,22 @@ public class MainActivity extends BaseActivity {
 	}
 
 	public void initFirstDefaultFragment(MenuItem item) {
+		firstMenu = item;
 		initNewCatalogFragmentByMenu(item);
 	}
 
 	@Override
 	public void onBackPressed() {
-		exitBy2Click();
+		if (currentMenu.getMenuId() == firstMenu.getMenuId()) {
+			exitBy2Click();
+		} else {
+			currentMenu = firstMenu;
+			switchCatalogByMenu(firstMenu);
+		}
 	}
 
 	public void switchCatalogByMenu(MenuItem item) {
+		currentMenu = item;
 		initNewCatalogFragmentByMenu(item);
 		new Handler().post(new Runnable() {
 			public void run() {
