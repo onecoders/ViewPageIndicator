@@ -1,8 +1,8 @@
 package net.jsiq.marketing.activity;
 
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.fragment.BehindMenuFragment;
-import net.jsiq.marketing.fragment.SecondaryMenuFragment;
+import net.jsiq.marketing.fragment.LeftMenuFragment;
+import net.jsiq.marketing.fragment.RightMenuFragment;
 import net.jsiq.marketing.util.ViewHelper;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +19,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	BehindMenuFragment mFrag;
+	LeftMenuFragment mFrag;
 	SlidingMenu sm;
 
 	@Override
@@ -52,7 +52,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		mFrag = new BehindMenuFragment();
+		mFrag = new LeftMenuFragment();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
 	}
@@ -61,7 +61,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setSecondaryMenu(R.layout.menu_frame_two);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.menu_frame_two, new SecondaryMenuFragment())
+				.replace(R.id.menu_frame_two, new RightMenuFragment())
 				.commit();
 	}
 

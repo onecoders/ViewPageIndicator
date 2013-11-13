@@ -22,7 +22,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
-public class BehindMenuFragment extends SherlockListFragment {
+public class LeftMenuFragment extends SherlockListFragment {
 
 	private Context context;
 

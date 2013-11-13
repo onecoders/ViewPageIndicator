@@ -23,7 +23,7 @@ import net.jsiq.marketing.adapter.SecondaryMenuAdapter;
 import net.jsiq.marketing.model.SecondaryMenuItem;
 
 
-public class SecondaryMenuFragment extends SherlockFragment implements
+public class RightMenuFragment extends SherlockFragment implements
 		OnItemClickListener {
 
 	private GridView gridview;
