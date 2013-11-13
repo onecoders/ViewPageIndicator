@@ -94,7 +94,6 @@ public class LeftMenuFragment extends SherlockListFragment {
 		MenuItem selectedItem = menuList.get(position);
 		if (selectedItem != null)
 			switchFragment(selectedItem);
-		adapter.setSelectItem(position);
 	}
 
 	// the meat of switching the above fragment

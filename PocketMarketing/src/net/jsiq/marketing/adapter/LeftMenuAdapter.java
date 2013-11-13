@@ -16,16 +16,10 @@ import android.widget.TextView;
 public class LeftMenuAdapter extends ArrayAdapter<MenuItem> {
 
 	private Context context;
-	private int selectItem = 0;
 
 	public LeftMenuAdapter(Context context, List<MenuItem> menuList) {
 		super(context, 0, menuList);
 		this.context = context;
-	}
-
-	public void setSelectItem(int selectItem) {
-		this.selectItem = selectItem;
-		notifyDataSetInvalidated();
 	}
 
 	@Override
@@ -39,11 +33,6 @@ public class LeftMenuAdapter extends ArrayAdapter<MenuItem> {
 				((ImageView) convertView.findViewById(R.id.menu_icon)));
 		((TextView) convertView.findViewById(R.id.main_title)).setText(item
 				.getMenuName());
-		if (position == selectItem) {
-			convertView.setBackgroundResource(R.color.pressed_w);
-		} else {
-			convertView.setBackgroundResource(android.R.color.transparent);
-		}
 		return convertView;
 	}
 
