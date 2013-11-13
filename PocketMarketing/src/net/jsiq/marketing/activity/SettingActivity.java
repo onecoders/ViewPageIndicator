@@ -87,7 +87,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 					}
 
 				});
-		builder.setNegativeButton(R.string.cancel, null);
+		builder.setNegativeButton(R.string.cancle, null);
 		builder.create().show();
 	}
 
