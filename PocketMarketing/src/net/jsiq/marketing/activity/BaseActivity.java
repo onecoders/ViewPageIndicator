@@ -3,7 +3,13 @@ package net.jsiq.marketing.activity;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.LeftMenuFragment;
 import net.jsiq.marketing.fragment.RightMenuFragment;
+import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -22,10 +28,22 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	LeftMenuFragment mFrag;
 	SlidingMenu sm;
 
+	BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (NetworkUtils.isNetworkConnected(context)) {
+				setBehindView();
+				setSecondaryMenu();
+			}
+		}
+	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ShareSDK.initSDK(this);
+		registerReceiver();
 		initActionBar();
 		initSlidingMenu();
 	}
@@ -61,8 +79,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setSecondaryMenu(R.layout.menu_frame_two);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.menu_frame_two, new RightMenuFragment())
-				.commit();
+				.replace(R.id.menu_frame_two, new RightMenuFragment()).commit();
 	}
 
 	private void initActionBar() {
@@ -110,7 +127,18 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	@Override
 	protected void onDestroy() {
 		ShareSDK.stopSDK(this);
+		unregisterReceiver();
 		super.onDestroy();
+	}
+
+	private void registerReceiver() {
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+		registerReceiver(receiver, filter);
+	}
+
+	private void unregisterReceiver() {
+		unregisterReceiver(receiver);
 	}
 
 }
