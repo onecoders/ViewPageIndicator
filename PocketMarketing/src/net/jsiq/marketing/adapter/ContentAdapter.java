@@ -15,26 +15,8 @@ import android.widget.TextView;
 
 public class ContentAdapter extends ArrayAdapter<ContentItem> {
 
-	private List<ContentItem> contentItems;
-
 	public ContentAdapter(Context context, List<ContentItem> contentItems) {
-		super(context, 0);
-		this.contentItems = contentItems;
-	}
-
-	@Override
-	public int getCount() {
-		return contentItems.size();
-	}
-
-	@Override
-	public ContentItem getItem(int position) {
-		return contentItems.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
+		super(context, 0, contentItems);
 	}
 
 	@Override

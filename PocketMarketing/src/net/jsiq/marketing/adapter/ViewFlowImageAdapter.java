@@ -15,27 +15,10 @@ import android.widget.ImageView;
 public class ViewFlowImageAdapter extends ArrayAdapter<String> {
 
 	private Context context;
-	private List<String> uris;
 
 	public ViewFlowImageAdapter(Context context, List<String> uris) {
 		super(context, 0, uris);
 		this.context = context;
-		this.uris = uris;
-	}
-
-	@Override
-	public int getCount() {
-		return uris.size();
-	}
-
-	@Override
-	public String getItem(int position) {
-		return uris.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
 	}
 
 	@Override

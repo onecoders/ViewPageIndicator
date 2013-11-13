@@ -10,11 +10,9 @@ import net.jsiq.marketing.util.MessageToast;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
 public class MainActivity extends BaseActivity {
 
-	private SherlockFragment mFragment;
+	private static Boolean isExit = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -22,17 +20,23 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.content_frame);
 	}
 
+	public void initFirstDefaultFragment(MenuItem item) {
+		initNewCatalogFragmentByMenu(item);
+	}
+
 	@Override
 	public void onBackPressed() {
-		/*
-		 * if (mFragment instanceof CatalogFragment) { if
-		 * (!getSlidingMenu().isMenuShowing()) { exitBy2Click(); } } else {
-		 * switchContent(new CatalogFragment()); resetSelectedItem(); }
-		 */
 		exitBy2Click();
 	}
 
-	private static Boolean isExit = false;
+	public void switchCatalogByMenu(MenuItem item) {
+		initNewCatalogFragmentByMenu(item);
+		new Handler().post(new Runnable() {
+			public void run() {
+				getSlidingMenu().showContent();
+			}
+		});
+	}
 
 	private void exitBy2Click() {
 		Timer tExit = null;
@@ -53,30 +57,19 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
-	public void switchContent(SherlockFragment fragment) {
-		mFragment = fragment;
+	private void initNewCatalogFragmentByMenu(MenuItem item) {
+		Bundle extra = new Bundle();
+		extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
+		extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
+		CatalogFragment fragment = new CatalogFragment();
+		fragment.setArguments(extra);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
-		new Handler().post(new Runnable() {
-			public void run() {
-				getSlidingMenu().showContent();
-			}
-		});
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-	}
-
-	public void setFirstFragment(MenuItem item) {
-		Bundle extra = new Bundle();
-		extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
-		extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
-		mFragment = new CatalogFragment();
-		mFragment.setArguments(extra);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, mFragment).commit();
 	}
 
 }

@@ -1,5 +1,9 @@
 package net.jsiq.marketing.activity;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.fragment.BehindMenuFragment;
+import net.jsiq.marketing.fragment.SecondaryMenuFragment;
+import net.jsiq.marketing.util.ViewHelper;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -9,11 +13,6 @@ import android.widget.ImageButton;
 import cn.sharesdk.framework.ShareSDK;
 
 import com.actionbarsherlock.app.ActionBar;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.fragment.BehindMenuFragment;
-import net.jsiq.marketing.fragment.SecondaryMenuFragment;
-import net.jsiq.marketing.util.ViewHelper;
-
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -106,10 +105,6 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		default:
 			break;
 		}
-	}
-
-	protected void resetSelectedItem() {
-		mFrag.getAdapter().setSelectItem(0);
 	}
 
 	@Override

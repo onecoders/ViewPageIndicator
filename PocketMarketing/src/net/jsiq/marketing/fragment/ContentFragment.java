@@ -61,6 +61,22 @@ public class ContentFragment extends SherlockFragment {
 		// add header view
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
+
+		// TODO
+		adapter = new ContentAdapter(context, contentList);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long id) {
+				Intent i = new Intent(
+						"android.intent.action.ContentDisplayActivity");
+				i.putExtra(ContentDisplayActivity.CONTENT_ID,
+						contentList.get(position - 1).getContentId());
+				startActivity(i);
+			}
+		});
 		return convertView;
 	}
 
@@ -92,8 +108,7 @@ public class ContentFragment extends SherlockFragment {
 		@Override
 		protected Void doInBackground(String... params) {
 			try {
-				contentList = LoaderUtil.loadContentItems(params[0]);
-				System.out.println(contentList.size());
+				contentList.addAll(LoaderUtil.loadContentItems(params[0]));
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
@@ -104,21 +119,7 @@ public class ContentFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			// TODO
-			adapter = new ContentAdapter(context, contentList);
-			listview.setAdapter(adapter);
-			listview.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int position, long id) {
-					Intent i = new Intent(
-							"android.intent.action.ContentDisplayActivity");
-					i.putExtra(ContentDisplayActivity.CONTENT_ID, contentList
-							.get(position - 1).getContentId());
-					startActivity(i);
-				}
-			});
+			adapter.notifyDataSetChanged();
 			dialog.dismiss();
 		}
 	}

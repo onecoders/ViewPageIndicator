@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.adapter.CatalogAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.CatalogItem;
 import net.jsiq.marketing.util.LoaderUtil;
@@ -14,7 +15,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -60,7 +60,7 @@ public class CatalogFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.simple_tabs, container,
 				false);
-		adapter = new CatalogAdapter(getChildFragmentManager());
+		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
 
 		pager = (ViewPager) convertView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
@@ -101,7 +101,7 @@ public class CatalogFragment extends SherlockFragment {
 		@Override
 		protected Void doInBackground(String... params) {
 			try {
-				catalogList = LoaderUtil.loadCatalogItems(params[0]);
+				catalogList.addAll(LoaderUtil.loadCatalogItems(params[0]));
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
@@ -124,33 +124,6 @@ public class CatalogFragment extends SherlockFragment {
 		super.onSaveInstanceState(outState);
 		currentPos = pager.getCurrentItem();
 		outState.putInt(BASIC_INFO_POS, currentPos);
-	}
-
-	class CatalogAdapter extends FragmentPagerAdapter {
-
-		public CatalogAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public SherlockFragment getItem(int position) {
-			Bundle extra = new Bundle();
-			extra.putInt(ContentFragment.CATALOG_ID, catalogList.get(position)
-					.getCatalogId());
-			ContentFragment fragment = new ContentFragment();
-			fragment.setArguments(extra);
-			return fragment;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return catalogList.get(position).getCatalogName();
-		}
-
-		@Override
-		public int getCount() {
-			return catalogList.size();
-		}
 	}
 
 }
