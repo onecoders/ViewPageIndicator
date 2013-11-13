@@ -24,6 +24,7 @@ public class MainActivity extends BaseActivity {
 
 	public void initFirstDefaultFragment(MenuItem item) {
 		firstMenu = item;
+		currentMenu = item;
 		initNewCatalogFragmentByMenu(item);
 	}
 

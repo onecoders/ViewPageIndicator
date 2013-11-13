@@ -12,23 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dip"
-        android:orientation="vertical"
-        android:padding="20dip" >
+        android:orientation="vertical" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:gravity="center"
+            android:singleLine="true"
             android:text="@string/barcoderScan"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="150dip"
             android:layout_height="150dip"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dip"
             android:scaleType="fitXY"
             android:src="@drawable/market___details_id_com_" />
     </LinearLayout>
@@ -38,9 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/user_center"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dip"
+        android:layout_marginBottom="15dip"
         android:columnWidth="60dip"
         android:gravity="center"
         android:horizontalSpacing="15dip"
