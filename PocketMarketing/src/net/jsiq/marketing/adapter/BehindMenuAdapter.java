@@ -16,28 +16,11 @@ import android.widget.TextView;
 public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
 
 	private Context context;
-	private List<MenuItem> menuList;
 	private int selectItem = 0;
 
 	public BehindMenuAdapter(Context context, List<MenuItem> menuList) {
 		super(context, 0, menuList);
 		this.context = context;
-		this.menuList = menuList;
-	}
-
-	@Override
-	public MenuItem getItem(int position) {
-		return menuList.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public int getCount() {
-		return menuList.size();
 	}
 
 	public void setSelectItem(int selectItem) {
