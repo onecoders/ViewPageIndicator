@@ -21,7 +21,7 @@ public class ContentDisplayActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_display);
-		initActinBar();
+		initActionBar();
 
 		String contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID
 				+ getIntent().getStringExtra(CONTENT_ID);
@@ -31,7 +31,7 @@ public class ContentDisplayActivity extends SherlockActivity {
 		mWebView.loadUrl(contentUrl);
 	}
 
-	private void initActinBar() {
+	private void initActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		// Get custom view
 		View customerView = loadCustomerView();
@@ -41,12 +41,12 @@ public class ContentDisplayActivity extends SherlockActivity {
 
 	private View loadCustomerView() {
 		View actionbarView = LayoutInflater.from(this).inflate(
-				R.layout.actionbar_main, null);
+				R.layout.actionbar_content_display, null);
 		ImageButton menuBtn = (ImageButton) actionbarView
-				.findViewById(R.id.menu_btn);
+				.findViewById(R.id.menu_back);
 		// menuBtn.setOnClickListener(this);
 		ImageButton personalBtn = (ImageButton) actionbarView
-				.findViewById(R.id.personal_btn);
+				.findViewById(R.id.menu_setting);
 		// personalBtn.setOnClickListener(this);
 		return actionbarView;
 	}

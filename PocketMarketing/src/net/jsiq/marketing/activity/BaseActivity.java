@@ -26,7 +26,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ShareSDK.initSDK(this);
-		initActinBar();
+		initActionBar();
 		initSlidingMenu();
 	}
 
@@ -65,7 +65,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 				.commit();
 	}
 
-	private void initActinBar() {
+	private void initActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		// Get custom view
 		View customerView = loadCustomerView();
