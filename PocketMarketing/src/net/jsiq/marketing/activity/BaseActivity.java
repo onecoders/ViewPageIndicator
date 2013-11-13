@@ -27,12 +27,14 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	LeftMenuFragment mFrag;
 	SlidingMenu sm;
+	private boolean currentNetworkConnected;
 
 	BroadcastReceiver receiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (NetworkUtils.isNetworkConnected(context)) {
+			if (NetworkUtils.isNetworkConnected(context)
+					&& !currentNetworkConnected) {
 				setBehindView();
 				setSecondaryMenu();
 			}
@@ -43,6 +45,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ShareSDK.initSDK(this);
+		currentNetworkConnected = NetworkUtils.isNetworkConnected(this);
 		registerReceiver();
 		initActionBar();
 		initSlidingMenu();
@@ -134,11 +137,15 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	private void registerReceiver() {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-		registerReceiver(receiver, filter);
+		if (null != receiver) {
+			registerReceiver(receiver, filter);
+		}
 	}
 
 	private void unregisterReceiver() {
-		unregisterReceiver(receiver);
+		if (null != receiver) {
+			unregisterReceiver(receiver);
+		}
 	}
 
 }
