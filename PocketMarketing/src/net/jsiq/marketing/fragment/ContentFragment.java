@@ -58,9 +58,6 @@ public class ContentFragment extends SherlockFragment {
 		for (int i = 0; i < 3; i++) {
 			urls.add("http://www.jsiq.net:6060/resource/menuIco/20131022164521.jpg");
 		}
-
-		// set empty view
-		listview.setEmptyView(convertView.findViewById(R.id.empty));
 		// add header view
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
@@ -102,10 +99,10 @@ public class ContentFragment extends SherlockFragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			/*dialog = new ProgressDialog(context);
+			dialog = new ProgressDialog(context);
 			dialog.setMessage("内容导入中...");
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.show();*/
+			dialog.show();
 		}
 
 		@Override
@@ -124,7 +121,7 @@ public class ContentFragment extends SherlockFragment {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			adapter.notifyDataSetChanged();
-			//dialog.dismiss();
+			dialog.dismiss();
 		}
 	}
 
