@@ -92,14 +92,15 @@ public class CatalogFragment extends SherlockFragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new ProgressDialog(context);
+			/*dialog = new ProgressDialog(context);
 			dialog.setMessage("内容导入中...");
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.show();
+			dialog.show();*/
 		}
 
 		@Override
 		protected Void doInBackground(String... params) {
+			catalogList.clear();
 			try {
 				catalogList.addAll(LoaderUtil.loadCatalogItems(params[0]));
 			} catch (Exception e) {
@@ -114,7 +115,7 @@ public class CatalogFragment extends SherlockFragment {
 			super.onPostExecute(result);
 			adapter.notifyDataSetChanged();
 			indicator.notifyDataSetChanged();
-			dialog.dismiss();
+			//dialog.dismiss();
 		}
 
 	}

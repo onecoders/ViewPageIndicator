@@ -69,6 +69,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 		@Override
 		protected Void doInBackground(String... params) {
+			menuList.clear();
 			try {
 				menuList.addAll(LoaderUtil.loadMenuItems(params[0]));
 			} catch (Exception e) {
