@@ -16,26 +16,28 @@
         android:orientation="vertical"
         android:padding="20dip" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/biz_pc_main_info_profile_avatar_bg_dark" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:gravity="center"
-            android:text="@string/user_center"
+            android:text="@string/barcoderScan"
             android:textColor="@color/white"
             android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@drawable/market___details_id_com_" />
     </LinearLayout>
 
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/user_center"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dip"

@@ -23,5 +23,6 @@
     <string name="notConnected">网络不给力</string>
     <string name="contentLoading">内容导入中 &#8230;</string>
     <string name="loadFailed">加载失败，请重试！</string>
+    <string name="barcoderScan">扫描下载客户端！</string>
 
 </resources>
