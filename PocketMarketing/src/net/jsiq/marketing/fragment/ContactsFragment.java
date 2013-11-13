@@ -45,7 +45,7 @@ public class ContactsFragment extends SherlockFragment implements
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
 		ViewHelper.setActionBarCustomerViewContent(actionBar,
-				R.drawable.more_product_back, "contact");
+				R.drawable.basic_info_back, "contact");
 	}
 
 	@Override

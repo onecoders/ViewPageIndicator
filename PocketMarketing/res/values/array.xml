@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string-array name="menu_items_name_zh">
-        <item>公司简介</item>
-        <item>营销活动</item>
-        <item>产品介绍</item>
-        <item>企业通讯录</item>
-    </string-array>
-    <string-array name="menu_items_name_en">
-        <item>Brief</item>
-        <item>Marketing</item>
-        <item>Product</item>
-        <item>Contacts</item>
-    </string-array>
-
-    <integer-array name="menu_item_icon">
-        <item>@drawable/basic_info</item>
-        <item>@drawable/marketing</item>
-        <item>@drawable/main_product</item>
-        <item>@drawable/more_product</item>
-    </integer-array>
     
     <string-array name="secondary_menu_title">
         <item>设置</item>

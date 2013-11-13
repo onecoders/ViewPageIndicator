@@ -6,13 +6,15 @@ import net.jsiq.marketing.util.ViewHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 
-public class ContentDisplayActivity extends SherlockActivity {
+public class ContentDisplayActivity extends SherlockActivity implements
+		OnClickListener {
 
 	public static final String CONTENT_ID = "content_id";
 	private WebView mWebView;
@@ -24,8 +26,8 @@ public class ContentDisplayActivity extends SherlockActivity {
 		initActionBar();
 
 		String contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID
-				+ getIntent().getStringExtra(CONTENT_ID);
-
+				+ getIntent().getIntExtra(CONTENT_ID, 1);
+		System.out.println(contentUrl);
 		mWebView = (WebView) findViewById(R.id.content);
 
 		mWebView.loadUrl(contentUrl);
@@ -42,13 +44,27 @@ public class ContentDisplayActivity extends SherlockActivity {
 	private View loadCustomerView() {
 		View actionbarView = LayoutInflater.from(this).inflate(
 				R.layout.actionbar_content_display, null);
-		ImageButton menuBtn = (ImageButton) actionbarView
+		ImageButton menuBack = (ImageButton) actionbarView
 				.findViewById(R.id.menu_back);
-		// menuBtn.setOnClickListener(this);
-		ImageButton personalBtn = (ImageButton) actionbarView
+		menuBack.setOnClickListener(this);
+		ImageButton menuSetting = (ImageButton) actionbarView
 				.findViewById(R.id.menu_setting);
-		// personalBtn.setOnClickListener(this);
+		menuSetting.setOnClickListener(this);
 		return actionbarView;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.menu_back:
+			onBackPressed();
+			break;
+		case R.id.menu_setting:
+
+			break;
+		default:
+			break;
+		}
 	}
 
 }
