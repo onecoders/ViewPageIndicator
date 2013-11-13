@@ -29,5 +29,6 @@
     <string name="comfirmToClearCache">确定要清除缓存吗？</string>
     <string name="cancle">取消</string>
     <string name="OK">确定</string>
+    <string name="networkConnected">网络已连接</string>
 
 </resources>

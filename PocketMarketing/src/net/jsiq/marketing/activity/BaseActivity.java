@@ -3,6 +3,7 @@ package net.jsiq.marketing.activity;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.LeftMenuFragment;
 import net.jsiq.marketing.fragment.RightMenuFragment;
+import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
 import android.content.BroadcastReceiver;
@@ -37,6 +38,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 					&& !currentNetworkConnected) {
 				setBehindView();
 				setSecondaryMenu();
+				MessageToast.showText(context, R.string.networkConnected);
 			}
 		}
 	};

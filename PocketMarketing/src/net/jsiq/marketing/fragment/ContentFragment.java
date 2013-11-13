@@ -55,9 +55,9 @@ public class ContentFragment extends SherlockFragment {
 		listview = (ListView) convertView.findViewById(R.id.content_list);
 
 		List<String> urls = new ArrayList<String>();
-		for (int i = 0; i < 3; i++) {
-			urls.add("http://www.jsiq.net:6060/resource/menuIco/20131022164521.jpg");
-		}
+		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
+		urls.add("http://www.chinaunicom.com.cn/images/wjtBanner.jpg");
+		urls.add("http://www.chinaunicom.com.cn/images/wswBanner.jpg");
 		// add header view
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
