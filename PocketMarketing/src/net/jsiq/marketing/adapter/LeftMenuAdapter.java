@@ -13,12 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BehindMenuAdapter extends ArrayAdapter<MenuItem> {
+public class LeftMenuAdapter extends ArrayAdapter<MenuItem> {
 
 	private Context context;
 	private int selectItem = 0;
 
-	public BehindMenuAdapter(Context context, List<MenuItem> menuList) {
+	public LeftMenuAdapter(Context context, List<MenuItem> menuList) {
 		super(context, 0, menuList);
 		this.context = context;
 	}

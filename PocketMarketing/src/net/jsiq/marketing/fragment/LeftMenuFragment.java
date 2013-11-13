@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.activity.MainActivity;
-import net.jsiq.marketing.adapter.BehindMenuAdapter;
+import net.jsiq.marketing.adapter.LeftMenuAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.LoaderUtil;
@@ -26,7 +26,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	private Context context;
 
-	private BehindMenuAdapter adapter;
+	private LeftMenuAdapter adapter;
 	private List<MenuItem> menuList;
 
 	@Override
@@ -40,7 +40,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View behindContentView = inflater.inflate(R.layout.behind_menu, null);
-		adapter = new BehindMenuAdapter(context, menuList);
+		adapter = new LeftMenuAdapter(context, menuList);
 		setListAdapter(adapter);
 		return behindContentView;
 	}

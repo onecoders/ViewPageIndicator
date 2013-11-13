@@ -19,7 +19,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.activity.CollectionsActivity;
 import net.jsiq.marketing.activity.SettingActivity;
-import net.jsiq.marketing.adapter.SecondaryMenuAdapter;
+import net.jsiq.marketing.adapter.RightMenuAdapter;
 import net.jsiq.marketing.model.SecondaryMenuItem;
 
 
@@ -44,7 +44,7 @@ public class RightMenuFragment extends SherlockFragment implements
 			menuList.add(new SecondaryMenuItem(iconArray.getResourceId(i, 0),
 					menuItemTitles[i]));
 		}
-		ArrayAdapter<SecondaryMenuItem> adapter = new SecondaryMenuAdapter(
+		ArrayAdapter<SecondaryMenuItem> adapter = new RightMenuAdapter(
 				getSherlockActivity(), menuList);
 		gridview = (GridView) convertView.findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);

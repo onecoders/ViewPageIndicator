@@ -12,12 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SecondaryMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
+public class RightMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
 
 	private Context context;
 	private List<SecondaryMenuItem> menuList;
 
-	public SecondaryMenuAdapter(Context context,
+	public RightMenuAdapter(Context context,
 			List<SecondaryMenuItem> menuList) {
 		super(context, 0, menuList);
 		this.context = context;
