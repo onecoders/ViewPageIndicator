@@ -24,5 +24,10 @@
     <string name="contentLoading">内容导入中 &#8230;</string>
     <string name="loadFailed">加载失败，请重试！</string>
     <string name="barcoderScan">扫描下载客户端！</string>
+    <string name="clearCacheTitle">清除缓存</string>
+    <string name="clearCacheSum">清空缓存图片</string>
+    <string name="comfirmToClearCache">确定要清除缓存吗？</string>
+    <string name="cancle">取消</string>
+    <string name="OK">确定</string>
 
 </resources>

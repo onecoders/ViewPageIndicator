@@ -1,8 +1,15 @@
 package net.jsiq.marketing.activity;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.util.LoaderUtil;
+import net.jsiq.marketing.util.ViewHelper;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,15 +18,15 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.util.ViewHelper;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SettingActivity extends SherlockPreferenceActivity implements
-		OnClickListener {
+		OnClickListener, OnPreferenceClickListener {
 
 	private static final String PREFS_NAME = "compintro";
 	private SharedPreferences m_prefs;
 	private Editor editor;
+	private Preference clearCache;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,9 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 		m_prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 		editor = m_prefs.edit();
 		addPreferencesFromResource(R.xml.preference);
+
+		clearCache = findPreference("clear_cache");
+		clearCache.setOnPreferenceClickListener(this);
 	}
 
 	private void initActinBar() {
@@ -54,5 +64,36 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 		if (v.getId() == R.id.back_btn) {
 			onBackPressed();
 		}
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.getKey().equals("clear_cache")) {
+			showClearCacheDialog();
+		}
+		return false;
+	}
+
+	private void showClearCacheDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.clearCacheTitle);
+		builder.setMessage(R.string.comfirmToClearCache);
+		builder.setPositiveButton(R.string.OK,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						clearCache();
+					}
+
+				});
+		builder.setNegativeButton(R.string.cancel, null);
+		builder.create().show();
+	}
+
+	private void clearCache() {
+		ImageLoader imageLoader = LoaderUtil.getImageLoader(this);
+		imageLoader.clearDiscCache();
+		imageLoader.clearMemoryCache();
 	}
 }

@@ -48,7 +48,7 @@ public class LoaderUtil {
 		return JsonHttpUtils.getRequest(url);
 	}
 
-	private static synchronized ImageLoader getImageLoader(Context context) {
+	public static synchronized ImageLoader getImageLoader(Context context) {
 		if (null == imageLoader) {
 			imageLoader = ImageLoader.getInstance();
 			ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
