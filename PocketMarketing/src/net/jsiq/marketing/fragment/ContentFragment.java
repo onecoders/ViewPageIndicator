@@ -27,7 +27,8 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class ContentFragment extends SherlockFragment {
+public class ContentFragment extends SherlockFragment implements
+		OnItemClickListener {
 
 	public static final String CATALOG_ID = "catalog_id";
 
@@ -65,18 +66,7 @@ public class ContentFragment extends SherlockFragment {
 		// TODO
 		adapter = new ContentAdapter(context, contentList);
 		listview.setAdapter(adapter);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long id) {
-				Intent i = new Intent(
-						"android.intent.action.ContentDisplayActivity");
-				i.putExtra(ContentDisplayActivity.CONTENT_ID,
-						contentList.get(position - 1).getContentId());
-				startActivity(i);
-			}
-		});
+		listview.setOnItemClickListener(this);
 		return convertView;
 	}
 
@@ -128,6 +118,19 @@ public class ContentFragment extends SherlockFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+			long id) {
+		int contentId = contentList.get(position - 1).getContentId();
+		startContentDisplayActivityWithContentId(contentId);
+	}
+
+	private void startContentDisplayActivityWithContentId(int contentId) {
+		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
+		startActivity(i);
 	}
 
 }

@@ -17,9 +17,8 @@ public class RightMenuAdapter extends ArrayAdapter<SecondaryMenuItem> {
 	private Context context;
 	private List<SecondaryMenuItem> menuList;
 
-	public RightMenuAdapter(Context context,
-			List<SecondaryMenuItem> menuList) {
-		super(context, 0, menuList);
+	public RightMenuAdapter(Context context, List<SecondaryMenuItem> menuList) {
+		super(context, 0);
 		this.context = context;
 		this.menuList = menuList;
 	}

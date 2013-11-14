@@ -30,7 +30,8 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (currentMenu.getMenuId() == firstMenu.getMenuId()) {
+		if (currentMenu == null || firstMenu == null
+				|| currentMenu.getMenuId() == firstMenu.getMenuId()) {
 			exitBy2Click();
 		} else {
 			currentMenu = firstMenu;

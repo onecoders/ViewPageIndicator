@@ -40,6 +40,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 				setSecondaryMenu();
 				MessageToast.showText(context, R.string.networkConnected);
 			}
+			currentNetworkConnected = NetworkUtils.isNetworkConnected(context);
 		}
 	};
 
