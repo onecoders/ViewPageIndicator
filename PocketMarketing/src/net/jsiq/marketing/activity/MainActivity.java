@@ -40,8 +40,10 @@ public class MainActivity extends BaseActivity {
 	}
 
 	public void switchCatalogByMenu(MenuItem item) {
-		currentMenu = item;
-		initNewCatalogFragmentByMenu(item);
+		if (currentMenu.getMenuId() != item.getMenuId()) {
+			currentMenu = item;
+			initNewCatalogFragmentByMenu(item);
+		}
 		new Handler().post(new Runnable() {
 			public void run() {
 				getSlidingMenu().showContent();
