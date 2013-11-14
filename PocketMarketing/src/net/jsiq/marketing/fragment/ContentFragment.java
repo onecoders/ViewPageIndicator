@@ -52,9 +52,7 @@ public class ContentFragment extends SherlockFragment implements
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
 		listview = (ListView) convertView.findViewById(R.id.content_list);
-		listview.setVisibility(View.GONE);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
-		loadingHintView.setVisibility(View.VISIBLE);
 		// top show images urls
 		List<String> urls = new ArrayList<String>();
 		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
@@ -64,7 +62,7 @@ public class ContentFragment extends SherlockFragment implements
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
 
-		// TODO list addAll()
+		// TODO list addAll() or use local variables
 		adapter = new ContentAdapter(context, contentList);
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(this);
@@ -74,7 +72,9 @@ public class ContentFragment extends SherlockFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		listview.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(context)) {
+			loadingHintView.setVisibility(View.VISIBLE);
 			String loadContentUrl = URLStrings.GET_CONTENTS_BY_CATALOGID_PAGENO
 					+ catalogId + "/1";
 			new LoadContentTask().execute(loadContentUrl);

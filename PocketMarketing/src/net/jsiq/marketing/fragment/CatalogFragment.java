@@ -61,8 +61,6 @@ public class CatalogFragment extends SherlockFragment {
 				false);
 		catalogView = convertView.findViewById(R.id.catalogs);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
-		catalogView.setVisibility(View.GONE);
-		loadingHintView.setVisibility(View.VISIBLE);
 
 		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
 
@@ -81,7 +79,9 @@ public class CatalogFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		catalogView.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(context)) {
+			loadingHintView.setVisibility(View.VISIBLE);
 			String getCatalogUrl = URLStrings.GET_CATALOGS_BY_MENUID + menuId;
 			new LoadCatalogTask().execute(getCatalogUrl);
 		} else {
