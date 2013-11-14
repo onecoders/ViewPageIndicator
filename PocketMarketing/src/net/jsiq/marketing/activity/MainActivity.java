@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity {
 				|| currentMenu.getMenuId() == firstMenu.getMenuId()) {
 			exitBy2Click();
 		} else {
-			currentMenu = firstMenu;
 			switchCatalogByMenu(firstMenu);
 		}
 	}
