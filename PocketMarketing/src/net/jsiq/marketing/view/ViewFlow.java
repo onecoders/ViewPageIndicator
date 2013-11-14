@@ -16,6 +16,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView;
 import android.widget.Adapter;
@@ -183,6 +184,15 @@ public class ViewFlow extends AdapterView<Adapter> {
 		}
 		mVelocityTracker.addMovement(ev);
 
+		MyViewPager pager = null;
+
+		ViewParent viewParent = getParent().getParent().getParent().getParent()
+				.getParent().getParent().getParent();
+
+		if (viewParent instanceof MyViewPager) {
+			pager = (MyViewPager) viewParent;
+		}
+
 		final int action = ev.getAction();
 		final float x = ev.getX();
 
@@ -204,9 +214,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 			if (handler != null)
 				handler.removeMessages(0);
 			getParent().requestDisallowInterceptTouchEvent(true);
-			getParent().getParent().getParent().getParent().getParent()
-					.getParent().getParent().getParent()
-					.requestDisallowInterceptTouchEvent(true);
+			pager.requestDisallowInterceptTouchEvent(true);
 			break;
 
 		case MotionEvent.ACTION_MOVE:
@@ -221,30 +229,36 @@ public class ViewFlow extends AdapterView<Adapter> {
 			if (mLastMotionX == x) {
 				if (0 == getSelectedItemPosition()
 						|| getSelectedItemPosition() == getChildCount() - 1) {
-					getParent().requestDisallowInterceptTouchEvent(true);
-					getParent().getParent().getParent().getParent().getParent()
-							.getParent().getParent().getParent()
-							.requestDisallowInterceptTouchEvent(true);
+					pager.requestDisallowInterceptTouchEvent(true);
+					pager.getParent().requestDisallowInterceptTouchEvent(true);
 				}
 			} else if (mLastMotionX > x) {
 				if (getSelectedItemPosition() == getChildCount() - 1) {
-					getParent().requestDisallowInterceptTouchEvent(false);
-					getParent().getParent().getParent().getParent().getParent()
-							.getParent().getParent().getParent()
-							.requestDisallowInterceptTouchEvent(true);
+					if (pager.getCurrentItem() == pager.getItemCount() - 1) {
+						pager.requestDisallowInterceptTouchEvent(true);
+						pager.getParent().requestDisallowInterceptTouchEvent(
+								false);
+					} else {
+						pager.requestDisallowInterceptTouchEvent(false);
+						pager.getParent().requestDisallowInterceptTouchEvent(
+								true);
+					}
 				}
 			} else if (mLastMotionX < x) {
 				if (getSelectedItemPosition() == 0) {
-					getParent().requestDisallowInterceptTouchEvent(false);
-					getParent().getParent().getParent().getParent().getParent()
-							.getParent().getParent().getParent()
-							.requestDisallowInterceptTouchEvent(true);
+					if (pager.getCurrentItem() == 0) {
+						pager.requestDisallowInterceptTouchEvent(true);
+						pager.getParent().requestDisallowInterceptTouchEvent(
+								false);
+					} else {
+						pager.requestDisallowInterceptTouchEvent(false);
+						pager.getParent().requestDisallowInterceptTouchEvent(
+								true);
+					}
 				}
 			} else {
-				getParent().requestDisallowInterceptTouchEvent(true);
-				getParent().getParent().getParent().getParent().getParent()
-						.getParent().getParent().getParent()
-						.requestDisallowInterceptTouchEvent(true);
+				pager.requestDisallowInterceptTouchEvent(true);
+				pager.getParent().requestDisallowInterceptTouchEvent(true);
 			}
 
 			if (mTouchState == TOUCH_STATE_SCROLLING) {
@@ -296,17 +310,13 @@ public class ViewFlow extends AdapterView<Adapter> {
 				Message message = handler.obtainMessage(0);
 				handler.sendMessageDelayed(message, timeSpan);
 			}
-			getParent().requestDisallowInterceptTouchEvent(true);
-			getParent().getParent().getParent().getParent().getParent()
-					.getParent().getParent().getParent()
-					.requestDisallowInterceptTouchEvent(true);
+			pager.requestDisallowInterceptTouchEvent(true);
+			pager.getParent().requestDisallowInterceptTouchEvent(true);
 			break;
 		case MotionEvent.ACTION_CANCEL:
 			mTouchState = TOUCH_STATE_REST;
-			getParent().requestDisallowInterceptTouchEvent(true);
-			getParent().getParent().getParent().getParent().getParent()
-					.getParent().getParent().getParent()
-					.requestDisallowInterceptTouchEvent(true);
+			pager.requestDisallowInterceptTouchEvent(true);
+			pager.getParent().requestDisallowInterceptTouchEvent(true);
 		}
 		return super.onInterceptTouchEvent(ev);
 	}
