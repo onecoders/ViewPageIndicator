@@ -89,31 +89,34 @@ public class CatalogFragment extends SherlockFragment {
 		}
 	}
 
-	class LoadCatalogTask extends AsyncTask<String, Void, Void> {
+	class LoadCatalogTask extends AsyncTask<String, Void, List<CatalogItem>> {
 
 		@Override
-		protected Void doInBackground(String... params) {
-			catalogList.clear();
+		protected List<CatalogItem> doInBackground(String... params) {
 			try {
-				catalogList.addAll(LoaderUtil.loadCatalogItems(params[0]));
+				return LoaderUtil.loadCatalogItems(params[0]);
 			} catch (Exception e) {
-				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
 			}
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(List<CatalogItem> result) {
 			super.onPostExecute(result);
-			adapter.notifyDataSetChanged();
-			indicator.notifyDataSetChanged();
-			if (catalogList.size() < 2) {
-				indicator.setVisibility(View.GONE);
+			if (result == null) {
+				MessageToast.showText(context, R.string.loadFailed);
 			} else {
-				indicator.setVisibility(View.VISIBLE);
+				catalogList.addAll(result);
+				adapter.notifyDataSetChanged();
+				indicator.notifyDataSetChanged();
+				if (catalogList.size() < 2) {
+					indicator.setVisibility(View.GONE);
+				} else {
+					indicator.setVisibility(View.VISIBLE);
+				}
+				catalogView.setVisibility(View.VISIBLE);
 			}
-			catalogView.setVisibility(View.VISIBLE);
 			loadingHintView.setVisibility(View.GONE);
 		}
 

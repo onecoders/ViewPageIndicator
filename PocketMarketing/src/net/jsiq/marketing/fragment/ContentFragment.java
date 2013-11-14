@@ -85,20 +85,11 @@ public class ContentFragment extends SherlockFragment implements
 
 	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
 
-		private List<ContentItem> contentItems;
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			adapter.clear();
-		}
-
 		@Override
 		protected List<ContentItem> doInBackground(String... params) {
 			try {
-				contentItems = LoaderUtil.loadContentItems(params[0]);
+				return LoaderUtil.loadContentItems(params[0]);
 			} catch (Exception e) {
-				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
 			}
 			return null;
@@ -107,8 +98,12 @@ public class ContentFragment extends SherlockFragment implements
 		@Override
 		protected void onPostExecute(List<ContentItem> result) {
 			super.onPostExecute(result);
-			adapter.addAll(contentItems);
-			listview.setVisibility(View.VISIBLE);
+			if (result == null) {
+				MessageToast.showText(context, R.string.loadFailed);
+			} else {
+				adapter.addAll(result);
+				listview.setVisibility(View.VISIBLE);
+			}
 			loadingHintView.setVisibility(View.GONE);
 		}
 	}
