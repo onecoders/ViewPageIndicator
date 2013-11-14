@@ -13,16 +13,16 @@ public class ViewFlowHeaderView extends LinearLayout {
 
 	public ViewFlowHeaderView(Context context) {
 		super(context);
+		this.context = context;
 	}
 
 	public ViewFlowHeaderView(Context context, List<String> urls) {
 		this(context);
-		this.context = context;
 		inflate(context, R.layout.viewflow_display, this);
-		initViewFlowImageWithUrls(urls);
+		initViewFlowImage(urls);
 	}
 
-	private void initViewFlowImageWithUrls(List<String> urls) {
+	private void initViewFlowImage(List<String> urls) {
 		ViewFlow viewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		viewFlow.setAdapter(new ViewFlowImageAdapter(context, urls));
 		viewFlow.setmSideBuffer(urls.size());

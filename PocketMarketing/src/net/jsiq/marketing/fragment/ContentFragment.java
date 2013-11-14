@@ -52,9 +52,8 @@ public class ContentFragment extends SherlockFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
-		//
 		listview = (ListView) convertView.findViewById(R.id.content_list);
-
+		// top show images urls
 		List<String> urls = new ArrayList<String>();
 		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
 		urls.add("http://www.chinaunicom.com.cn/images/wjtBanner.jpg");
@@ -63,7 +62,7 @@ public class ContentFragment extends SherlockFragment implements
 		View headerView = new ViewFlowHeaderView(context, urls);
 		listview.addHeaderView(headerView);
 
-		// TODO
+		// TODO list addAll()
 		adapter = new ContentAdapter(context, contentList);
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(this);
@@ -82,13 +81,15 @@ public class ContentFragment extends SherlockFragment implements
 		}
 	}
 
-	class LoadContentTask extends AsyncTask<String, Void, Void> {
+	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
 
+		private List<ContentItem> contentItems;
 		private ProgressDialog dialog;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			adapter.clear();
 			dialog = new ProgressDialog(context);
 			dialog.setMessage("内容导入中...");
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -96,10 +97,9 @@ public class ContentFragment extends SherlockFragment implements
 		}
 
 		@Override
-		protected Void doInBackground(String... params) {
-			contentList.clear();
+		protected List<ContentItem> doInBackground(String... params) {
 			try {
-				contentList.addAll(LoaderUtil.loadContentItems(params[0]));
+				contentItems = LoaderUtil.loadContentItems(params[0]);
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
@@ -108,9 +108,9 @@ public class ContentFragment extends SherlockFragment implements
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(List<ContentItem> result) {
 			super.onPostExecute(result);
-			adapter.notifyDataSetChanged();
+			adapter.addAll(contentItems);
 			dialog.dismiss();
 		}
 	}
