@@ -67,7 +67,6 @@ public class LeftMenuFragment extends SherlockListFragment {
 			try {
 				return LoaderUtil.loadMenuItems(params[0]);
 			} catch (Exception e) {
-				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
 			}
 			return null;
@@ -76,8 +75,12 @@ public class LeftMenuFragment extends SherlockListFragment {
 		@Override
 		protected void onPostExecute(List<MenuItem> result) {
 			super.onPostExecute(result);
-			adapter.addAll(result);
-			initMainFirstDefaultFragment();
+			if (result == null) {
+				MessageToast.showText(context, R.string.loadFailed);
+			} else {
+				adapter.addAll(result);
+				initMainFirstDefaultFragment();
+			}
 		}
 
 	}
