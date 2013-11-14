@@ -50,9 +50,8 @@ public class CatalogFragment extends SherlockFragment {
 		this.context = getSherlockActivity();
 		menuId = getArguments().getInt(MENU_ID);
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
-		ViewHelper.setActionBarCustomerViewContent(actionBar,
-				R.drawable.basic_info_back,
-				getArguments().getString(CATALOG_TITLE));
+		ViewHelper.setActionBarCustomerViewContent(actionBar, getArguments()
+				.getString(CATALOG_TITLE));
 	}
 
 	@Override

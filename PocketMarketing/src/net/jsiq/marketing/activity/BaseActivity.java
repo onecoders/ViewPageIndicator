@@ -115,7 +115,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 			if (sm.isMenuShowing()) {
 				showContent();
 			} else {
-				getSlidingMenu().showMenu();
+				sm.showMenu();
 			}
 			break;
 		case R.id.personal_btn:
