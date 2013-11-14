@@ -11,11 +11,11 @@ import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
-import net.jsiq.marketing.view.MyViewPager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +33,7 @@ public class CatalogFragment extends SherlockFragment {
 	private Context context;
 
 	private FragmentPagerAdapter adapter;
-	private MyViewPager pager;
+	private ViewPager pager;
 	private TabPageIndicator indicator;
 
 	private int currentPos = 0;
@@ -64,7 +64,7 @@ public class CatalogFragment extends SherlockFragment {
 
 		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
 
-		pager = (MyViewPager) convertView.findViewById(R.id.pager);
+		pager = (ViewPager) convertView.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
 		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
@@ -114,7 +114,6 @@ public class CatalogFragment extends SherlockFragment {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				catalogList.addAll(result);
-				pager.setItemCount(result.size());
 				adapter.notifyDataSetChanged();
 				indicator.notifyDataSetChanged();
 				if (catalogList.size() < 2) {

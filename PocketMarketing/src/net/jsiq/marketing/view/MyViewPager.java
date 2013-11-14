@@ -8,15 +8,6 @@ import android.view.MotionEvent;
 public class MyViewPager extends ViewPager {
 
 	float startX;
-	private int itemCount;
-
-	public int getItemCount() {
-		return itemCount;
-	}
-
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
-	}
 
 	public MyViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -34,11 +25,11 @@ public class MyViewPager extends ViewPager {
 		case MotionEvent.ACTION_MOVE:
 			if (startX == ev.getX()) {
 				if (0 == getCurrentItem()
-						|| getCurrentItem() == getItemCount() - 1) {
+						|| getCurrentItem() == getAdapter().getCount() - 1) {
 					getParent().requestDisallowInterceptTouchEvent(true);
 				}
 			} else if (startX > ev.getX()) {
-				if (getCurrentItem() == getItemCount() - 1) {
+				if (getCurrentItem() == getAdapter().getCount() - 1) {
 					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			} else if (startX < ev.getX()) {

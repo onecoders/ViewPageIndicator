@@ -10,6 +10,7 @@ import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -184,13 +185,13 @@ public class ViewFlow extends AdapterView<Adapter> {
 		}
 		mVelocityTracker.addMovement(ev);
 
-		MyViewPager pager = null;
+		ViewPager pager = null;
 
 		ViewParent viewParent = getParent().getParent().getParent().getParent()
 				.getParent().getParent().getParent();
 
-		if (viewParent instanceof MyViewPager) {
-			pager = (MyViewPager) viewParent;
+		if (viewParent instanceof ViewPager) {
+			pager = (ViewPager) viewParent;
 		}
 
 		final int action = ev.getAction();
@@ -234,7 +235,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 				}
 			} else if (mLastMotionX > x) {
 				if (getSelectedItemPosition() == getChildCount() - 1) {
-					if (pager.getCurrentItem() == pager.getItemCount() - 1) {
+					if (pager.getCurrentItem() == pager.getAdapter().getCount() - 1) {
 						pager.requestDisallowInterceptTouchEvent(true);
 						pager.getParent().requestDisallowInterceptTouchEvent(
 								false);
