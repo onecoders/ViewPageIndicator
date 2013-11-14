@@ -11,7 +11,6 @@ import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -41,6 +39,8 @@ public class CatalogFragment extends SherlockFragment {
 	private int currentPos = 0;
 	private List<CatalogItem> catalogList;
 	private int menuId;
+	private View catalogView;
+	private View loadingHintView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,11 @@ public class CatalogFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.simple_tabs, container,
 				false);
+		catalogView = convertView.findViewById(R.id.catalogs);
+		loadingHintView = convertView.findViewById(R.id.loadingHint);
+		catalogView.setVisibility(View.GONE);
+		loadingHintView.setVisibility(View.VISIBLE);
+
 		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
 
 		pager = (ViewPager) convertView.findViewById(R.id.pager);
@@ -86,17 +91,6 @@ public class CatalogFragment extends SherlockFragment {
 
 	class LoadCatalogTask extends AsyncTask<String, Void, Void> {
 
-		private ProgressDialog dialog;
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			dialog = new ProgressDialog(context);
-			dialog.setMessage("内容导入中...");
-			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.show();
-		}
-
 		@Override
 		protected Void doInBackground(String... params) {
 			catalogList.clear();
@@ -119,7 +113,8 @@ public class CatalogFragment extends SherlockFragment {
 			} else {
 				indicator.setVisibility(View.VISIBLE);
 			}
-			dialog.dismiss();
+			catalogView.setVisibility(View.VISIBLE);
+			loadingHintView.setVisibility(View.GONE);
 		}
 
 	}

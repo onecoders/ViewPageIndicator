@@ -12,7 +12,6 @@ import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.view.ViewFlowHeaderView;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,7 +19,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -39,6 +37,7 @@ public class ContentFragment extends SherlockFragment implements
 
 	private ListView listview;
 	private ContentAdapter adapter;
+	private View loadingHintView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,9 @@ public class ContentFragment extends SherlockFragment implements
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
 		listview = (ListView) convertView.findViewById(R.id.content_list);
+		listview.setVisibility(View.GONE);
+		loadingHintView = convertView.findViewById(R.id.loadingHint);
+		loadingHintView.setVisibility(View.VISIBLE);
 		// top show images urls
 		List<String> urls = new ArrayList<String>();
 		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
@@ -84,16 +86,11 @@ public class ContentFragment extends SherlockFragment implements
 	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
 
 		private List<ContentItem> contentItems;
-		private ProgressDialog dialog;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			adapter.clear();
-			dialog = new ProgressDialog(context);
-			dialog.setMessage("内容导入中...");
-			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			dialog.show();
 		}
 
 		@Override
@@ -111,7 +108,8 @@ public class ContentFragment extends SherlockFragment implements
 		protected void onPostExecute(List<ContentItem> result) {
 			super.onPostExecute(result);
 			adapter.addAll(contentItems);
-			dialog.dismiss();
+			listview.setVisibility(View.VISIBLE);
+			loadingHintView.setVisibility(View.GONE);
 		}
 	}
 

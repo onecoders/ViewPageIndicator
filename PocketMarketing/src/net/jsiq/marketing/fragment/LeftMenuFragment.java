@@ -11,7 +11,6 @@ import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,23 +54,21 @@ public class LeftMenuFragment extends SherlockListFragment {
 		}
 	}
 
-	class LoadMenuTask extends AsyncTask<String, Void, Void> {
+	class LoadMenuTask extends AsyncTask<String, Void, List<MenuItem>> {
 
-		private ProgressDialog dialog;
+		private List<MenuItem> menuItems;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new ProgressDialog(context);
-			dialog.setMessage("内容导入中...");
-			dialog.show();
+			adapter.clear();
 		}
 
 		@Override
-		protected Void doInBackground(String... params) {
-			menuList.clear();
+		protected List<MenuItem> doInBackground(String... params) {
 			try {
-				menuList.addAll(LoaderUtil.loadMenuItems(params[0]));
+				menuItems = LoaderUtil.loadMenuItems(params[0]);
+				return menuItems;
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
@@ -80,11 +77,10 @@ public class LeftMenuFragment extends SherlockListFragment {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(List<MenuItem> result) {
 			super.onPostExecute(result);
-			adapter.notifyDataSetChanged();
+			adapter.addAll(result);
 			initMainFirstDefaultFragment();
-			dialog.dismiss();
 		}
 
 	}
