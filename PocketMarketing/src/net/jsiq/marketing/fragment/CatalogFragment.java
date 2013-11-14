@@ -92,6 +92,12 @@ public class CatalogFragment extends SherlockFragment {
 	class LoadCatalogTask extends AsyncTask<String, Void, List<CatalogItem>> {
 
 		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			catalogList.clear();
+		}
+
+		@Override
 		protected List<CatalogItem> doInBackground(String... params) {
 			try {
 				return LoaderUtil.loadCatalogItems(params[0]);

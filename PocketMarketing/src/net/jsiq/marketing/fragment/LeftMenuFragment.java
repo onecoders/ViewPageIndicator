@@ -56,8 +56,6 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	class LoadMenuTask extends AsyncTask<String, Void, List<MenuItem>> {
 
-		private List<MenuItem> menuItems;
-
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -67,8 +65,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 		@Override
 		protected List<MenuItem> doInBackground(String... params) {
 			try {
-				menuItems = LoaderUtil.loadMenuItems(params[0]);
-				return menuItems;
+				return LoaderUtil.loadMenuItems(params[0]);
 			} catch (Exception e) {
 				MessageToast.showText(context, R.string.loadFailed);
 				e.printStackTrace();
