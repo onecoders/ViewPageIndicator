@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+    android:background="@drawable/biz_news_detaila_action_bar_bg" >
 
     <ImageButton
         android:id="@+id/menu_back"

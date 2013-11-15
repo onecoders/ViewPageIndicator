@@ -3,10 +3,13 @@ package net.jsiq.marketing.activity;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.util.ViewHelper;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
@@ -22,6 +25,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.content_display);
 		initActionBar();
 
@@ -35,6 +39,10 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 	private void initActionBar() {
 		ActionBar actionBar = getSupportActionBar();
+		ColorDrawable drawable = new ColorDrawable(
+				Color.parseColor("#88F0F0F0"));
+		actionBar.setBackgroundDrawable(drawable);
+		actionBar.setSplitBackgroundDrawable(drawable);
 		// Get custom view
 		View customerView = loadCustomerView();
 		// Now set custom view
