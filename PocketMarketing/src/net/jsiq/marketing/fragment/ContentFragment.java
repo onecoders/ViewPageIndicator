@@ -34,7 +34,6 @@ public class ContentFragment extends SherlockFragment implements
 	private Context context;
 
 	private int catalogId;
-	private List<ContentItem> contentList;
 
 	private ListView listview;
 	private ContentAdapter adapter;
@@ -44,7 +43,6 @@ public class ContentFragment extends SherlockFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.context = getSherlockActivity();
-		this.contentList = new ArrayList<ContentItem>();
 		// get catalogId
 		catalogId = getArguments().getInt(CATALOG_ID);
 	}
@@ -56,18 +54,6 @@ public class ContentFragment extends SherlockFragment implements
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
 		loadingFailedHintView = convertView
 				.findViewById(R.id.loadingFailedHint);
-		// top show images urls
-		List<String> urls = new ArrayList<String>();
-		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
-		urls.add("http://www.chinaunicom.com.cn/images/wjtBanner.jpg");
-		urls.add("http://www.chinaunicom.com.cn/images/wswBanner.jpg");
-		// add header view
-		View headerView = new ViewFlowHeaderView(context, urls);
-		listview.addHeaderView(headerView);
-
-		// TODO list addAll() or use local variables
-		adapter = new ContentAdapter(context, contentList);
-		listview.setAdapter(adapter);
 		setListeners();
 		return convertView;
 	}
@@ -92,13 +78,8 @@ public class ContentFragment extends SherlockFragment implements
 		}
 	}
 
+	// TODO list.addAll() or use local variables in AsyncTask
 	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			adapter.clear();
-		}
 
 		@Override
 		protected List<ContentItem> doInBackground(String... params) {
@@ -116,11 +97,25 @@ public class ContentFragment extends SherlockFragment implements
 			if (result == null) {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
-				adapter.addAll(result);
+				initListView(result);
 				listview.setVisibility(View.VISIBLE);
 			}
 			loadingHintView.setVisibility(View.GONE);
 		}
+
+	}
+
+	private void initListView(List<ContentItem> result) {
+		List<String> urls = new ArrayList<String>();
+		for (ContentItem item : result) {
+			urls.add(item.getContentTopPic());
+		}
+		if (urls.size() > 0) {
+			View headerView = new ViewFlowHeaderView(context, urls);
+			listview.addHeaderView(headerView);
+		}
+		adapter = new ContentAdapter(context, result);
+		listview.setAdapter(adapter);
 	}
 
 	@Override
@@ -142,7 +137,7 @@ public class ContentFragment extends SherlockFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		int contentId = contentList.get(position - 1).getContentId();
+		int contentId = adapter.getItem(position - 1).getContentId();
 		startContentDisplayActivityWithContentId(contentId);
 	}
 
