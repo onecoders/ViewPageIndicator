@@ -38,6 +38,7 @@ public class ContentFragment extends SherlockFragment implements
 	private ListView listview;
 	private ContentAdapter adapter;
 	private View loadingHintView, loadingFailedHintView;
+	private View headerView = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,7 +117,7 @@ public class ContentFragment extends SherlockFragment implements
 			}
 		}
 		if (urls.size() > 0) {
-			View headerView = new ViewFlowHeaderView(context, urls);
+			headerView = new ViewFlowHeaderView(context, urls);
 			listview.addHeaderView(headerView);
 		}
 		adapter = new ContentAdapter(context, result);
@@ -142,7 +143,11 @@ public class ContentFragment extends SherlockFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		int contentId = adapter.getItem(position - 1).getContentId();
+		int selectedPos = position;
+		if (headerView != null) {
+			selectedPos = position - 1;
+		}
+		int contentId = adapter.getItem(selectedPos).getContentId();
 		startContentDisplayActivityWithContentId(contentId);
 	}
 
