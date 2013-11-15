@@ -14,6 +14,7 @@
 
     <include
         android:id="@+id/loadingHint"
-        layout="@layout/loading_progress_hint" />
+        layout="@layout/loading_progress_hint"
+        android:visibility="gone" />
 
 </RelativeLayout>
