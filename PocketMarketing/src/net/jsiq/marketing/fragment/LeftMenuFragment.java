@@ -51,6 +51,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
+			initMainFirstDefaultFragment(null);
 		}
 	}
 
@@ -79,7 +80,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				initMainFirstDefaultFragment();
+				initMainFirstDefaultFragment(menuList.get(0));
 			}
 		}
 
@@ -102,9 +103,8 @@ public class LeftMenuFragment extends SherlockListFragment {
 		}
 	}
 
-	private void initMainFirstDefaultFragment() {
-		((MainActivity) getSherlockActivity())
-				.initFirstDefaultFragment(menuList.get(0));
+	private void initMainFirstDefaultFragment(MenuItem item) {
+		((MainActivity) getSherlockActivity()).initFirstDefaultFragment(item);
 	}
 
 }

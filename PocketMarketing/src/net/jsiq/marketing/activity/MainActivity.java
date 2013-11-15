@@ -23,8 +23,10 @@ public class MainActivity extends BaseActivity {
 	}
 
 	public void initFirstDefaultFragment(MenuItem item) {
-		firstMenu = item;
-		currentMenu = item;
+		if (item != null) {
+			firstMenu = item;
+			currentMenu = item;
+		}
 		initNewCatalogFragmentByMenu(item);
 	}
 
@@ -70,10 +72,12 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initNewCatalogFragmentByMenu(MenuItem item) {
-		Bundle extra = new Bundle();
-		extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
-		extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
 		CatalogFragment fragment = new CatalogFragment();
+		Bundle extra = new Bundle();
+		if (item != null) {
+			extra.putInt(CatalogFragment.MENU_ID, item.getMenuId());
+			extra.putString(CatalogFragment.CATALOG_TITLE, item.getMenuName());
+		}
 		fragment.setArguments(extra);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
