@@ -18,13 +18,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class CatalogFragment extends SherlockFragment {
+public class CatalogFragment extends SherlockFragment implements
+		OnClickListener {
 
 	public static final String MENU_ID = "menu_id";
 	public static final String CATALOG_TITLE = "catalog_title";
@@ -40,7 +42,7 @@ public class CatalogFragment extends SherlockFragment {
 	private List<CatalogItem> catalogList;
 	private int menuId;
 	private View catalogView;
-	private View loadingHintView;
+	private View loadingHintView, loadingFailedHintView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,9 @@ public class CatalogFragment extends SherlockFragment {
 				false);
 		catalogView = convertView.findViewById(R.id.catalogs);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
+		loadingFailedHintView = convertView
+				.findViewById(R.id.loadingFailedHint);
+		loadingFailedHintView.setOnClickListener(this);
 
 		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
 
@@ -79,13 +84,19 @@ public class CatalogFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		loadCatalog();
+	}
+
+	private void loadCatalog() {
 		catalogView.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(context)) {
 			loadingHintView.setVisibility(View.VISIBLE);
+			loadingFailedHintView.setVisibility(View.GONE);
 			String getCatalogUrl = URLStrings.GET_CATALOGS_BY_MENUID + menuId;
 			new LoadCatalogTask().execute(getCatalogUrl);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
+			loadingFailedHintView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -132,6 +143,17 @@ public class CatalogFragment extends SherlockFragment {
 		super.onSaveInstanceState(outState);
 		currentPos = pager.getCurrentItem();
 		outState.putInt(BASIC_INFO_POS, currentPos);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadingFailedHint:
+			loadCatalog();
+			break;
+		default:
+			break;
+		}
 	}
 
 }

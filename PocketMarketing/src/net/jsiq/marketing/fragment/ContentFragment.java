@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,7 +27,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 
 public class ContentFragment extends SherlockFragment implements
-		OnItemClickListener {
+		OnItemClickListener, OnClickListener {
 
 	public static final String CATALOG_ID = "catalog_id";
 
@@ -37,7 +38,7 @@ public class ContentFragment extends SherlockFragment implements
 
 	private ListView listview;
 	private ContentAdapter adapter;
-	private View loadingHintView;
+	private View loadingHintView, loadingFailedHintView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class ContentFragment extends SherlockFragment implements
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
 		listview = (ListView) convertView.findViewById(R.id.content_list);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
+		loadingFailedHintView = convertView
+				.findViewById(R.id.loadingFailedHint);
 		// top show images urls
 		List<String> urls = new ArrayList<String>();
 		urls.add("http://www.chinaunicom.com.cn/images/wpBananer.jpg");
@@ -72,14 +75,20 @@ public class ContentFragment extends SherlockFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		loadContent();
+	}
+
+	private void loadContent() {
 		listview.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(context)) {
 			loadingHintView.setVisibility(View.VISIBLE);
+			loadingFailedHintView.setVisibility(View.GONE);
 			String loadContentUrl = URLStrings.GET_CONTENTS_BY_CATALOGID_PAGENO
 					+ catalogId + "/1";
 			new LoadContentTask().execute(loadContentUrl);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
+			loadingFailedHintView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -130,6 +139,17 @@ public class ContentFragment extends SherlockFragment implements
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
 		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
 		startActivity(i);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadingFailedHint:
+			loadContent();
+			break;
+		default:
+			break;
+		}
 	}
 
 }

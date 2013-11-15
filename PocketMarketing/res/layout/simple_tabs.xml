@@ -44,4 +44,9 @@
         layout="@layout/loading_progress_hint"
         android:visibility="gone" />
 
+    <include
+        android:id="@+id/loadingFailedHint"
+        layout="@layout/loading_failed"
+        android:visibility="gone" />
+
 </LinearLayout>
