@@ -22,7 +22,7 @@
             android:singleLine="true"
             android:text="@string/barcoderScan"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:layout_width="150dip"
@@ -33,18 +33,30 @@
             android:src="@drawable/market___details_id_com_" />
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dip"
-        android:columnWidth="60dip"
-        android:gravity="center"
-        android:horizontalSpacing="15dip"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dip" />
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_margin="15dip"
+            android:background="#929292" />
+
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="60dip"
+            android:gravity="center"
+            android:horizontalSpacing="15dip"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dip" />
+    </LinearLayout>
 
 </RelativeLayout>
