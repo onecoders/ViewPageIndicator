@@ -68,7 +68,7 @@ public class ContentFragment extends SherlockFragment implements
 		// TODO list addAll() or use local variables
 		adapter = new ContentAdapter(context, contentList);
 		listview.setAdapter(adapter);
-		listview.setOnItemClickListener(this);
+		setListeners();
 		return convertView;
 	}
 
@@ -128,17 +128,22 @@ public class ContentFragment extends SherlockFragment implements
 		super.onSaveInstanceState(outState);
 	}
 
+	private void startContentDisplayActivityWithContentId(int contentId) {
+		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
+		startActivity(i);
+	}
+
+	private void setListeners() {
+		loadingFailedHintView.setOnClickListener(this);
+		listview.setOnItemClickListener(this);
+	}
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
 		int contentId = contentList.get(position - 1).getContentId();
 		startContentDisplayActivityWithContentId(contentId);
-	}
-
-	private void startContentDisplayActivityWithContentId(int contentId) {
-		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
-		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
-		startActivity(i);
 	}
 
 	@Override
