@@ -21,17 +21,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 
-public class CollectionsActivity extends SherlockListActivity implements
+public class CollectionsActivity extends SherlockActivity implements
 		OnClickListener, OnItemClickListener {
 
 	private List<ContentCollection> collections;
 	private CollectionDBHelper DBHelper;
 	private CollectionAdapter adapter;
+	private ListView listview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,12 @@ public class CollectionsActivity extends SherlockListActivity implements
 		DBHelper = new CollectionDBHelper(this);
 		DBHelper.open();
 		collections = DBHelper.queryAll();
+		listview = (ListView) findViewById(android.R.id.list);
+		listview.setEmptyView(findViewById(android.R.id.empty));
 		adapter = new CollectionAdapter(this, collections);
-		setListAdapter(adapter);
-		getListView().setOnItemClickListener(this);
-		registerForContextMenu(getListView());
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(this);
+		registerForContextMenu(listview);
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class CollectionsActivity extends SherlockListActivity implements
 		boolean success = false;
 		switch (item.getItemId()) {
 		case R.id.delete:
-			int pos = (int) getListAdapter().getItemId(menuInfo.position);
+			int pos = (int) adapter.getItemId(menuInfo.position);
 			success = DBHelper.delete(collections.get(pos).get_id());
 			collections.remove(pos);
 			adapter.notifyDataSetChanged();

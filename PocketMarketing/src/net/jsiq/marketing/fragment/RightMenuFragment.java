@@ -3,6 +3,11 @@ package net.jsiq.marketing.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.activity.CollectionsActivity;
+import net.jsiq.marketing.activity.SettingActivity;
+import net.jsiq.marketing.adapter.RightMenuAdapter;
+import net.jsiq.marketing.model.SecondaryMenuItem;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -13,23 +18,16 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.activity.CollectionsActivity;
-import net.jsiq.marketing.activity.SettingActivity;
-import net.jsiq.marketing.adapter.RightMenuAdapter;
-import net.jsiq.marketing.model.SecondaryMenuItem;
-
 
 public class RightMenuFragment extends SherlockFragment implements
 		OnItemClickListener {
 
 	private GridView gridview;
-	private static final int POS_CONFIG = 0;
+	private static final int POS_SEARCH = 0;
 	private static final int POS_COLLECTION = 1;
-	private static final int POS_SHARE = 2;
+	private static final int POS_CONFIG = 2;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -56,30 +54,19 @@ public class RightMenuFragment extends SherlockFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		switch (position) {
-		case POS_CONFIG:
-			startActivity(new Intent(getSherlockActivity(),
-					SettingActivity.class));
+		case POS_SEARCH:
+			
 			break;
 		case POS_COLLECTION:
 			startActivity(new Intent(getSherlockActivity(),
 					CollectionsActivity.class));
 			break;
-		case POS_SHARE:
-			toOnekeyShare();
+		case POS_CONFIG:
+			startActivity(new Intent(getSherlockActivity(),
+					SettingActivity.class));
 			break;
 		default:
 			break;
 		}
-	}
-
-	private void toOnekeyShare() {
-		OnekeyShare oks = new OnekeyShare();
-		oks.setNotification(R.drawable.ic_launcher,
-				getString(R.string.app_name));
-		oks.setTitle(getString(R.string.app_name));
-		oks.setText(getString(R.string.app_name));
-		oks.setUrl("http://sharesdk.cn");
-		oks.setSilent(true);
-		oks.show(getSherlockActivity());
 	}
 }

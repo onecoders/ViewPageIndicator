@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string-array name="secondary_menu_title">
-        <item>设置</item>
+        <item>搜索</item>
         <item>收藏</item>
-        <item>分享</item>
+        <item>设置</item>
     </string-array>
-    
+
     <integer-array name="secondary_menu_icon">
-        <item>@drawable/biz_pc_list_setting_icon</item>
+        <item>@drawable/biz_pc_list_search_icon</item>
         <item>@drawable/biz_pc_go_favor</item>
-        <item>@drawable/biz_audio_btn_share</item>
+        <item>@drawable/biz_pc_list_setting_icon</item>
     </integer-array>
-    
-    
 
 </resources>
