@@ -3,14 +3,7 @@ package net.jsiq.marketing.activity;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.LeftMenuFragment;
 import net.jsiq.marketing.fragment.RightMenuFragment;
-import net.jsiq.marketing.util.MessageToast;
-import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -28,28 +21,11 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	LeftMenuFragment mFrag;
 	SlidingMenu sm;
-	private boolean currentNetworkConnected;
-
-	BroadcastReceiver receiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			if (NetworkUtils.isNetworkConnected(context)
-					&& !currentNetworkConnected) {
-				setBehindView();
-				setSecondaryMenu();
-				MessageToast.showText(context, R.string.networkConnected);
-			}
-			currentNetworkConnected = NetworkUtils.isNetworkConnected(context);
-		}
-	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ShareSDK.initSDK(this);
-		currentNetworkConnected = NetworkUtils.isNetworkConnected(this);
-		registerReceiver();
 		initActionBar();
 		initSlidingMenu();
 	}
@@ -57,8 +33,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	private void initSlidingMenu() {
 		sm = getSlidingMenu();
 		customizeSlidingMenu();
-		setBehindView();
-		setSecondaryMenu();
+		loadMenu();
 	}
 
 	private void customizeSlidingMenu() {
@@ -69,6 +44,11 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setFadeDegree(0.35f);
 		sm.setBehindScrollScale(0.0f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+	}
+
+	public void loadMenu() {
+		setBehindView();
+		setSecondaryMenu();
 	}
 
 	private void setBehindView() {
@@ -133,22 +113,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	@Override
 	protected void onDestroy() {
 		ShareSDK.stopSDK(this);
-		unregisterReceiver();
 		super.onDestroy();
-	}
-
-	private void registerReceiver() {
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-		if (null != receiver) {
-			registerReceiver(receiver, filter);
-		}
-	}
-
-	private void unregisterReceiver() {
-		if (null != receiver) {
-			unregisterReceiver(receiver);
-		}
 	}
 
 }

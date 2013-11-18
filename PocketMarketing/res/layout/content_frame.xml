@@ -2,4 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/loadingHint"
+        layout="@layout/loading_progress_hint"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/loadingFailedHint"
+        layout="@layout/loading_failed"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -31,7 +31,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	private WebView mWebView;
 	private ImageButton menuSetting;
 	private PopupWindow popupWindow;
-	private String[] title = {"设置", "分享"};
+	private String[] title = { "设置", "分享" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +105,8 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		popupWindow.setContentView(layout);
 		// showAsDropDown会把里面的view作为参照物，所以要那满屏幕parent
 		// popupWindow.showAsDropDown(findViewById(R.id.tv_title), x, 10);
-		popupWindow.showAtLocation(findViewById(R.id.content_display), Gravity.RIGHT
-				| Gravity.TOP, x, y);// 需要指定Gravity，默认情况是center.
+		popupWindow.showAtLocation(findViewById(R.id.content_display),
+				Gravity.RIGHT | Gravity.TOP, x, y);// 需要指定Gravity，默认情况是center.
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 

@@ -11,6 +11,7 @@ import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +28,30 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	private LeftMenuAdapter adapter;
 	private List<MenuItem> menuList;
+
+	private MainActivity mainActivity;
+
+	public enum LOADSTATUS {
+		LOADING, FAILED, SUCCEED;
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		if (getSherlockActivity() == null)
+			return;
+		if (getSherlockActivity() instanceof MainActivity) {
+			mainActivity = (MainActivity) getSherlockActivity();
+		}
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		if (mainActivity != null) {
+			mainActivity = null;
+		}
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,10 +73,11 @@ public class LeftMenuFragment extends SherlockListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (NetworkUtils.isNetworkConnected(context)) {
+			mainActivity.refreshMainContent(LOADSTATUS.LOADING);
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
-			initMainFirstDefaultFragment(null);
+			refreshMainContent(LOADSTATUS.FAILED);
 		}
 	}
 
@@ -77,13 +103,14 @@ public class LeftMenuFragment extends SherlockListFragment {
 		protected void onPostExecute(List<MenuItem> result) {
 			super.onPostExecute(result);
 			if (result == null) {
+				refreshMainContent(LOADSTATUS.FAILED);
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				initMainFirstDefaultFragment(menuList.get(0));
+				initFirstDefaultCatalogInMain(menuList.get(0));
+				refreshMainContent(LOADSTATUS.SUCCEED);
 			}
 		}
-
 	}
 
 	@Override
@@ -95,16 +122,15 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	// the meat of switching the above fragment
 	private void switchFragment(MenuItem item) {
-		if (getSherlockActivity() == null)
-			return;
-		if (getSherlockActivity() instanceof MainActivity) {
-			MainActivity fca = (MainActivity) getSherlockActivity();
-			fca.switchCatalogByMenu(item);
-		}
+		mainActivity.switchCatalogByMenu(item);
 	}
 
-	private void initMainFirstDefaultFragment(MenuItem item) {
-		((MainActivity) getSherlockActivity()).initFirstDefaultFragment(item);
+	private void refreshMainContent(LOADSTATUS loadstatus) {
+		mainActivity.refreshMainContent(loadstatus);
+	}
+
+	private void initFirstDefaultCatalogInMain(MenuItem item) {
+		mainActivity.initFirstDefaultCatalog(item);
 	}
 
 }
