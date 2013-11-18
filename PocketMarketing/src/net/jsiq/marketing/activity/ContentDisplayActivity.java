@@ -29,6 +29,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	private String[] contentInfo;
 	private int contentId;
 	private CollectionDBHelper DBHelper;
+	private String contentUrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 		contentId = Integer.valueOf(contentInfo[0]);
 
-		String contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
+		contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
 		mWebView = (WebView) findViewById(R.id.content);
 		mWebView.loadUrl(contentUrl);
 	}
@@ -101,11 +102,9 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 	private void toOnekeyShare() {
 		OnekeyShare oks = new OnekeyShare();
-		oks.setNotification(R.drawable.ic_launcher,
-				getString(R.string.app_name));
 		oks.setTitle(getString(R.string.app_name));
 		oks.setText(getString(R.string.app_name));
-		oks.setUrl("http://sharesdk.cn");
+		oks.setUrl(contentUrl);
 		oks.setSilent(true);
 		oks.show(this);
 	}
