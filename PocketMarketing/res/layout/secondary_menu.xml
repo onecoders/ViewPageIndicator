@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:columnWidth="60dip"
             android:gravity="center"
+            android:listSelector="@drawable/list_selector"
             android:horizontalSpacing="15dip"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
