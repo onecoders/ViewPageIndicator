@@ -38,5 +38,12 @@
     <string name="sendMail">发送中 &#8230;</string>
     <string name="sendError">发送失败！</string>
     <string name="other">其他</string>
+    <string name="addCollectionSuccess">收藏成功</string>
+    <string name="addCollectionFail">收藏失败</string>
+    <string name="delete">删除</string>
+    <string name="deleteAll">清空收藏</string>
+    <string name="options">选项</string>
+    <string name="operatSucceed">操作成功</string>
+    <string name="operatFailed">操作失败</string>
 
 </resources>

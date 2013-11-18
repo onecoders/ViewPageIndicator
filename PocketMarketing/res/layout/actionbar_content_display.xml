@@ -12,12 +12,26 @@
         android:layout_centerVertical="true"
         android:background="@drawable/biz_pics_ic_back" />
 
-    <ImageButton
-        android:id="@+id/menu_setting"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/biz_pics_action_bar" />
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/menu_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/biz_pics_action_bar"
+            android:padding="5dip" />
+
+        <ImageButton
+            android:id="@+id/menu_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/biz_pics_action_bar"
+            android:padding="5dip" />
+    </LinearLayout>
 
 </RelativeLayout>

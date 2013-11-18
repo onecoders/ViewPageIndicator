@@ -1,49 +1,87 @@
 package net.jsiq.marketing.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import net.jsiq.marketing.R;
+import net.jsiq.marketing.adapter.CollectionAdapter;
+import net.jsiq.marketing.db.CollectionDBHelper;
+import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.util.MessageToast;
+import net.jsiq.marketing.util.ViewHelper;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockListActivity;
-import net.jsiq.marketing.R;
-import net.jsiq.marketing.util.ViewHelper;
 
 public class CollectionsActivity extends SherlockListActivity implements
-		OnClickListener {
+		OnClickListener, OnItemClickListener {
 
-	private List<String> collections = new ArrayList<String>();
+	private List<ContentCollection> collections;
+	private CollectionDBHelper DBHelper;
+	private CollectionAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.collection_listview);
 		initActinBar();
-		// simulation load collections from database
-		for (int i = 0; i < 10; i++) {
-			collections.add("收藏" + i);
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1,
-				collections);
+		DBHelper = new CollectionDBHelper(this);
+		DBHelper.open();
+		collections = DBHelper.queryAll();
+		adapter = new CollectionAdapter(this, collections);
 		setListAdapter(adapter);
-		getListView().setOnItemClickListener(new OnItemClickListener() {
+		getListView().setOnItemClickListener(this);
+		registerForContextMenu(getListView());
+	}
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		menu.setHeaderTitle(R.string.options);
+		inflater.inflate(R.menu.context_menu, menu);
+	}
 
-			}
-		});
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item
+				.getMenuInfo();
+		boolean success = false;
+		switch (item.getItemId()) {
+		case R.id.delete:
+			int pos = (int) getListAdapter().getItemId(menuInfo.position);
+			success = DBHelper.delete(collections.get(pos).get_id());
+			collections.remove(pos);
+			adapter.notifyDataSetChanged();
+			break;
+		case R.id.deleteAll:
+			success = DBHelper.deleteAll();
+			collections.clear();
+			adapter.notifyDataSetChanged();
+			break;
+		default:
+			break;
+		}
+		if (success) {
+			MessageToast.showText(this, R.string.operatSucceed);
+		} else {
+			MessageToast.showText(this, R.string.operatFailed);
+		}
+		return true;
 	}
 
 	private void initActinBar() {
@@ -70,6 +108,26 @@ public class CollectionsActivity extends SherlockListActivity implements
 		if (v.getId() == R.id.back_btn) {
 			onBackPressed();
 		}
+	}
+
+	private void startContentDisplayActivityWithContentId(
+			ContentCollection collection) {
+		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		i.putExtra(ContentDisplayActivity.CONTENT_INFO, new String[] {
+				collection.getContentId() + "", collection.getContentTitle(),
+				collection.getContentSummary() });
+		startActivity(i);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		DBHelper.close();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		startContentDisplayActivityWithContentId(collections.get(arg2));
 	}
 
 }

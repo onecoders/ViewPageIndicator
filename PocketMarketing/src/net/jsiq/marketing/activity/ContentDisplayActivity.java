@@ -2,24 +2,19 @@ package net.jsiq.marketing.activity;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.constants.URLStrings;
+import net.jsiq.marketing.db.CollectionDBHelper;
+import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.ViewHelper;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -27,24 +22,27 @@ import com.actionbarsherlock.app.SherlockActivity;
 public class ContentDisplayActivity extends SherlockActivity implements
 		OnClickListener {
 
-	public static final String CONTENT_ID = "content_id";
+	public static final String CONTENT_INFO = "content_info";
+
 	private WebView mWebView;
-	private ImageButton menuSetting;
-	private PopupWindow popupWindow;
-	private String[] title = { "设置", "分享" };
+	private ImageButton menuCollection, menuShare;
+	private String[] contentInfo;
+	private int contentId;
+	private CollectionDBHelper DBHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.content_display);
 		initActionBar();
+		DBHelper = new CollectionDBHelper(this);
+		DBHelper.open();
+		contentInfo = getIntent().getStringArrayExtra(CONTENT_INFO);
 
-		String contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID
-				+ getIntent().getIntExtra(CONTENT_ID, 1);
-		System.out.println(contentUrl);
+		contentId = Integer.valueOf(contentInfo[0]);
+
+		String contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
 		mWebView = (WebView) findViewById(R.id.content);
-
 		mWebView.loadUrl(contentUrl);
 	}
 
@@ -66,9 +64,11 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		ImageButton menuBack = (ImageButton) actionbarView
 				.findViewById(R.id.menu_back);
 		menuBack.setOnClickListener(this);
-		menuSetting = (ImageButton) actionbarView
-				.findViewById(R.id.menu_setting);
-		menuSetting.setOnClickListener(this);
+		menuCollection = (ImageButton) actionbarView
+				.findViewById(R.id.menu_collection);
+		menuCollection.setOnClickListener(this);
+		menuShare = (ImageButton) actionbarView.findViewById(R.id.menu_share);
+		menuShare.setOnClickListener(this);
 		return actionbarView;
 	}
 
@@ -78,46 +78,42 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		case R.id.menu_back:
 			onBackPressed();
 			break;
-		case R.id.menu_setting:
-			int y = menuSetting.getBottom() * 3 / 2;
-			int x = getWindowManager().getDefaultDisplay().getWidth() / 4;
-			showPopupWindow(x, y);
+		case R.id.menu_collection:
+			addToCollection();
+			break;
+		case R.id.menu_share:
+			toOnekeyShare();
 			break;
 		default:
 			break;
 		}
 	}
 
-	public void showPopupWindow(int x, int y) {
-		LinearLayout layout = (LinearLayout) LayoutInflater.from(this).inflate(
-				R.layout.popup_window_dialog, null);
-		ListView listView = (ListView) layout.findViewById(R.id.lv_dialog);
-		listView.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.popup_window_text, R.id.tv_text, title));
+	private void addToCollection() {
+		boolean success = DBHelper.insert(new ContentCollection(contentId,
+				contentInfo[1], contentInfo[2]));
+		if (success) {
+			MessageToast.showText(this, R.string.addCollectionSuccess);
+		} else {
+			MessageToast.showText(this, R.string.addCollectionFail);
+		}
+	}
 
-		popupWindow = new PopupWindow(this);
-		popupWindow.setBackgroundDrawable(new BitmapDrawable());
-		popupWindow
-				.setWidth(getWindowManager().getDefaultDisplay().getWidth() / 2);
-		popupWindow.setHeight(300);
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setFocusable(true);
-		popupWindow.setContentView(layout);
-		// showAsDropDown会把里面的view作为参照物，所以要那满屏幕parent
-		// popupWindow.showAsDropDown(findViewById(R.id.tv_title), x, 10);
-		popupWindow.showAtLocation(findViewById(R.id.content_display),
-				Gravity.RIGHT | Gravity.TOP, x, y);// 需要指定Gravity，默认情况是center.
+	private void toOnekeyShare() {
+		OnekeyShare oks = new OnekeyShare();
+		oks.setNotification(R.drawable.ic_launcher,
+				getString(R.string.app_name));
+		oks.setTitle(getString(R.string.app_name));
+		oks.setText(getString(R.string.app_name));
+		oks.setUrl("http://sharesdk.cn");
+		oks.setSilent(true);
+		oks.show(this);
+	}
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-
-				popupWindow.dismiss();
-				popupWindow = null;
-			}
-		});
+	@Override
+	protected void onDestroy() {
+		DBHelper.close();
+		super.onDestroy();
 	}
 
 }

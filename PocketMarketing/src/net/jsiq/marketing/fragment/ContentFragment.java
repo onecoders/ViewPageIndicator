@@ -79,7 +79,7 @@ public class ContentFragment extends SherlockFragment implements
 		}
 	}
 
-	// TODO list.addAll() or use local variables in AsyncTask
+	// list.addAll() or use local variables in AsyncTask
 	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
 
 		@Override
@@ -128,9 +128,11 @@ public class ContentFragment extends SherlockFragment implements
 		super.onSaveInstanceState(outState);
 	}
 
-	private void startContentDisplayActivityWithContentId(int contentId) {
+	private void startContentDisplayActivityWithContentId(ContentItem item) {
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
-		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
+		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
+				new String[] { item.getContentId() + "",
+						item.getContentTitle(), item.getContentSummary() });
 		startActivity(i);
 	}
 
@@ -146,8 +148,8 @@ public class ContentFragment extends SherlockFragment implements
 		if (headerView != null) {
 			selectedPos = position - 1;
 		}
-		int contentId = adapter.getItem(selectedPos).getContentId();
-		startContentDisplayActivityWithContentId(contentId);
+		ContentItem selectedItem = adapter.getItem(selectedPos);
+		startContentDisplayActivityWithContentId(selectedItem);
 	}
 
 	@Override

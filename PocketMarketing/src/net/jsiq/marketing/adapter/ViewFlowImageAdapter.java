@@ -38,16 +38,17 @@ public class ViewFlowImageAdapter extends ArrayAdapter<ContentItem> {
 
 			@Override
 			public void onClick(View v) {
-				int contentId = item.getContentId();
-				startContentDisplayActivityWithContentId(contentId);
+				startContentDisplayActivityWithContentId(item);
 			}
 		});
 		return convertView;
 	}
 
-	private void startContentDisplayActivityWithContentId(int contentId) {
+	private void startContentDisplayActivityWithContentId(ContentItem item) {
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
-		i.putExtra(ContentDisplayActivity.CONTENT_ID, contentId);
+		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
+				new String[] { item.getContentId() + "",
+						item.getContentTitle(), item.getContentSummary() });
 		context.startActivity(i);
 	}
 
