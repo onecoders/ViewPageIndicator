@@ -97,6 +97,7 @@ public class ContentFragment extends SherlockFragment implements
 			super.onPostExecute(result);
 			if (result == null) {
 				MessageToast.showText(context, R.string.loadFailed);
+				loadingFailedHintView.setVisibility(View.VISIBLE);
 			} else {
 				initListView(result);
 				listview.setVisibility(View.VISIBLE);

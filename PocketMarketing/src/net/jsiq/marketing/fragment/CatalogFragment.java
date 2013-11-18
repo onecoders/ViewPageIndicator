@@ -123,6 +123,7 @@ public class CatalogFragment extends SherlockFragment implements
 			super.onPostExecute(result);
 			if (result == null) {
 				MessageToast.showText(context, R.string.loadFailed);
+				loadingFailedHintView.setVisibility(View.VISIBLE);
 			} else {
 				catalogList.addAll(result);
 				adapter.notifyDataSetChanged();
