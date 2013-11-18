@@ -1,12 +1,17 @@
 package net.jsiq.marketing.activity;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.constants.Constants;
 import net.jsiq.marketing.util.LoaderUtil;
+import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.ViewHelper;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -26,7 +31,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 	private static final String PREFS_NAME = "compintro";
 	private SharedPreferences m_prefs;
 	private Editor editor;
-	private Preference clearCache;
+	private Preference clearCache, feedback;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,9 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 
 		clearCache = findPreference("clear_cache");
 		clearCache.setOnPreferenceClickListener(this);
+
+		feedback = findPreference("feedback");
+		feedback.setOnPreferenceClickListener(this);
 	}
 
 	private void initActinBar() {
@@ -70,6 +78,8 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals("clear_cache")) {
 			showClearCacheDialog();
+		} else if (preference.getKey().equals("feedback")) {
+			sendFeedback();
 		}
 		return false;
 	}
@@ -95,5 +105,16 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 		ImageLoader imageLoader = LoaderUtil.getImageLoader(this);
 		imageLoader.clearDiscCache();
 		imageLoader.clearMemoryCache();
+	}
+
+	private void sendFeedback() {
+		Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",
+				Constants.FEEDBACK_ADDRESS, null));
+		try {
+			startActivity(Intent.createChooser(i,
+					getResources().getString(R.string.sendMail)));
+		} catch (ActivityNotFoundException e) {
+			MessageToast.showText(this, R.string.sendError);
+		}
 	}
 }

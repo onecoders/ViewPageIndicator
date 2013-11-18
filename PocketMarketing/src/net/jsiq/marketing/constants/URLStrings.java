@@ -17,6 +17,4 @@ public class URLStrings {
 	public static final String GET_CONTENT_BY_CONTENT_ID = BASIC_URL
 			+ "viewContent/";
 
-	public static final String EMPTY_TOP_SHOW_IMAGE = "http://wwww.jsiq.net:6060/resource";
-
 }

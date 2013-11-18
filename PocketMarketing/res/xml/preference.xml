@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <Preference
-        android:key="clear_cache"
-        android:summary="@string/clearCacheSum"
-        android:title="@string/clearCacheTitle" >
-    </Preference>
+    <PreferenceCategory android:title="@string/system_config" >
+        <Preference
+            android:key="clear_cache"
+            android:summary="@string/clearCacheSum"
+            android:title="@string/clearCacheTitle" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about" >
+        <Preference
+            android:key="version_info"
+            android:summary="@string/version_info_sum"
+            android:title="@string/version_info_title" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/other" >
+        <Preference
+            android:key="feedback"
+            android:title="@string/feedback" >
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

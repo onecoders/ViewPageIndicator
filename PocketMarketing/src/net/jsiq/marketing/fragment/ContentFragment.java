@@ -110,9 +110,7 @@ public class ContentFragment extends SherlockFragment implements
 		List<String> urls = new ArrayList<String>();
 		for (ContentItem item : result) {
 			String topPic = item.getContentTopPic();
-			System.out.println(topPic);
-			if (topPic != null && !topPic.trim().equals("")
-					&& !topPic.equals(URLStrings.EMPTY_TOP_SHOW_IMAGE)) {
+			if (topPic != null && !topPic.trim().equals("")) {
 				urls.add(item.getContentTopPic());
 			}
 		}
