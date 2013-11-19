@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ViewFlowImageAdapter extends ArrayAdapter<ContentItem> {
 
@@ -32,7 +33,10 @@ public class ViewFlowImageAdapter extends ArrayAdapter<ContentItem> {
 		}
 		ImageView viewFlow = ((ImageView) convertView
 				.findViewById(R.id.imgView));
+		TextView topShowTitle = (TextView) convertView
+				.findViewById(R.id.topShowTitle);
 		LoaderUtil.displayImage(context, item.getContentTopPic(), viewFlow);
+		topShowTitle.setText(item.getContentTitle());
 		viewFlow.setOnClickListener(new OnClickListener() {
 
 			@Override

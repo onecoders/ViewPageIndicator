@@ -21,8 +21,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="#88252525"
-            android:gravity="center"
+            android:gravity="right"
             android:padding="3dip" >
 
             <net.jsiq.marketing.view.CircleFlowIndicator
