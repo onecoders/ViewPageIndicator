@@ -115,20 +115,12 @@ public class CollectionDBHelper {
 
 	public boolean deleteAll() {
 		try {
-			Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID,
-					KEY_CONTENT_ID, KEY_CONTENT_TITLE, KEY_CONTENT_SUMMARY },
-					null, null, null, null, null);
-			if (c != null) {
-				while (c.moveToNext()) {
-					delete(c.getInt(c.getColumnIndex(KEY_ROWID)));
-				}
-			}
-			c.close();
+			db.execSQL("delete from " + DATABASE_TABLE);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 
 }
