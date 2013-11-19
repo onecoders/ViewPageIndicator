@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/biz_audio_header_img_tag" />
+            android:src="@drawable/base_action_bar_action_search" />
     </RelativeLayout>
 
 </LinearLayout>

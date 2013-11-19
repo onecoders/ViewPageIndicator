@@ -68,7 +68,7 @@ public class CollectionsActivity extends SherlockActivity implements
 		switch (item.getItemId()) {
 		case R.id.delete:
 			int pos = (int) adapter.getItemId(menuInfo.position);
-			success = DBHelper.delete(collections.get(pos).get_id());
+			success = DBHelper.delete(collections.get(pos).getContentId());
 			collections.remove(pos);
 			adapter.notifyDataSetChanged();
 			break;

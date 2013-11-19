@@ -32,8 +32,7 @@
             android:id="@+id/menu_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dip"
-            android:background="@drawable/menu_collection" />
+            android:layout_marginRight="15dip" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -35,12 +35,11 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_display);
-		initActionBar();
 		DBHelper = new CollectionDBHelper(this);
 		DBHelper.open();
 		contentInfo = getIntent().getStringArrayExtra(CONTENT_INFO);
-
 		contentId = Integer.valueOf(contentInfo[0]);
+		initActionBar();
 
 		contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
 		mWebView = (WebView) findViewById(R.id.content);
@@ -68,6 +67,11 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		menuCollection = (ImageButton) actionbarView
 				.findViewById(R.id.menu_collection);
 		menuCollection.setOnClickListener(this);
+		if (isCollected(contentId)) {
+			setMenuCollecitonBg(R.drawable.already_collected);
+		} else {
+			setMenuCollecitonBg(R.drawable.not_collected);
+		}
 		menuShare = (ImageButton) actionbarView.findViewById(R.id.menu_share);
 		menuShare.setOnClickListener(this);
 		return actionbarView;
@@ -80,7 +84,11 @@ public class ContentDisplayActivity extends SherlockActivity implements
 			onBackPressed();
 			break;
 		case R.id.menu_collection:
-			addToCollection();
+			if (isCollected(contentId)) {
+				cancelCollection();
+			} else {
+				addToCollection();
+			}
 			break;
 		case R.id.menu_share:
 			toOnekeyShare();
@@ -90,14 +98,33 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		}
 	}
 
+	private boolean isCollected(int contentId) {
+		return DBHelper.queryById(contentId);
+	}
+
 	private void addToCollection() {
 		boolean success = DBHelper.insert(new CollectionItem(contentId,
 				contentInfo[1], contentInfo[2]));
 		if (success) {
 			MessageToast.showText(this, R.string.addCollectionSuccess);
+			setMenuCollecitonBg(R.drawable.already_collected);
 		} else {
 			MessageToast.showText(this, R.string.addCollectionFail);
 		}
+	}
+
+	private void cancelCollection() {
+		boolean success = DBHelper.delete(contentId);
+		if (success) {
+			MessageToast.showText(this, R.string.cancelCollecitonSucced);
+			setMenuCollecitonBg(R.drawable.not_collected);
+		} else {
+			MessageToast.showText(this, R.string.cancelCollecitonFailed);
+		}
+	}
+
+	private void setMenuCollecitonBg(int res) {
+		menuCollection.setBackgroundResource(res);
 	}
 
 	private void toOnekeyShare() {

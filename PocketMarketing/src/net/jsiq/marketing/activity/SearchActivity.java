@@ -80,7 +80,7 @@ public class SearchActivity extends SherlockActivity implements
 				.findViewById(R.id.back_btn);
 		menuBtn.setOnClickListener(this);
 		TextView title = (TextView) actionbarView.findViewById(R.id.title);
-		title.setText(R.string.configure);
+		title.setText(R.string.search);
 		return actionbarView;
 	}
 
@@ -98,14 +98,18 @@ public class SearchActivity extends SherlockActivity implements
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		String searchUrl = URLStrings.GET_SEARCH_BY_SEARCH_KEY
-				+ URLEncoder.encode(query);
-		resultListView.setVisibility(View.GONE);
-		if (NetworkUtils.isNetworkConnected(this)) {
-			loadingHint.setVisibility(View.VISIBLE);
-			new SearchContentTask().execute(searchUrl);
+		if (query != null && !query.trim().equals("")) {
+			String searchUrl = URLStrings.GET_SEARCH_BY_SEARCH_KEY
+					+ URLEncoder.encode(query);
+			resultListView.setVisibility(View.GONE);
+			if (NetworkUtils.isNetworkConnected(this)) {
+				loadingHint.setVisibility(View.VISIBLE);
+				new SearchContentTask().execute(searchUrl);
+			} else {
+				MessageToast.showText(this, R.string.notConnected);
+			}
 		} else {
-			MessageToast.showText(this, R.string.notConnected);
+			MessageToast.showText(this, R.string.invalid);
 		}
 		return false;
 	}

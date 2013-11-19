@@ -39,11 +39,15 @@
     <string name="sendError">发送失败！</string>
     <string name="other">其他</string>
     <string name="addCollectionSuccess">收藏成功</string>
-    <string name="addCollectionFail">收藏失败</string>
+    <string name="addCollectionFail">收藏失败，请重试！</string>
     <string name="delete">删除</string>
     <string name="deleteAll">清空收藏</string>
     <string name="options">选项</string>
     <string name="operatSucceed">操作成功</string>
     <string name="operatFailed">操作失败</string>
+    <string name="search">搜索</string>
+    <string name="invalid">请输入有效搜索关键字！</string>
+    <string name="cancelCollecitonSucced">取消成功</string>
+    <string name="cancelCollecitonFailed">取消失败，请重试！</string>
 
 </resources>

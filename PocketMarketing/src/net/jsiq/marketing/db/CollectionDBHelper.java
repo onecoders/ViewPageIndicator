@@ -76,8 +76,19 @@ public class CollectionDBHelper {
 		return db.insert(DATABASE_TABLE, null, cv) > 0;
 	}
 
-	public boolean delete(long id) {
-		return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + id, null) > 0;
+	public boolean delete(int contentId) {
+		return db
+				.delete(DATABASE_TABLE, KEY_CONTENT_ID + "=" + contentId, null) > 0;
+	}
+
+	public boolean queryById(int contentId) {
+		Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID,
+				KEY_CONTENT_ID, KEY_CONTENT_TITLE, KEY_CONTENT_SUMMARY },
+				KEY_CONTENT_ID + "=" + contentId, null, null, null, null, null);
+		if (c != null && c.moveToFirst()) {
+			return true;
+		}
+		return false;
 	}
 
 	public List<CollectionItem> queryAll() {
