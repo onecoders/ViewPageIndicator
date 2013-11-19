@@ -140,6 +140,9 @@ public class SearchActivity extends SherlockActivity implements
 			super.onPostExecute(result);
 			if (result == null) {
 				MessageToast.showText(SearchActivity.this, R.string.loadFailed);
+			} else if (result.size() == 0) {
+				MessageToast.showText(SearchActivity.this,
+						R.string.searchNoResults);
 			} else {
 				contentList.addAll(result);
 				adapter.notifyDataSetChanged();

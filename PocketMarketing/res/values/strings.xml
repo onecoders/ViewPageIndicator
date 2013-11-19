@@ -49,5 +49,6 @@
     <string name="invalid">请输入有效搜索关键字！</string>
     <string name="cancelCollecitonSucced">取消成功</string>
     <string name="cancelCollecitonFailed">取消失败，请重试！</string>
+    <string name="searchNoResults">对不起，没有搜索到相关内容！</string>
 
 </resources>
