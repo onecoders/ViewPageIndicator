@@ -122,7 +122,7 @@ public class SearchActivity extends SherlockActivity implements
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			adapter.clear();
+			contentList.clear();
 		}
 
 		@Override
@@ -141,7 +141,8 @@ public class SearchActivity extends SherlockActivity implements
 			if (result == null) {
 				MessageToast.showText(SearchActivity.this, R.string.loadFailed);
 			} else {
-				adapter.addAll(result);
+				contentList.addAll(result);
+				adapter.notifyDataSetChanged();
 				resultListView.setVisibility(View.VISIBLE);
 			}
 			loadingHint.setVisibility(View.GONE);
@@ -151,7 +152,8 @@ public class SearchActivity extends SherlockActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
+		ViewHelper.startContentDisplayActivityByContent(this,
+				contentList.get(arg2));
 	}
 
 }
