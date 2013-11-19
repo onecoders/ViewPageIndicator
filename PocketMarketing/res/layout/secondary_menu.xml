@@ -30,8 +30,7 @@
             android:layout_height="150dip"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dip"
-            android:scaleType="fitXY"
-            android:src="@drawable/market___details_id_com_" />
+            android:scaleType="fitXY" />
     </LinearLayout>
 
     <LinearLayout
