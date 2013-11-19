@@ -55,8 +55,8 @@ public class CollectionsActivity extends SherlockActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		collections = DBHelper.queryAll();
-		adapter.notifyDataSetChanged();
+		adapter.clear();
+		adapter.addAll(DBHelper.queryAll());
 	}
 
 	@Override
