@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.View;
@@ -108,16 +109,26 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 		int leftPadding = getPaddingLeft();
 
 		for (int iLoop = 0; iLoop < count; iLoop++) {
-			canvas.drawCircle(leftPadding + radius + (iLoop * circleSeparation)
-					+ centeringOffset, getPaddingTop() + radius, radius,
-					mPaintInactive);
+			float x = leftPadding + radius + (iLoop * circleSeparation)
+					+ centeringOffset;
+			float y = getPaddingTop() + radius;
+			int left = (int) (x - radius);
+			int top = (int) (y - radius / 2);
+			int right = (int) (x + radius);
+			int bottom = (int) (y + radius / 2);
+			canvas.drawRect(new Rect(left, top, right, bottom), mPaintInactive);
 		}
 		float cx = 0;
 		if (flowWidth != 0) {
 			cx = (currentScroll * circleSeparation) / flowWidth;
 		}
-		canvas.drawCircle(leftPadding + radius + cx + centeringOffset,
-				getPaddingTop() + radius, radius + activeRadius, mPaintActive);
+		float x = leftPadding + radius + cx + centeringOffset;
+		float y = getPaddingTop() + radius;
+		int left = (int) (x - radius);
+		int top = (int) (y - radius / 2);
+		int right = (int) (x + radius);
+		int bottom = (int) (y + radius / 2);
+		canvas.drawRect(new Rect(left, top, right, bottom), mPaintActive);
 	}
 
 	@Override
