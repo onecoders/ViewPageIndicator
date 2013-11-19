@@ -3,11 +3,10 @@ package net.jsiq.marketing.adapter;
 import java.util.List;
 
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.activity.ContentDisplayActivity;
 import net.jsiq.marketing.model.ContentItem;
 import net.jsiq.marketing.util.LoaderUtil;
+import net.jsiq.marketing.util.ViewHelper;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,18 +37,10 @@ public class ViewFlowImageAdapter extends ArrayAdapter<ContentItem> {
 
 			@Override
 			public void onClick(View v) {
-				startContentDisplayActivityWithContentId(item);
+				ViewHelper.startContentDisplayActivityByContent(context, item);
 			}
 		});
 		return convertView;
-	}
-
-	private void startContentDisplayActivityWithContentId(ContentItem item) {
-		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
-		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
-				new String[] { item.getContentId() + "",
-						item.getContentTitle(), item.getContentSummary() });
-		context.startActivity(i);
 	}
 
 }

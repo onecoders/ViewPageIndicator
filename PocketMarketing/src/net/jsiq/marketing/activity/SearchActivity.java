@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -27,7 +29,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 
 public class SearchActivity extends SherlockActivity implements
-		OnClickListener, OnQueryTextListener {
+		OnClickListener, OnQueryTextListener, OnItemClickListener {
 
 	private SearchView searchView;
 	private ListView resultListView;
@@ -50,6 +52,7 @@ public class SearchActivity extends SherlockActivity implements
 		resultListView.setEmptyView(findViewById(android.R.id.empty));
 		adapter = new ContentAdapter(this, contentList);
 		resultListView.setAdapter(adapter);
+		resultListView.setOnItemClickListener(this);
 	}
 
 	private void findViews() {
@@ -143,6 +146,11 @@ public class SearchActivity extends SherlockActivity implements
 			}
 			loadingHint.setVisibility(View.GONE);
 		}
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
 	}
 

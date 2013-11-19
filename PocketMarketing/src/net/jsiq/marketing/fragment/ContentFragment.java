@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.activity.ContentDisplayActivity;
 import net.jsiq.marketing.adapter.ContentAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.ContentItem;
 import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
+import net.jsiq.marketing.util.ViewHelper;
 import net.jsiq.marketing.view.ViewFlowHeaderView;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -136,14 +135,6 @@ public class ContentFragment extends SherlockFragment implements
 		super.onSaveInstanceState(outState);
 	}
 
-	private void startContentDisplayActivityWithContentId(ContentItem item) {
-		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
-		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
-				new String[] { item.getContentId() + "",
-						item.getContentTitle(), item.getContentSummary() });
-		startActivity(i);
-	}
-
 	private void setListeners() {
 		loadingFailedHintView.setOnClickListener(this);
 		listview.setOnItemClickListener(this);
@@ -157,7 +148,7 @@ public class ContentFragment extends SherlockFragment implements
 			selectedPos = position - 1;
 		}
 		ContentItem selectedItem = adapter.getItem(selectedPos);
-		startContentDisplayActivityWithContentId(selectedItem);
+		ViewHelper.startContentDisplayActivityByContent(context, selectedItem);
 	}
 
 	@Override

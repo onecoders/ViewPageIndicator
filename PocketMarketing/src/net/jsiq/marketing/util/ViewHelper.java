@@ -1,6 +1,10 @@
 package net.jsiq.marketing.util;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.activity.ContentDisplayActivity;
+import net.jsiq.marketing.model.ContentItem;
+import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -33,6 +37,15 @@ public class ViewHelper {
 			TextView tv = (TextView) actionbarView.findViewById(R.id.title);
 			tv.setText(title);
 		}
+	}
+
+	public static void startContentDisplayActivityByContent(Context context,
+			ContentItem item) {
+		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
+				new String[] { item.getContentId() + "",
+						item.getContentTitle(), item.getContentSummary() });
+		context.startActivity(i);
 	}
 
 }
