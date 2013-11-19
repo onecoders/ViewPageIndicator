@@ -45,6 +45,5 @@
     <string name="options">选项</string>
     <string name="operatSucceed">操作成功</string>
     <string name="operatFailed">操作失败</string>
-    <string name="noCollections">还没有收藏哦 &#8230;</string>
 
 </resources>

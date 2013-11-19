@@ -83,6 +83,14 @@ public class ContentFragment extends SherlockFragment implements
 	class LoadContentTask extends AsyncTask<String, Void, List<ContentItem>> {
 
 		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if (adapter != null) {
+				adapter.clear();
+			}
+		}
+
+		@Override
 		protected List<ContentItem> doInBackground(String... params) {
 			try {
 				return LoaderUtil.loadContentItems(params[0]);
