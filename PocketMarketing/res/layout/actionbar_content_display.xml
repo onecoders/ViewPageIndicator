@@ -17,21 +17,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="10dip"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <ImageButton
             android:id="@+id/menu_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/biz_pics_action_bar"
-            android:padding="5dip" />
+            android:layout_marginRight="15dip"
+            android:background="@drawable/menu_share" />
 
         <ImageButton
             android:id="@+id/menu_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/biz_pics_action_bar"
-            android:padding="5dip" />
+            android:layout_marginRight="15dip"
+            android:background="@drawable/menu_collection" />
     </LinearLayout>
 
 </RelativeLayout>

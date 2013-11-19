@@ -17,4 +17,10 @@ public class URLStrings {
 	public static final String GET_CONTENT_BY_CONTENT_ID = BASIC_URL
 			+ "viewContent/";
 
+	public static final String GET_BAR_CODE = BASIC_URL
+			+ "getTwoDimensionCodeImage/";
+
+	public static final String GET_SEARCH_BY_SEARCH_KEY = BASIC_URL
+			+ "searchContents/";
+
 }

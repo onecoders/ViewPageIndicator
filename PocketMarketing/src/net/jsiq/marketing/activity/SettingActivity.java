@@ -36,7 +36,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initActinBar();
+		initActionBar();
 		m_prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 		editor = m_prefs.edit();
 		addPreferencesFromResource(R.xml.preference);
@@ -48,7 +48,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 		feedback.setOnPreferenceClickListener(this);
 	}
 
-	private void initActinBar() {
+	private void initActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		// Get custom view
 		View customerView = loadCustomerView();

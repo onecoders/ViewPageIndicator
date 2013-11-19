@@ -3,7 +3,7 @@ package net.jsiq.marketing.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.model.CollectionItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,7 +68,7 @@ public class CollectionDBHelper {
 		DBHelper.close();
 	}
 
-	public boolean insert(ContentCollection colleciton) {
+	public boolean insert(CollectionItem colleciton) {
 		ContentValues cv = new ContentValues();
 		cv.put(KEY_CONTENT_ID, colleciton.getContentId());
 		cv.put(KEY_CONTENT_TITLE, colleciton.getContentTitle());
@@ -80,14 +80,14 @@ public class CollectionDBHelper {
 		return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + id, null) > 0;
 	}
 
-	public List<ContentCollection> queryAll() {
-		List<ContentCollection> collections = new ArrayList<ContentCollection>();
+	public List<CollectionItem> queryAll() {
+		List<CollectionItem> collections = new ArrayList<CollectionItem>();
 		Cursor c = db.query(DATABASE_TABLE, new String[] { KEY_ROWID,
 				KEY_CONTENT_ID, KEY_CONTENT_TITLE, KEY_CONTENT_SUMMARY }, null,
 				null, null, null, null);
 		if (c != null) {
 			while (c.moveToNext()) {
-				ContentCollection collection = new ContentCollection();
+				CollectionItem collection = new CollectionItem();
 				collection.set_id(c.getInt(c.getColumnIndex(KEY_ROWID)));
 				collection.setContentId(c.getInt(c
 						.getColumnIndex(KEY_CONTENT_ID)));

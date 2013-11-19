@@ -1,6 +1,6 @@
 package net.jsiq.marketing.model;
 
-public class ContentCollection {
+public class CollectionItem {
 
 	private long _id;
 
@@ -16,11 +16,11 @@ public class ContentCollection {
 	private String contentTitle;
 	private String contentSummary;
 
-	public ContentCollection() {
+	public CollectionItem() {
 
 	}
 
-	public ContentCollection(int contentId, String contentTitle,
+	public CollectionItem(int contentId, String contentTitle,
 			String contentSummary) {
 		this.contentId = contentId;
 		this.contentTitle = contentTitle;

@@ -5,7 +5,7 @@ import java.util.List;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.adapter.CollectionAdapter;
 import net.jsiq.marketing.db.CollectionDBHelper;
-import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.model.CollectionItem;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.ViewHelper;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 public class CollectionsActivity extends SherlockActivity implements
 		OnClickListener, OnItemClickListener {
 
-	private List<ContentCollection> collections;
+	private List<CollectionItem> collections;
 	private CollectionDBHelper DBHelper;
 	private CollectionAdapter adapter;
 	private ListView listview;
@@ -115,7 +115,7 @@ public class CollectionsActivity extends SherlockActivity implements
 	}
 
 	private void startContentDisplayActivityWithContentId(
-			ContentCollection collection) {
+			CollectionItem collection) {
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
 		i.putExtra(ContentDisplayActivity.CONTENT_INFO, new String[] {
 				collection.getContentId() + "", collection.getContentTitle(),

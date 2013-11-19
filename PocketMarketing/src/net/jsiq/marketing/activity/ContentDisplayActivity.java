@@ -3,7 +3,7 @@ package net.jsiq.marketing.activity;
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.db.CollectionDBHelper;
-import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.model.CollectionItem;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.ViewHelper;
 import android.graphics.Color;
@@ -91,7 +91,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	}
 
 	private void addToCollection() {
-		boolean success = DBHelper.insert(new ContentCollection(contentId,
+		boolean success = DBHelper.insert(new CollectionItem(contentId,
 				contentInfo[1], contentInfo[2]));
 		if (success) {
 			MessageToast.showText(this, R.string.addCollectionSuccess);

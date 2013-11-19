@@ -3,7 +3,7 @@ package net.jsiq.marketing.adapter;
 import java.util.List;
 
 import net.jsiq.marketing.R;
-import net.jsiq.marketing.model.ContentCollection;
+import net.jsiq.marketing.model.CollectionItem;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class CollectionAdapter extends ArrayAdapter<ContentCollection> {
+public class CollectionAdapter extends ArrayAdapter<CollectionItem> {
 
-	public CollectionAdapter(Context context, List<ContentCollection> objects) {
+	public CollectionAdapter(Context context, List<CollectionItem> objects) {
 		super(context, 0, objects);
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ContentCollection collection = getItem(position);
+		CollectionItem collection = getItem(position);
 		if (convertView == null) {
 			convertView = LayoutInflater.from(getContext()).inflate(
 					R.layout.collection_item, null);

@@ -280,6 +280,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 						scrollBy(Math.min(availableToScroll, deltaX), 0);
 					}
 				}
+				return true;
 			}
 			break;
 
