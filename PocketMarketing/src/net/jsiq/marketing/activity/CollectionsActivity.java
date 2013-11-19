@@ -1,5 +1,6 @@
 package net.jsiq.marketing.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.jsiq.marketing.R;
@@ -42,13 +43,20 @@ public class CollectionsActivity extends SherlockActivity implements
 		initActinBar();
 		DBHelper = new CollectionDBHelper(this);
 		DBHelper.open();
-		collections = DBHelper.queryAll();
+		collections = new ArrayList<CollectionItem>();
 		listview = (ListView) findViewById(android.R.id.list);
 		listview.setEmptyView(findViewById(android.R.id.empty));
 		adapter = new CollectionAdapter(this, collections);
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(this);
 		registerForContextMenu(listview);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		collections = DBHelper.queryAll();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -70,17 +78,16 @@ public class CollectionsActivity extends SherlockActivity implements
 			int pos = (int) adapter.getItemId(menuInfo.position);
 			success = DBHelper.delete(collections.get(pos).getContentId());
 			collections.remove(pos);
-			adapter.notifyDataSetChanged();
 			break;
 		case R.id.deleteAll:
 			success = DBHelper.deleteAll();
 			collections.clear();
-			adapter.notifyDataSetChanged();
 			break;
 		default:
 			break;
 		}
 		if (success) {
+			adapter.notifyDataSetChanged();
 			MessageToast.showText(this, R.string.operatSucceed);
 		} else {
 			MessageToast.showText(this, R.string.operatFailed);
