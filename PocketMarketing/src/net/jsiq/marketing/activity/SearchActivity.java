@@ -14,6 +14,7 @@ import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -96,6 +97,9 @@ public class SearchActivity extends SherlockActivity implements
 
 	@Override
 	public boolean onQueryTextChange(String newText) {
+		if (TextUtils.isEmpty(newText)) {
+			MessageToast.showText(this, R.string.invalid);
+		}
 		return true;
 	}
 
