@@ -117,14 +117,14 @@ public class ContentFragment extends SherlockFragment implements
 	private void initListView(List<ContentItem> result) {
 		List<ContentItem> topShowContent = new ArrayList<ContentItem>();
 		for (ContentItem item : result) {
-			String topPic = item.getContentTopPic();
-			if (topPic != null && !topPic.trim().equals("")) {
+			if (item.getTopShowFlag() == 1) {
 				topShowContent.add(item);
 			}
 		}
 		if (topShowContent.size() > 0) {
 			headerView = new ViewFlowHeaderView(context, topShowContent);
 			listview.addHeaderView(headerView);
+			result.removeAll(topShowContent);
 		}
 		adapter = new ContentAdapter(context, result);
 		listview.setAdapter(adapter);
