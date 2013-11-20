@@ -47,8 +47,9 @@
     <string name="operatFailed">操作失败</string>
     <string name="search">搜索</string>
     <string name="invalid">请输入有效搜索关键字！</string>
-    <string name="cancelCollecitonSucced">取消成功</string>
+    <string name="cancelCollecitonSucced">已取消收藏</string>
     <string name="cancelCollecitonFailed">取消失败，请重试！</string>
     <string name="searchNoResults">对不起，没有搜索到相关内容！</string>
+    <string name="viewCollection">查看</string>
 
 </resources>

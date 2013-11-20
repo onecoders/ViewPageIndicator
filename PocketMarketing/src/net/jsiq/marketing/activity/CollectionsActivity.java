@@ -73,9 +73,12 @@ public class CollectionsActivity extends SherlockActivity implements
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item
 				.getMenuInfo();
 		boolean success = false;
+		int pos = (int) adapter.getItemId(menuInfo.position);
 		switch (item.getItemId()) {
+		case R.id.viewCollection:
+			startContentDisplayActivityWithContentId(collections.get(pos));
+			break;
 		case R.id.delete:
-			int pos = (int) adapter.getItemId(menuInfo.position);
 			success = DBHelper.delete(collections.get(pos).getContentId());
 			collections.remove(pos);
 			break;
