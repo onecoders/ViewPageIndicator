@@ -1,11 +1,11 @@
 package net.jsiq.marketing.activity;
 
+import net.jsiq.marketing.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import net.jsiq.marketing.R;
 
 public class SplashActivity extends SherlockActivity {
 
@@ -23,7 +23,7 @@ public class SplashActivity extends SherlockActivity {
 				Intent i = new Intent(SplashActivity.this, MainActivity.class);
 				SplashActivity.this.startActivity(i);
 				SplashActivity.this.finish();
-				overridePendingTransition(R.anim.zoomout, R.anim.zoomin);
+				// overridePendingTransition(R.anim.zoomout, R.anim.zoomin);
 			}
 		}, SPLASH_DISPLAY_LENGHT);
 	}
