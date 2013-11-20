@@ -5,6 +5,7 @@ import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.db.CollectionDBHelper;
 import net.jsiq.marketing.model.CollectionItem;
 import net.jsiq.marketing.util.MessageToast;
+import net.jsiq.marketing.util.NetworkUtils;
 import net.jsiq.marketing.util.ViewHelper;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,6 +31,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	private int contentId;
 	private CollectionDBHelper DBHelper;
 	private String contentUrl;
+	private View loadingFailedHint;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,20 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 		contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
 		mWebView = (WebView) findViewById(R.id.content);
-		mWebView.loadUrl(contentUrl);
+		loadingFailedHint = findViewById(R.id.loadingFailedHint);
+		loadingFailedHint.setOnClickListener(this);
+		loadContent();
+	}
+
+	private void loadContent() {
+		if (NetworkUtils.isNetworkConnected(this)) {
+			mWebView.loadUrl(contentUrl);
+			mWebView.setVisibility(View.VISIBLE);
+			loadingFailedHint.setVisibility(View.GONE);
+		} else {
+			mWebView.setVisibility(View.GONE);
+			loadingFailedHint.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void initActionBar() {
@@ -92,6 +107,9 @@ public class ContentDisplayActivity extends SherlockActivity implements
 			break;
 		case R.id.menu_share:
 			toOnekeyShare();
+			break;
+		case R.id.loadingFailedHint:
+			loadContent();
 			break;
 		default:
 			break;

@@ -13,4 +13,9 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip" />
 
+    <include
+        android:id="@+id/loadingFailedHint"
+        layout="@layout/loading_failed"
+        android:visibility="gone" />
+
 </LinearLayout>
