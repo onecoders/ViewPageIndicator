@@ -8,28 +8,21 @@ import net.jsiq.marketing.adapter.CollectionAdapter;
 import net.jsiq.marketing.db.CollectionDBHelper;
 import net.jsiq.marketing.model.CollectionItem;
 import net.jsiq.marketing.util.MessageToast;
-import net.jsiq.marketing.util.ViewHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-
-public class CollectionsActivity extends SherlockActivity implements
-		OnClickListener, OnItemClickListener {
+public class CollectionsActivity extends RightMenuBaseActivity implements
+		OnItemClickListener {
 
 	private List<CollectionItem> collections;
 	private CollectionDBHelper DBHelper;
@@ -40,7 +33,6 @@ public class CollectionsActivity extends SherlockActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.collection_listview);
-		initActinBar();
 		DBHelper = new CollectionDBHelper(this);
 		DBHelper.open();
 		collections = new ArrayList<CollectionItem>();
@@ -98,32 +90,6 @@ public class CollectionsActivity extends SherlockActivity implements
 		return true;
 	}
 
-	private void initActinBar() {
-		ActionBar actionBar = getSupportActionBar();
-		// Get custom view
-		View customerView = loadCustomerView();
-		// Now set custom view
-		ViewHelper.initActionBarAndSetCustomerView(actionBar, customerView);
-	}
-
-	private View loadCustomerView() {
-		View actionbarView = LayoutInflater.from(this).inflate(
-				R.layout.actionbar_configure, null);
-		ImageButton menuBtn = (ImageButton) actionbarView
-				.findViewById(R.id.back_btn);
-		menuBtn.setOnClickListener(this);
-		TextView title = (TextView) actionbarView.findViewById(R.id.title);
-		title.setText(R.string.collections);
-		return actionbarView;
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.back_btn) {
-			onBackPressed();
-		}
-	}
-
 	private void startContentDisplayActivityWithContentId(
 			CollectionItem collection) {
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
@@ -142,6 +108,11 @@ public class CollectionsActivity extends SherlockActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		startContentDisplayActivityWithContentId(collections.get(arg2));
+	}
+
+	@Override
+	protected void setTitle(TextView title) {
+		title.setText(R.string.collections);
 	}
 
 }

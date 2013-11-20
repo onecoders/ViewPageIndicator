@@ -15,22 +15,16 @@ import net.jsiq.marketing.util.ViewHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-
-public class SearchActivity extends SherlockActivity implements
-		OnClickListener, OnQueryTextListener, OnItemClickListener {
+public class SearchActivity extends RightMenuBaseActivity implements
+		OnQueryTextListener, OnItemClickListener {
 
 	private SearchView searchView;
 	private ListView resultListView;
@@ -42,7 +36,6 @@ public class SearchActivity extends SherlockActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_page);
-		initActionBar();
 		findViews();
 		setListeners();
 		initResultListView();
@@ -65,32 +58,6 @@ public class SearchActivity extends SherlockActivity implements
 		searchView.setOnQueryTextListener(this);
 		searchView.setSubmitButtonEnabled(true);
 		resultListView.setOnItemClickListener(this);
-	}
-
-	private void initActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		// Get custom view
-		View customerView = loadCustomerView();
-		// Now set custom view
-		ViewHelper.initActionBarAndSetCustomerView(actionBar, customerView);
-	}
-
-	private View loadCustomerView() {
-		View actionbarView = LayoutInflater.from(this).inflate(
-				R.layout.actionbar_configure, null);
-		ImageButton menuBtn = (ImageButton) actionbarView
-				.findViewById(R.id.back_btn);
-		menuBtn.setOnClickListener(this);
-		TextView title = (TextView) actionbarView.findViewById(R.id.title);
-		title.setText(R.string.search);
-		return actionbarView;
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.back_btn) {
-			onBackPressed();
-		}
 	}
 
 	@Override
@@ -159,6 +126,11 @@ public class SearchActivity extends SherlockActivity implements
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		ViewHelper.startContentDisplayActivityByContent(this,
 				contentList.get(arg2));
+	}
+
+	@Override
+	protected void setTitle(TextView title) {
+		title.setText(R.string.search);
 	}
 
 }

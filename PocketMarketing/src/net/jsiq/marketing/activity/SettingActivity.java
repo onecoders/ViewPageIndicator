@@ -75,7 +75,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 
 	private View loadCustomerView() {
 		View actionbarView = LayoutInflater.from(this).inflate(
-				R.layout.actionbar_configure, null);
+				R.layout.actionbar_for_right_menu, null);
 		ImageButton menuBtn = (ImageButton) actionbarView
 				.findViewById(R.id.back_btn);
 		menuBtn.setOnClickListener(this);
