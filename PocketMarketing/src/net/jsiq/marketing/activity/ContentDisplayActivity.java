@@ -58,6 +58,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		} else {
 			mWebView.setVisibility(View.GONE);
 			loadingFailedHint.setVisibility(View.VISIBLE);
+			MessageToast.showText(this, R.string.notConnected);
 		}
 	}
 
