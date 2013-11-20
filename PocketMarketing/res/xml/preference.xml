@@ -11,7 +11,6 @@
     <PreferenceCategory android:title="@string/about" >
         <Preference
             android:key="version_info"
-            android:summary="@string/version_info_sum"
             android:title="@string/version_info_title" >
         </Preference>
     </PreferenceCategory>

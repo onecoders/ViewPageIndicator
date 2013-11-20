@@ -4,6 +4,7 @@ import net.jsiq.marketing.R;
 import net.jsiq.marketing.constants.Constants;
 import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
+import net.jsiq.marketing.util.VersionUtil;
 import net.jsiq.marketing.util.ViewHelper;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -11,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -31,7 +33,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 	private static final String PREFS_NAME = "compintro";
 	private SharedPreferences m_prefs;
 	private Editor editor;
-	private Preference clearCache, feedback;
+	private Preference clearCache, feedback, versionInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 		initActionBar();
 		m_prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 		editor = m_prefs.edit();
+		String versionName = getVersionName();
 		addPreferencesFromResource(R.xml.preference);
 
 		clearCache = findPreference("clear_cache");
@@ -46,6 +49,20 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 
 		feedback = findPreference("feedback");
 		feedback.setOnPreferenceClickListener(this);
+
+		versionInfo = findPreference("version_info");
+		versionInfo.setSummary(versionName);
+	}
+
+	private String getVersionName() {
+		String version = getString(R.string.version_info_sum);
+		try {
+			version += VersionUtil.getVersionName(this);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+			version = getString(R.string.detect_verison_failed);
+		}
+		return version;
 	}
 
 	private void initActionBar() {

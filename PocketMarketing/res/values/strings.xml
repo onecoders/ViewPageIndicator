@@ -25,7 +25,7 @@
     <string name="loadFailed">加载失败，请重试！</string>
     <string name="barcoderScan">扫描下载客户端！</string>
     <string name="clearCacheTitle">清除缓存</string>
-    <string name="clearCacheSum">清空缓存图片</string>
+    <string name="clearCacheSum">保留缓存可节省流量</string>
     <string name="comfirmToClearCache">确定要清除缓存吗？</string>
     <string name="cancle">取消</string>
     <string name="OK">确定</string>
@@ -33,7 +33,8 @@
     <string name="system_config">系统设置</string>
     <string name="about">关于</string>
     <string name="version_info_title">版本信息</string>
-    <string name="version_info_sum">Version 1.3</string>
+    <string name="version_info_sum">Version &#160;</string>
+    <string name="detect_verison_failed">版本检测失败</string>
     <string name="feedback">意见反馈</string>
     <string name="sendMail">请选择 &#8230;</string>
     <string name="sendError">发送失败！</string>
