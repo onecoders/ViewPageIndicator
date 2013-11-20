@@ -44,7 +44,7 @@ public class SearchActivity extends SherlockActivity implements
 		setContentView(R.layout.search_page);
 		initActionBar();
 		findViews();
-		initSearchView();
+		setListeners();
 		initResultListView();
 	}
 
@@ -53,7 +53,6 @@ public class SearchActivity extends SherlockActivity implements
 		resultListView.setEmptyView(findViewById(android.R.id.empty));
 		adapter = new ContentAdapter(this, contentList);
 		resultListView.setAdapter(adapter);
-		resultListView.setOnItemClickListener(this);
 	}
 
 	private void findViews() {
@@ -62,11 +61,10 @@ public class SearchActivity extends SherlockActivity implements
 		loadingHint = findViewById(R.id.loadingHint);
 	}
 
-	private void initSearchView() {
-		searchView.setIconifiedByDefault(false);
+	private void setListeners() {
 		searchView.setOnQueryTextListener(this);
 		searchView.setSubmitButtonEnabled(true);
-		searchView.setQueryHint("查找");
+		resultListView.setOnItemClickListener(this);
 	}
 
 	private void initActionBar() {

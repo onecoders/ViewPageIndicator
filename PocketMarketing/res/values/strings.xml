@@ -51,5 +51,6 @@
     <string name="cancelCollecitonFailed">取消失败，请重试！</string>
     <string name="searchNoResults">对不起，没有搜索到相关内容！</string>
     <string name="viewCollection">查看</string>
+    <string name="inputKeyWords">请输入关键字</string>
 
 </resources>
