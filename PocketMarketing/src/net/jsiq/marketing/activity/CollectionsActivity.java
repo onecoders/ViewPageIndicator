@@ -72,20 +72,26 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 			break;
 		case R.id.delete:
 			success = DBHelper.delete(collections.get(pos).getContentId());
-			collections.remove(pos);
+			if (success) {
+				collections.remove(pos);
+				adapter.notifyDataSetChanged();
+				MessageToast.showText(this, R.string.operatSucceed);
+			} else {
+				MessageToast.showText(this, R.string.operatFailed);
+			}
 			break;
 		case R.id.deleteAll:
 			success = DBHelper.deleteAll();
-			collections.clear();
+			if (success) {
+				collections.clear();
+				adapter.notifyDataSetChanged();
+				MessageToast.showText(this, R.string.operatSucceed);
+			} else {
+				MessageToast.showText(this, R.string.operatFailed);
+			}
 			break;
 		default:
 			break;
-		}
-		if (success) {
-			adapter.notifyDataSetChanged();
-			MessageToast.showText(this, R.string.operatSucceed);
-		} else {
-			MessageToast.showText(this, R.string.operatFailed);
 		}
 		return true;
 	}

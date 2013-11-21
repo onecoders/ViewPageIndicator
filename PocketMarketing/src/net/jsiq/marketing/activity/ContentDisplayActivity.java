@@ -83,7 +83,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		menuCollection = (ImageButton) actionbarView
 				.findViewById(R.id.menu_collection);
 		menuCollection.setOnClickListener(this);
-		if (isCollected(contentId)) {
+		if (existInCollections(contentId)) {
 			setMenuCollecitonBg(R.drawable.already_collected);
 		} else {
 			setMenuCollecitonBg(R.drawable.not_collected);
@@ -100,7 +100,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 			onBackPressed();
 			break;
 		case R.id.menu_collection:
-			if (isCollected(contentId)) {
+			if (existInCollections(contentId)) {
 				cancelCollection();
 			} else {
 				addToCollection();
@@ -117,7 +117,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		}
 	}
 
-	private boolean isCollected(int contentId) {
+	private boolean existInCollections(int contentId) {
 		return DBHelper.queryById(contentId);
 	}
 
