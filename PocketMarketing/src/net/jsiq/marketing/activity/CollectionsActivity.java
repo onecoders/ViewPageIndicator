@@ -33,8 +33,11 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.collection_listview);
-		DBHelper = new CollectionDBHelper(this);
-		DBHelper.open();
+		initDBHelper();
+		initCollectionListView();
+	}
+
+	private void initCollectionListView() {
 		collections = new ArrayList<CollectionItem>();
 		listview = (ListView) findViewById(android.R.id.list);
 		listview.setEmptyView(findViewById(android.R.id.empty));
@@ -42,6 +45,11 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(this);
 		registerForContextMenu(listview);
+	}
+
+	private void initDBHelper() {
+		DBHelper = new CollectionDBHelper(this);
+		DBHelper.open();
 	}
 
 	@Override
