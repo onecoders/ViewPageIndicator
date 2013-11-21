@@ -45,6 +45,8 @@ public class JsonHttpUtils {
 			// 处理返回的httpResponse信息
 			if (statusCode == HttpStatus.SC_OK) {
 				result = retrieveInputStream(httpResponse.getEntity());
+			} else {
+				throw new Exception("status codes not OK");
 			}
 		} catch (Exception e) {
 			throw new Exception(e);
