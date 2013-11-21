@@ -23,4 +23,6 @@ public class URLStrings {
 	public static final String GET_SEARCH_BY_SEARCH_KEY = BASIC_URL
 			+ "searchContents/";
 
+	public static final String GET_START_IMAGE = BASIC_URL + "getStartImage";
+
 }

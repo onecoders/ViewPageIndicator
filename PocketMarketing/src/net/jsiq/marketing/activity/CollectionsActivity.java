@@ -68,7 +68,7 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 		int pos = (int) adapter.getItemId(menuInfo.position);
 		switch (item.getItemId()) {
 		case R.id.viewCollection:
-			startContentDisplayActivityWithContentId(collections.get(pos));
+			startContentDisplayActivityByCollection(collections.get(pos));
 			break;
 		case R.id.delete:
 			success = DBHelper.delete(collections.get(pos).getContentId());
@@ -96,7 +96,7 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 		return true;
 	}
 
-	private void startContentDisplayActivityWithContentId(
+	private void startContentDisplayActivityByCollection(
 			CollectionItem collection) {
 		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
 		i.putExtra(ContentDisplayActivity.CONTENT_INFO, new String[] {
@@ -113,7 +113,7 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		startContentDisplayActivityWithContentId(collections.get(arg2));
+		startContentDisplayActivityByCollection(collections.get(arg2));
 	}
 
 	@Override
