@@ -130,11 +130,6 @@ public class ContentFragment extends SherlockFragment implements
 		listview.setAdapter(adapter);
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-	}
-
 	private void setListeners() {
 		loadingFailedHintView.setOnClickListener(this);
 		listview.setOnItemClickListener(this);

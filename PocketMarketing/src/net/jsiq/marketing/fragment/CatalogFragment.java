@@ -30,7 +30,7 @@ public class CatalogFragment extends SherlockFragment implements
 
 	public static final String MENU_ID = "menu_id";
 	public static final String CATALOG_TITLE = "catalog_title";
-	private static final String BASIC_INFO_POS = "basic_info_pos";
+	private static final String CATALOG_POS = "catalog_pos";
 
 	private Context context;
 
@@ -75,7 +75,7 @@ public class CatalogFragment extends SherlockFragment implements
 		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 		if (savedInstanceState != null) {
-			currentPos = savedInstanceState.getInt(BASIC_INFO_POS);
+			currentPos = savedInstanceState.getInt(CATALOG_POS);
 		}
 		indicator.setCurrentItem(currentPos);
 		return convertView;
@@ -141,9 +141,9 @@ public class CatalogFragment extends SherlockFragment implements
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
 		currentPos = pager.getCurrentItem();
-		outState.putInt(BASIC_INFO_POS, currentPos);
+		outState.putInt(CATALOG_POS, currentPos);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
