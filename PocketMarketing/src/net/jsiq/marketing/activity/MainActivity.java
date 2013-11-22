@@ -27,6 +27,15 @@ public class MainActivity extends BaseActivity {
 		setListeners();
 	}
 
+	private void findViews() {
+		loadingHintView = findViewById(R.id.loadingHint);
+		loadingFailedHintView = findViewById(R.id.loadingFailedHint);
+	}
+
+	private void setListeners() {
+		loadingFailedHintView.setOnClickListener(this);
+	}
+
 	public void refreshMainContent(LeftMenuFragment.LOADSTATUS loadStatus) {
 		loadingHintView
 				.setVisibility(loadStatus == LOADSTATUS.LOADING ? View.VISIBLE
@@ -54,6 +63,14 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		if (v.getId() == R.id.loadingFailedHint) {
+			loadMenu();
+		}
+	}
+
 	public void switchCatalogByMenu(MenuItem item) {
 		if (currentMenu.getMenuId() != item.getMenuId()) {
 			currentMenu = item;
@@ -64,15 +81,6 @@ public class MainActivity extends BaseActivity {
 				getSlidingMenu().showContent();
 			}
 		});
-	}
-
-	private void setListeners() {
-		loadingFailedHintView.setOnClickListener(this);
-	}
-
-	private void findViews() {
-		loadingHintView = findViewById(R.id.loadingHint);
-		loadingFailedHintView = findViewById(R.id.loadingFailedHint);
 	}
 
 	private void exitBy2Click() {
@@ -105,14 +113,6 @@ public class MainActivity extends BaseActivity {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment)
 				.commitAllowingStateLoss();
-	}
-
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-		if (v.getId() == R.id.loadingFailedHint) {
-			loadMenu();
-		}
 	}
 
 	@Override

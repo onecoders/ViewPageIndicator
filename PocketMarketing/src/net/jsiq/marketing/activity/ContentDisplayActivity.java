@@ -61,13 +61,6 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		loadContent();
 	}
 
-	private void initWebView() {
-		WebSettings setting = mWebView.getSettings();
-		setting.setBuiltInZoomControls(true);
-		setting.setLoadWithOverviewMode(true);
-		mWebView.setWebViewClient(webViewClient);
-	}
-
 	private void initDBHelper() {
 		DBHelper = new CollectionDBHelper(this);
 		DBHelper.open();
@@ -80,6 +73,13 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 	private void setListeners() {
 		loadingFailedHint.setOnClickListener(this);
+	}
+
+	private void initWebView() {
+		WebSettings setting = mWebView.getSettings();
+		setting.setBuiltInZoomControls(true);
+		setting.setLoadWithOverviewMode(true);
+		mWebView.setWebViewClient(webViewClient);
 	}
 
 	private void loadContent() {

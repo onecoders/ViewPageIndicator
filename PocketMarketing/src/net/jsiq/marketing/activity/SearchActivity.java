@@ -41,13 +41,6 @@ public class SearchActivity extends RightMenuBaseActivity implements
 		initResultListView();
 	}
 
-	private void initResultListView() {
-		contentList = new ArrayList<ContentItem>();
-		resultListView.setEmptyView(findViewById(android.R.id.empty));
-		adapter = new ContentAdapter(this, contentList);
-		resultListView.setAdapter(adapter);
-	}
-
 	private void findViews() {
 		searchView = (SearchView) findViewById(R.id.searchview);
 		resultListView = (ListView) findViewById(android.R.id.list);
@@ -58,6 +51,13 @@ public class SearchActivity extends RightMenuBaseActivity implements
 		searchView.setOnQueryTextListener(this);
 		searchView.setSubmitButtonEnabled(true);
 		resultListView.setOnItemClickListener(this);
+	}
+
+	private void initResultListView() {
+		contentList = new ArrayList<ContentItem>();
+		resultListView.setEmptyView(findViewById(android.R.id.empty));
+		adapter = new ContentAdapter(this, contentList);
+		resultListView.setAdapter(adapter);
 	}
 
 	@Override
@@ -71,19 +71,23 @@ public class SearchActivity extends RightMenuBaseActivity implements
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		if (query != null && !query.trim().equals("")) {
-			String searchUrl = URLStrings.GET_SEARCH_BY_SEARCH_KEY
-					+ URLEncoder.encode(query);
-			resultListView.setVisibility(View.GONE);
-			if (NetworkUtils.isNetworkConnected(this)) {
-				loadingHint.setVisibility(View.VISIBLE);
-				new SearchContentTask().execute(searchUrl);
-			} else {
-				MessageToast.showText(this, R.string.notConnected);
-			}
+			queryByKeywords(query);
 		} else {
 			MessageToast.showText(this, R.string.invalid);
 		}
 		return false;
+	}
+
+	private void queryByKeywords(String query) {
+		String searchUrl = URLStrings.GET_SEARCH_BY_SEARCH_KEY
+				+ URLEncoder.encode(query);
+		resultListView.setVisibility(View.GONE);
+		if (NetworkUtils.isNetworkConnected(this)) {
+			loadingHint.setVisibility(View.VISIBLE);
+			new SearchContentTask().execute(searchUrl);
+		} else {
+			MessageToast.showText(this, R.string.notConnected);
+		}
 	}
 
 	class SearchContentTask extends AsyncTask<String, Void, List<ContentItem>> {

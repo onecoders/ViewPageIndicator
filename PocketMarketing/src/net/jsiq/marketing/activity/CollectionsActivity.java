@@ -37,6 +37,11 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 		initCollectionListView();
 	}
 
+	private void initDBHelper() {
+		DBHelper = new CollectionDBHelper(this);
+		DBHelper.open();
+	}
+
 	private void initCollectionListView() {
 		collections = new ArrayList<CollectionItem>();
 		listview = (ListView) findViewById(android.R.id.list);
@@ -45,11 +50,6 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(this);
 		registerForContextMenu(listview);
-	}
-
-	private void initDBHelper() {
-		DBHelper = new CollectionDBHelper(this);
-		DBHelper.open();
 	}
 
 	@Override

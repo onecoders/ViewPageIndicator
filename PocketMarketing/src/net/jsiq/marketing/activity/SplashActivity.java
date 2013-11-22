@@ -21,7 +21,16 @@ public class SplashActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		// initSplashImage();
+		delayAndSwitchToMain();
+	}
 
+	private void initSplashImage() {
+		splashImageView = (ImageView) findViewById(R.id.splashImageView);
+		LoaderUtil.displayImage(this, URLStrings.GET_START_IMAGE,
+				splashImageView);
+	}
+
+	private void delayAndSwitchToMain() {
 		new Handler().postDelayed(new Runnable() {
 
 			@Override
@@ -32,12 +41,6 @@ public class SplashActivity extends SherlockActivity {
 				// overridePendingTransition(R.anim.zoomout, R.anim.zoomin);
 			}
 		}, SPLASH_DISPLAY_LENGHT);
-	}
-
-	private void initSplashImage() {
-		splashImageView = (ImageView) findViewById(R.id.splashImageView);
-		LoaderUtil.displayImage(this, URLStrings.GET_START_IMAGE,
-				splashImageView);
 	}
 
 	@Override

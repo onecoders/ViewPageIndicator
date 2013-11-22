@@ -26,7 +26,6 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	LeftMenuFragment mFrag;
 	SlidingMenu sm;
 	private boolean currentNetworkConnected;
 
@@ -84,8 +83,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		mFrag = new LeftMenuFragment();
-		t.replace(R.id.menu_frame, mFrag);
+		t.replace(R.id.menu_frame, new LeftMenuFragment());
 		t.commit();
 	}
 

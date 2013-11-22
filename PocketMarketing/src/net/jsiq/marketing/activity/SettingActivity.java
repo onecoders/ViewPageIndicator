@@ -93,9 +93,10 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals("clear_cache")) {
+		String key = preference.getKey();
+		if (key.equals("clear_cache")) {
 			showClearCacheDialog();
-		} else if (preference.getKey().equals("feedback")) {
+		} else if (key.equals("feedback")) {
 			sendFeedback();
 		}
 		return false;
