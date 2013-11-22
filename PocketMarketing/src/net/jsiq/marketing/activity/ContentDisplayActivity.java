@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -32,6 +33,16 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	private CollectionDBHelper DBHelper;
 	private String contentUrl;
 	private View loadingFailedHint;
+
+	private WebViewClient webViewClient = new WebViewClient() {
+		public void onReceivedError(WebView view, int errorCode,
+				String description, String failingUrl) {
+			mWebView.setVisibility(View.GONE);
+			loadingFailedHint.setVisibility(View.VISIBLE);
+			MessageToast.showText(ContentDisplayActivity.this,
+					R.string.loadingError);
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 	private void loadContent() {
 		if (NetworkUtils.isNetworkConnected(this)) {
+			mWebView.setWebViewClient(webViewClient);
 			mWebView.loadUrl(contentUrl);
 			mWebView.setVisibility(View.VISIBLE);
 			loadingFailedHint.setVisibility(View.GONE);
