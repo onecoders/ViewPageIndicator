@@ -21,6 +21,7 @@
     <string name="cancle">取消</string>
     <string name="OK">确定</string>
     <string name="networkConnected">网络已连接</string>
+    <string name="networkInterupt">网络已断开</string>
     <string name="system_config">系统设置</string>
     <string name="about">关于</string>
     <string name="version_info_title">版本信息</string>
