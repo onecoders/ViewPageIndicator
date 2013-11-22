@@ -107,6 +107,7 @@ public class TabPageIndicator extends HorizontalScrollView implements
 			} else {
 				mMaxTabWidth = MeasureSpec.getSize(widthMeasureSpec) / 2;
 			}
+			mMaxTabWidth = MeasureSpec.getSize(widthMeasureSpec);
 		} else {
 			mMaxTabWidth = -1;
 		}
