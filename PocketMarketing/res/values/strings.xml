@@ -2,10 +2,6 @@
 <resources>
 
     <string name="app_name">掌上营销助理</string>
-    <string name="basic_info_title">公司简介</string>
-    <string name="marketing_title">营销活动</string>
-    <string name="main_product_title">产品介绍</string>
-    <string name="contacts_title">企业通讯录</string>
     <string name="action_settings">Settings</string>
     <string name="clickAgain">再按一次返回键退出程序</string>
     <string name="user_center">用户中心</string>
@@ -13,11 +9,6 @@
     <string name="loadingError">加载失败，点击重试</string>
     <string name="netUnavailable">网络不给力</string>
     <string name="allLoaded">全部加载完毕</string>
-    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
-    <string name="pull_to_refresh_release_label">松开可以刷新</string>
-    <string name="pull_to_refresh_refreshing_label">正在刷新 &#8230;</string>
-    <string name="pull_to_refresh_tap_label">点击刷新 &#8230;</string>
-    <string name="lastUpdate">上次更新：</string>
     <string name="configure">设置</string>
     <string name="collections">收藏</string>
     <string name="notConnected">网络不给力</string>
