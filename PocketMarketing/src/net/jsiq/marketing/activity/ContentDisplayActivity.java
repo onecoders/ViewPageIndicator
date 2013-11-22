@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -56,7 +57,15 @@ public class ContentDisplayActivity extends SherlockActivity implements
 		contentUrl = URLStrings.GET_CONTENT_BY_CONTENT_ID + contentId;
 		findViews();
 		setListeners();
+		initWebView();
 		loadContent();
+	}
+
+	private void initWebView() {
+		WebSettings setting = mWebView.getSettings();
+		setting.setBuiltInZoomControls(true);
+		setting.setLoadWithOverviewMode(true);
+		mWebView.setWebViewClient(webViewClient);
 	}
 
 	private void initDBHelper() {
@@ -75,7 +84,6 @@ public class ContentDisplayActivity extends SherlockActivity implements
 
 	private void loadContent() {
 		if (NetworkUtils.isNetworkConnected(this)) {
-			mWebView.setWebViewClient(webViewClient);
 			mWebView.loadUrl(contentUrl);
 			mWebView.setVisibility(View.VISIBLE);
 			loadingFailedHint.setVisibility(View.GONE);
