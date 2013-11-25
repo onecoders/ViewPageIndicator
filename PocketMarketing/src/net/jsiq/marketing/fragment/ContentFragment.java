@@ -29,6 +29,7 @@ public class ContentFragment extends SherlockFragment implements
 		OnItemClickListener, OnClickListener {
 
 	public static final String CATALOG_ID = "catalog_id";
+	private static final int TOPSHOW_FLAG_VALUE = 1;
 
 	private Context context;
 
@@ -117,7 +118,7 @@ public class ContentFragment extends SherlockFragment implements
 	private void initListView(List<ContentItem> result) {
 		List<ContentItem> topShowContent = new ArrayList<ContentItem>();
 		for (ContentItem item : result) {
-			if (item.getTopShowFlag() == 1) {
+			if (item.getTopShowFlag() == TOPSHOW_FLAG_VALUE) {
 				topShowContent.add(item);
 			}
 		}

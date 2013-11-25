@@ -73,7 +73,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (NetworkUtils.isNetworkConnected(context)) {
-			mainActivity.refreshMainContent(LOADSTATUS.LOADING);
+			refreshMainContent(LOADSTATUS.LOADING);
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);

@@ -32,6 +32,8 @@ public class CatalogFragment extends SherlockFragment implements
 	public static final String CATALOG_TITLE = "catalog_title";
 	private static final String CATALOG_POS = "catalog_pos";
 
+	private static final int MIN_TOPSHOW_CATALOG_COUNT = 2;
+
 	private Context context;
 
 	private FragmentPagerAdapter adapter;
@@ -128,7 +130,7 @@ public class CatalogFragment extends SherlockFragment implements
 				catalogList.addAll(result);
 				adapter.notifyDataSetChanged();
 				indicator.notifyDataSetChanged();
-				if (catalogList.size() < 2) {
+				if (catalogList.size() < MIN_TOPSHOW_CATALOG_COUNT) {
 					indicator.setVisibility(View.GONE);
 				} else {
 					indicator.setVisibility(View.VISIBLE);
