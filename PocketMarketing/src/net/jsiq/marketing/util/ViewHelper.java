@@ -41,7 +41,7 @@ public class ViewHelper {
 
 	public static void startContentDisplayActivityByContent(Context context,
 			ContentItem item) {
-		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		Intent i = new Intent(context, ContentDisplayActivity.class);
 		i.putExtra(ContentDisplayActivity.CONTENT_INFO,
 				new String[] { item.getContentId() + "",
 						item.getContentTitle(), item.getContentSummary() });

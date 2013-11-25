@@ -52,7 +52,7 @@
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.MainActivity" />
+                <action android:name="net.jsiq.marketing.intent.action.MainActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -62,7 +62,7 @@
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.SettingActivity" />
+                <action android:name="net.jsiq.marketing.intent.action.SettingActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -72,7 +72,7 @@
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.CollectionsActivity" />
+                <action android:name="net.jsiq.marketing.intent.action.CollectionsActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -82,7 +82,7 @@
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.ContentDisplayActivity" />
+                <action android:name="net.jsiq.marketing.intent.action.ContentDisplayActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -92,7 +92,7 @@
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.SearchActivity" />
+                <action android:name="net.jsiq.marketing.intent.action.SearchActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

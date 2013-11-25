@@ -66,18 +66,22 @@ public class RightMenuFragment extends SherlockFragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		Class<?> cls = null;
 		switch (position) {
 		case POS_SEARCH:
-			startActivity(new Intent(context, SearchActivity.class));
+			cls = SearchActivity.class;
 			break;
 		case POS_COLLECTION:
-			startActivity(new Intent(context, CollectionsActivity.class));
+			cls = CollectionsActivity.class;
 			break;
 		case POS_CONFIG:
-			startActivity(new Intent(context, SettingActivity.class));
+			cls = SettingActivity.class;
 			break;
 		default:
 			break;
+		}
+		if (cls != null) {
+			startActivity(new Intent(context, cls));
 		}
 	}
 }

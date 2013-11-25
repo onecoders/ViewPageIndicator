@@ -106,7 +106,7 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 
 	private void startContentDisplayActivityByCollection(
 			CollectionItem collection) {
-		Intent i = new Intent("android.intent.action.ContentDisplayActivity");
+		Intent i = new Intent(this, ContentDisplayActivity.class);
 		i.putExtra(ContentDisplayActivity.CONTENT_INFO, new String[] {
 				collection.getContentId() + "", collection.getContentTitle(),
 				collection.getContentSummary() });
