@@ -2,7 +2,7 @@ package net.jsiq.marketing.constants;
 
 public class URLStrings {
 
-	private static final String DOMAIN_NAME = "http://www.jsiq.net:6060/";
+	private static final String DOMAIN_NAME = "http://58.241.60.12/";
 
 	private static final String BASIC_URL = DOMAIN_NAME + "mpms/clientService/";
 
