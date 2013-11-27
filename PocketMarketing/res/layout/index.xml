@@ -1,22 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/net.jsiq.marketing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/framelayout"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_marginBottom="1dip"
         android:layout_weight="1"
-        android:background="#D5A487"
         android:orientation="vertical" >
 
-        <net.jsiq.marketing.view.ViewFlow
-            android:id="@+id/index_viewflow"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-        </net.jsiq.marketing.view.ViewFlow>
+
+            <net.jsiq.marketing.view.ViewFlow
+                android:id="@+id/index_viewflow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </net.jsiq.marketing.view.ViewFlow>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:layout_gravity="top"
+                android:background="#88252525"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="中国联通 掌上营销助理"
+                    android:layout_marginTop="8dip"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="italic|bold" />
+
+                <net.jsiq.marketing.view.CircleFlowIndicator
+                    android:id="@+id/viewflowindic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginRight="5dip"
+                    app:activeColor="#ff0000"
+                    app:activeType="fill"
+                    app:circleSeparation="15dip"
+                    app:inactiveColor="#ffffff"
+                    app:inactiveType="fill"
+                    app:radiuse="4dip" />
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -30,15 +70,13 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_marginRight="1dip"
-            android:layout_weight="1"
-            android:background="#13AEE7" >
+            android:layout_weight="1" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="123"
-                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/index_bottom_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
         </RelativeLayout>
 
         <LinearLayout
@@ -61,7 +99,23 @@
                     android:layout_marginRight="1dip"
                     android:layout_weight="1"
                     android:background="#F6BC10"
+                    android:gravity="center"
                     android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/index_first_image"
+                        android:layout_width="35dip"
+                        android:layout_height="35dip"
+                        android:layout_marginTop="10dip" />
+
+                    <TextView
+                        android:id="@+id/index_first_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -70,7 +124,23 @@
                     android:layout_marginLeft="1dip"
                     android:layout_weight="1"
                     android:background="#93B228"
+                    android:gravity="center"
                     android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/index_second_image"
+                        android:layout_width="35dip"
+                        android:layout_height="35dip"
+                        android:layout_marginTop="10dip" />
+
+                    <TextView
+                        android:id="@+id/index_second_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -88,7 +158,23 @@
                     android:layout_marginRight="1dip"
                     android:layout_weight="1"
                     android:background="#AA266F"
+                    android:gravity="center"
                     android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/index_third_image"
+                        android:layout_width="35dip"
+                        android:layout_height="35dip"
+                        android:layout_marginTop="10dip" />
+
+                    <TextView
+                        android:id="@+id/index_third_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,7 +183,23 @@
                     android:layout_marginLeft="1dip"
                     android:layout_weight="1"
                     android:background="#BF0F0F"
+                    android:gravity="center"
                     android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/index_forth_image"
+                        android:layout_width="35dip"
+                        android:layout_height="35dip"
+                        android:layout_marginTop="10dip" />
+
+                    <TextView
+                        android:id="@+id/index_forth_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -107,7 +209,23 @@
                 android:layout_marginTop="1dip"
                 android:layout_weight="1"
                 android:background="#8D6D96"
+                android:gravity="left|center_vertical"
                 android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/index_fifth_image"
+                    android:layout_width="35dip"
+                    android:layout_height="35dip"
+                    android:layout_marginLeft="10dip" />
+
+                <TextView
+                    android:id="@+id/index_fifth_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -11,11 +11,11 @@
         android:layout_height="150dip"
         android:background="#ffffff" >
 
-        <net.jsiq.marketing.view.ViewFlow
+        <net.jsiq.marketing.view.MyViewFlow
             android:id="@+id/viewflow"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
-        </net.jsiq.marketing.view.ViewFlow>
+        </net.jsiq.marketing.view.MyViewFlow>
 
         <LinearLayout
             android:layout_width="fill_parent"

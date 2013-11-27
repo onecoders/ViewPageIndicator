@@ -73,11 +73,11 @@ public class LeftMenuFragment extends SherlockListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (NetworkUtils.isNetworkConnected(context)) {
-			refreshMainContent(LOADSTATUS.LOADING);
+			refreshMainStatus(LOADSTATUS.LOADING);
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
-			refreshMainContent(LOADSTATUS.FAILED);
+			refreshMainStatus(LOADSTATUS.FAILED);
 		}
 	}
 
@@ -103,12 +103,12 @@ public class LeftMenuFragment extends SherlockListFragment {
 		protected void onPostExecute(List<MenuItem> result) {
 			super.onPostExecute(result);
 			if (result == null) {
-				refreshMainContent(LOADSTATUS.FAILED);
+				refreshMainStatus(LOADSTATUS.FAILED);
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				initFirstDefaultCatalogInMain(menuList.get(0));
-				refreshMainContent(LOADSTATUS.SUCCEED);
+				initIndexPage(menuList);
+				refreshMainStatus(LOADSTATUS.SUCCEED);
 			}
 		}
 	}
@@ -120,17 +120,16 @@ public class LeftMenuFragment extends SherlockListFragment {
 			switchFragment(selectedItem);
 	}
 
-	// the meat of switching the above fragment
 	private void switchFragment(MenuItem item) {
 		mainActivity.switchCatalogByMenu(item);
 	}
 
-	private void refreshMainContent(LOADSTATUS loadstatus) {
-		mainActivity.refreshMainContent(loadstatus);
+	private void refreshMainStatus(LOADSTATUS loadstatus) {
+		mainActivity.refreshMainStatus(loadstatus);
 	}
 
-	private void initFirstDefaultCatalogInMain(MenuItem item) {
-		mainActivity.initFirstDefaultCatalog(item);
+	private void initIndexPage(List<MenuItem> items) {
+		mainActivity.initIndexFragment(items);
 	}
 
 }

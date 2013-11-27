@@ -185,15 +185,6 @@ public class ViewFlow extends AdapterView<Adapter> {
 		}
 		mVelocityTracker.addMovement(ev);
 
-		ViewPager pager = null;
-
-		ViewParent viewParent = getParent().getParent().getParent().getParent()
-				.getParent().getParent().getParent();
-
-		if (viewParent instanceof ViewPager) {
-			pager = (ViewPager) viewParent;
-		}
-
 		final int action = ev.getAction();
 		final float x = ev.getX();
 
@@ -214,8 +205,6 @@ public class ViewFlow extends AdapterView<Adapter> {
 					: TOUCH_STATE_SCROLLING;
 			if (handler != null)
 				handler.removeMessages(0);
-			getParent().requestDisallowInterceptTouchEvent(true);
-			pager.requestDisallowInterceptTouchEvent(true);
 			break;
 
 		case MotionEvent.ACTION_MOVE:
@@ -226,40 +215,6 @@ public class ViewFlow extends AdapterView<Adapter> {
 			if (xMoved) {
 				// Scroll if the user moved far enough along the X axis
 				mTouchState = TOUCH_STATE_SCROLLING;
-			}
-			if (mLastMotionX == x) {
-				if (0 == getSelectedItemPosition()
-						|| getSelectedItemPosition() == getChildCount() - 1) {
-					pager.requestDisallowInterceptTouchEvent(true);
-					pager.getParent().requestDisallowInterceptTouchEvent(true);
-				}
-			} else if (mLastMotionX > x) {
-				if (getSelectedItemPosition() == getChildCount() - 1) {
-					if (pager.getCurrentItem() == pager.getAdapter().getCount() - 1) {
-						pager.requestDisallowInterceptTouchEvent(true);
-						pager.getParent().requestDisallowInterceptTouchEvent(
-								false);
-					} else {
-						pager.requestDisallowInterceptTouchEvent(false);
-						pager.getParent().requestDisallowInterceptTouchEvent(
-								true);
-					}
-				}
-			} else if (mLastMotionX < x) {
-				if (getSelectedItemPosition() == 0) {
-					if (pager.getCurrentItem() == 0) {
-						pager.requestDisallowInterceptTouchEvent(true);
-						pager.getParent().requestDisallowInterceptTouchEvent(
-								false);
-					} else {
-						pager.requestDisallowInterceptTouchEvent(false);
-						pager.getParent().requestDisallowInterceptTouchEvent(
-								true);
-					}
-				}
-			} else {
-				pager.requestDisallowInterceptTouchEvent(true);
-				pager.getParent().requestDisallowInterceptTouchEvent(true);
 			}
 
 			if (mTouchState == TOUCH_STATE_SCROLLING) {
@@ -312,13 +267,9 @@ public class ViewFlow extends AdapterView<Adapter> {
 				Message message = handler.obtainMessage(0);
 				handler.sendMessageDelayed(message, timeSpan);
 			}
-			pager.requestDisallowInterceptTouchEvent(true);
-			pager.getParent().requestDisallowInterceptTouchEvent(true);
 			break;
 		case MotionEvent.ACTION_CANCEL:
 			mTouchState = TOUCH_STATE_REST;
-			pager.requestDisallowInterceptTouchEvent(true);
-			pager.getParent().requestDisallowInterceptTouchEvent(true);
 		}
 		return super.onInterceptTouchEvent(ev);
 	}

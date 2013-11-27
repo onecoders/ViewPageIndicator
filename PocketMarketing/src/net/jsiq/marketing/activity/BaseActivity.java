@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +25,8 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	SlidingMenu sm;
+	protected ActionBar actionBar;
+	protected SlidingMenu sm;
 	private boolean currentNetworkConnected;
 
 	BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -81,10 +81,8 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	private void setBehindView() {
 		setBehindContentView(R.layout.menu_frame);
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
-		FragmentTransaction t = this.getSupportFragmentManager()
-				.beginTransaction();
-		t.replace(R.id.menu_frame, new LeftMenuFragment());
-		t.commit();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.menu_frame, new LeftMenuFragment()).commit();
 	}
 
 	private void setSecondaryMenu() {
@@ -95,7 +93,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	}
 
 	private void initActionBar() {
-		ActionBar actionBar = getSupportActionBar();
+		actionBar = getSupportActionBar();
 		// Get custom view
 		View customerView = loadCustomerView();
 		// Now set custom view
@@ -121,14 +119,14 @@ public class BaseActivity extends SlidingFragmentActivity implements
 			if (sm.isMenuShowing()) {
 				showContent();
 			} else {
-				sm.showMenu();
+				showMenu();
 			}
 			break;
 		case R.id.personal_btn:
 			if (sm.isSecondaryMenuShowing()) {
 				showContent();
 			} else {
-				sm.showSecondaryMenu();
+				showSecondaryMenu();
 			}
 			break;
 		default:

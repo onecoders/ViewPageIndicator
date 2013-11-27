@@ -24,7 +24,7 @@ public class ViewFlowHeaderView extends LinearLayout {
 	}
 
 	private void initViewFlowImage(List<ContentItem> items) {
-		ViewFlow viewFlow = (ViewFlow) findViewById(R.id.viewflow);
+		MyViewFlow viewFlow = (MyViewFlow) findViewById(R.id.viewflow);
 		viewFlow.setAdapter(new ViewFlowImageAdapter(context, items));
 		viewFlow.setmSideBuffer(items.size());
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);

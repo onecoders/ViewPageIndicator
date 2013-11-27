@@ -44,7 +44,6 @@ public class ContentFragment extends SherlockFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.context = getSherlockActivity();
-		// get catalogId
 		catalogId = getArguments().getInt(CATALOG_ID);
 	}
 
@@ -57,6 +56,33 @@ public class ContentFragment extends SherlockFragment implements
 				.findViewById(R.id.loadingFailedHint);
 		setListeners();
 		return convertView;
+	}
+
+	private void setListeners() {
+		loadingFailedHintView.setOnClickListener(this);
+		listview.setOnItemClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadingFailedHint:
+			loadContent();
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+			long id) {
+		int selectedPos = position;
+		if (headerView != null) {
+			selectedPos = position - 1;
+		}
+		ContentItem selectedItem = adapter.getItem(selectedPos);
+		ViewHelper.startContentDisplayActivityByContent(context, selectedItem);
 	}
 
 	@Override
@@ -129,33 +155,6 @@ public class ContentFragment extends SherlockFragment implements
 		}
 		adapter = new ContentAdapter(context, result);
 		listview.setAdapter(adapter);
-	}
-
-	private void setListeners() {
-		loadingFailedHintView.setOnClickListener(this);
-		listview.setOnItemClickListener(this);
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-			long id) {
-		int selectedPos = position;
-		if (headerView != null) {
-			selectedPos = position - 1;
-		}
-		ContentItem selectedItem = adapter.getItem(selectedPos);
-		ViewHelper.startContentDisplayActivityByContent(context, selectedItem);
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.loadingFailedHint:
-			loadContent();
-			break;
-		default:
-			break;
-		}
 	}
 
 }

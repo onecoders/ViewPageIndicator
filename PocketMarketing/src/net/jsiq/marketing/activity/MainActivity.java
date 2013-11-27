@@ -1,22 +1,27 @@
 package net.jsiq.marketing.activity;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.CatalogFragment;
+import net.jsiq.marketing.fragment.IndexFragment;
 import net.jsiq.marketing.fragment.LeftMenuFragment;
 import net.jsiq.marketing.fragment.LeftMenuFragment.LOADSTATUS;
 import net.jsiq.marketing.model.MenuItem;
 import net.jsiq.marketing.util.MessageToast;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
 
+	private Boolean isIndex;
 	private static Boolean isExit = false;
-	private MenuItem firstMenu, currentMenu;
+	private MenuItem currentMenu;
+	private List<MenuItem> menuItems;
 	private View loadingHintView, loadingFailedHintView;
 
 	@Override
@@ -36,33 +41,6 @@ public class MainActivity extends BaseActivity {
 		loadingFailedHintView.setOnClickListener(this);
 	}
 
-	public void refreshMainContent(LeftMenuFragment.LOADSTATUS loadStatus) {
-		loadingHintView
-				.setVisibility(loadStatus == LOADSTATUS.LOADING ? View.VISIBLE
-						: View.GONE);
-		loadingFailedHintView
-				.setVisibility(loadStatus == LOADSTATUS.FAILED ? View.VISIBLE
-						: View.GONE);
-	}
-
-	public void initFirstDefaultCatalog(MenuItem item) {
-		if (item != null) {
-			firstMenu = item;
-			currentMenu = item;
-		}
-		initNewCatalogFragmentByMenu(item);
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (currentMenu == null || firstMenu == null
-				|| currentMenu.getMenuId() == firstMenu.getMenuId()) {
-			exitBy2Click();
-		} else {
-			switchCatalogByMenu(firstMenu);
-		}
-	}
-
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
@@ -71,35 +49,45 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	public void refreshMainStatus(LeftMenuFragment.LOADSTATUS loadStatus) {
+		loadingHintView
+				.setVisibility(loadStatus == LOADSTATUS.LOADING ? View.VISIBLE
+						: View.GONE);
+		loadingFailedHintView
+				.setVisibility(loadStatus == LOADSTATUS.FAILED ? View.VISIBLE
+						: View.GONE);
+	}
+
+	public void initIndexFragment(List<MenuItem> items) {
+		isIndex = true;
+		menuItems = items;
+		switchToIndex();
+	}
+
+	private void switchToIndex() {
+		currentMenu = null;
+		actionBar.hide();
+		sm.setSlidingEnabled(false);
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
+		transaction.replace(R.id.content_frame, new IndexFragment());
+		transaction.addToBackStack(null);
+		transaction.commitAllowingStateLoss();
+	}
+
 	public void switchCatalogByMenu(MenuItem item) {
-		if (currentMenu.getMenuId() != item.getMenuId()) {
+		isIndex = false;
+		actionBar.show();
+		sm.setSlidingEnabled(true);
+		if (currentMenu == null || currentMenu.getMenuId() != item.getMenuId()) {
 			currentMenu = item;
 			initNewCatalogFragmentByMenu(item);
 		}
 		new Handler().post(new Runnable() {
 			public void run() {
-				getSlidingMenu().showContent();
+				sm.showContent();
 			}
 		});
-	}
-
-	private void exitBy2Click() {
-		Timer tExit = null;
-		if (isExit) {
-			finish();
-			System.exit(0);
-		} else {
-			isExit = true;
-			MessageToast.showText(this, R.string.clickAgain);
-			tExit = new Timer();
-			tExit.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					isExit = false;
-				}
-			}, 2000);
-		}
 	}
 
 	private void initNewCatalogFragmentByMenu(MenuItem item) {
@@ -116,8 +104,49 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	public void onBackPressed() {
+		if (isIndex == null) {
+			exitApp();
+		} else {
+			if (isIndex) {
+				exitBy2Click();
+			} else {
+				isIndex = true;
+				switchToIndex();
+			}
+		}
+	}
+
+	private void exitBy2Click() {
+		Timer tExit = null;
+		if (isExit) {
+			exitApp();
+		} else {
+			isExit = true;
+			MessageToast.showText(this, R.string.clickAgain);
+			tExit = new Timer();
+			tExit.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					isExit = false;
+				}
+			}, 2000);
+		}
+	}
+
+	private void exitApp() {
+		finish();
+		System.exit(0);
+	}
+
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	public List<MenuItem> getMenuItems() {
+		return menuItems;
 	}
 
 }
