@@ -9,6 +9,8 @@ import net.jsiq.marketing.R;
 import net.jsiq.marketing.adapter.IndexViewFlowAdapter;
 import net.jsiq.marketing.constants.URLStrings;
 import net.jsiq.marketing.model.MenuItem;
+import net.jsiq.marketing.model.Weather;
+import net.jsiq.marketing.util.BitmapUtil;
 import net.jsiq.marketing.util.LoaderUtil;
 import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
@@ -35,7 +37,8 @@ public class IndexDisplayActivity extends SherlockActivity implements
 	public static final String MENU_SELECTED_POS = "menu_selected_pos";
 
 	private ViewFlow viewFlow;
-	private ImageView indexBottomLeft;
+	private TextView date_y, week, city, temp1;
+	private ImageView weather_image;
 	private ImageView[] indexImageViews;
 	private TextView[] indexTextViews;
 	private CircleFlowIndicator indic;
@@ -50,8 +53,8 @@ public class IndexDisplayActivity extends SherlockActivity implements
 			{ R.id.index_fifth_image, R.id.index_fifth_text } };
 
 	private List<String> urls;
-	private String bottomLeftUrl;
 	private List<MenuItem> menuItems;
+	private Weather weather;
 
 	private static Boolean isExit = false;
 	private boolean currentNetworkConnected;
@@ -69,7 +72,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 				if (connected) {
 					MessageToast.showText(context, R.string.networkConnected);
 					if (loadingFailedHintView.isShown()) {
-						loadMenu();
+						loadContents();
 					}
 				}
 			}
@@ -91,18 +94,24 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		urls.add("http://f.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=7266c1c3abec8a13141a53e3c135aaec/aa64034f78f0f7368a89a92d0855b319ebc413a2.jpg");
 		urls.add("http://d.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=83a450cbaa18972ba33a04c9d0fb40ea/6d81800a19d8bc3ee2876a15838ba61ea9d34565.jpg");
 		urls.add("http://e.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=842e83c40df3d7ca0cf63b75c429856a/f9198618367adab456e1dfb98ad4b31c8701e413.jpg");
-		bottomLeftUrl = "http://h.hiphotos.baidu.com/image/w%3D2048/sign=369a40aadc54564ee565e33987e69d82/738b4710b912c8fcbc008a74fd039245d7882193.jpg";
 
 		registerReceiver();
 		findViews();
 		setListeners();
-		loadMenu();
+		loadContents();
 	}
 
 	private void findViews() {
 		indexContainer = findViewById(R.id.index_container);
 		viewFlow = (ViewFlow) findViewById(R.id.index_viewflow);
-		indexBottomLeft = (ImageView) findViewById(R.id.index_bottom_left);
+		// TextView date_y, week, city, temp1;
+		date_y = (TextView) findViewById(R.id.date_y);
+		week = (TextView) findViewById(R.id.week);
+		city = (TextView) findViewById(R.id.city);
+		temp1 = (TextView) findViewById(R.id.temp1);
+		// weather image
+		weather_image = (ImageView) findViewById(R.id.weather_image);
+		// five menu parts
 		indexImageViews = new ImageView[MENU_PARTY_COUNT];
 		indexTextViews = new TextView[MENU_PARTY_COUNT];
 		for (int i = 0; i < MENU_PARTY_COUNT; i++) {
@@ -122,24 +131,25 @@ public class IndexDisplayActivity extends SherlockActivity implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.loadingFailedHint:
-			loadMenu();
+			loadContents();
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void loadMenu() {
+	private void loadContents() {
 		indexContainer.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(this)) {
-			new LoadMenuTask().execute(URLStrings.GET_MENUS);
+			new LoadIndexContentTask().execute(URLStrings.GET_WEATHER_INFO,
+					URLStrings.GET_MENUS);
 		} else {
 			loadingFailedHintView.setVisibility(View.VISIBLE);
 			MessageToast.showText(this, R.string.notConnected);
 		}
 	}
 
-	class LoadMenuTask extends AsyncTask<String, Void, List<MenuItem>> {
+	class LoadIndexContentTask extends AsyncTask<String, Void, Void> {
 
 		@Override
 		protected void onPreExecute() {
@@ -149,9 +159,10 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		}
 
 		@Override
-		protected List<MenuItem> doInBackground(String... params) {
+		protected Void doInBackground(String... params) {
 			try {
-				return LoaderUtil.loadMenuItems(params[0]);
+				weather = LoaderUtil.loadWeatherData(params[0]);
+				menuItems = LoaderUtil.loadMenuItems(params[1]);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -159,17 +170,16 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		}
 
 		@Override
-		protected void onPostExecute(List<MenuItem> result) {
+		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			loadingHintView.setVisibility(View.GONE);
-			if (result == null) {
+			showWeatherInfo();
+			if (menuItems == null) {
 				loadingFailedHintView.setVisibility(View.VISIBLE);
 				MessageToast.showText(IndexDisplayActivity.this,
 						R.string.loadFailed);
 			} else {
-				menuItems = result;
 				initIndexViewFlow();
-				initBottomLeft();
 				initIndexFiveParts();
 				indexContainer.setVisibility(View.VISIBLE);
 			}
@@ -184,8 +194,18 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		viewFlow.setSelection(0);
 	}
 
-	private void initBottomLeft() {
-		LoaderUtil.displayImage(this, bottomLeftUrl, indexBottomLeft);
+	private void showWeatherInfo() {
+		if (weather != null) {
+			date_y.setText(weather.getDate_y());
+			week.setText(weather.getWeek());
+			city.setText(weather.getCity());
+			temp1.setText(weather.getTemp1());
+			String weatherImageUrl = BitmapUtil
+					.getWeatherImg(weather.getImg1());
+			LoaderUtil.displayImage(this, weatherImageUrl, weather_image);
+		} else {
+			MessageToast.showText(this, R.string.loadWeatherError);
+		}
 	}
 
 	private void initIndexFiveParts() {

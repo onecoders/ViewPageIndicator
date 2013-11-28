@@ -34,4 +34,8 @@ public class BitmapUtil {
 		return bitmap;
 	}
 
+	public static String getWeatherImg(String imageNo) {
+		return "http://m.weather.com.cn/img/b" + imageNo + ".gif";
+	}
+
 }

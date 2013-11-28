@@ -46,5 +46,6 @@
     <string name="viewCollection">查看</string>
     <string name="inputKeyWords">请输入关键字</string>
     <string name="indexTitle">中国联通 掌上营销助理</string>
+    <string name="loadWeatherError">天气信息加载失败！</string>
 
 </resources>

@@ -6,6 +6,7 @@ import java.util.List;
 import net.jsiq.marketing.model.CatalogItem;
 import net.jsiq.marketing.model.ContentItem;
 import net.jsiq.marketing.model.MenuItem;
+import net.jsiq.marketing.model.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,5 +65,25 @@ public class JSONParser {
 			contentList.add(item);
 		}
 		return contentList;
+	}
+
+	public static Weather JSON2Weather(String json) {
+		Weather weather = null;
+		try {
+			weather = new Weather();
+			JSONObject jObj = new JSONObject(json);
+			JSONObject weatherJobj = jObj.getJSONObject("weatherinfo");
+			weather.setCity(weatherJobj.getString("city"));
+			weather.setDate_y(weatherJobj.getString("date_y"));
+			weather.setWeek(weatherJobj.getString("week"));
+			weather.setFchh(weatherJobj.getString("fchh"));
+			weather.setTemp1(weatherJobj.getString("temp1"));
+			weather.setWeather1(weatherJobj.getString("weather1"));
+			weather.setImg1(weatherJobj.getString("img1"));
+			weather.setWind1(weatherJobj.getString("wind1"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return weather;
 	}
 }

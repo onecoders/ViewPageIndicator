@@ -25,4 +25,6 @@ public class URLStrings {
 
 	public static final String GET_START_IMAGE = BASIC_URL + "getStartImage";
 
+	public static final String GET_WEATHER_INFO = "http://m.weather.com.cn/data/101191101.html";
+
 }

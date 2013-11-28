@@ -6,6 +6,7 @@ import net.jsiq.marketing.R;
 import net.jsiq.marketing.model.CatalogItem;
 import net.jsiq.marketing.model.ContentItem;
 import net.jsiq.marketing.model.MenuItem;
+import net.jsiq.marketing.model.Weather;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -42,6 +43,11 @@ public class LoaderUtil {
 			throws Exception {
 		String json = getRequestViaUrl(url);
 		return JSONParser.JSON2ContentItems(json);
+	}
+
+	public static Weather loadWeatherData(String url) throws Exception {
+		String json = getRequestViaUrl(url);
+		return JSONParser.JSON2Weather(json);
 	}
 
 	private static String getRequestViaUrl(String url) throws Exception {
