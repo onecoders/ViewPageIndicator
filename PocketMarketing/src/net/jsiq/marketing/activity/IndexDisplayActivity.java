@@ -89,12 +89,6 @@ public class IndexDisplayActivity extends SherlockActivity implements
 
 	private void init() {
 		currentNetworkConnected = NetworkUtils.isNetworkConnected(this);
-		urls = new ArrayList<String>();
-		// simulation to load data
-		urls.add("http://f.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=7266c1c3abec8a13141a53e3c135aaec/aa64034f78f0f7368a89a92d0855b319ebc413a2.jpg");
-		urls.add("http://d.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=83a450cbaa18972ba33a04c9d0fb40ea/6d81800a19d8bc3ee2876a15838ba61ea9d34565.jpg");
-		urls.add("http://e.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=842e83c40df3d7ca0cf63b75c429856a/f9198618367adab456e1dfb98ad4b31c8701e413.jpg");
-
 		registerReceiver();
 		findViews();
 		setListeners();
@@ -154,6 +148,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			urls = new ArrayList<String>();
 			loadingFailedHintView.setVisibility(View.GONE);
 			loadingHintView.setVisibility(View.VISIBLE);
 		}
@@ -161,6 +156,9 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		@Override
 		protected Void doInBackground(String... params) {
 			try {
+				// simulation
+				loadUrlsForViewFlow();
+				// load weather and menus
 				weather = LoaderUtil.loadWeatherData(params[0]);
 				menuItems = LoaderUtil.loadMenuItems(params[1]);
 			} catch (Exception e) {
@@ -184,6 +182,14 @@ public class IndexDisplayActivity extends SherlockActivity implements
 				indexContainer.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+
+	public void loadUrlsForViewFlow() {
+		urls.add("http://business.online.cn/Msg_Image/2011-05/4a4b4169-9443-4b09-a7b1-44ffe3fcd7d4.jpg");
+		urls.add("http://www.utu123.com/UploadFile/image/16/46219.jpg");
+		urls.add("http://pic.58pic.com/58pic/11/18/68/31p58PIC9CT.jpg");
+		urls.add("http://www.utu123.com/UploadFile/image/16/46194.jpg");
+		urls.add("http://pic4.nipic.com/20091216/14491_164617063293_2.jpg");
 	}
 
 	private void initIndexViewFlow() {
