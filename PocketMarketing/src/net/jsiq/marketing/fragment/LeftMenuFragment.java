@@ -119,10 +119,12 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	private int getSelectedMenuPos() {
 		int selectedPos = 0;
-		Intent intent = mainActivity.getIntent();
-		if (intent != null) {
-			selectedPos = intent.getIntExtra(
-					IndexDisplayActivity.MENU_SELECTED_POS, 0);
+		if (mainActivity != null) {
+			Intent intent = mainActivity.getIntent();
+			if (intent != null) {
+				selectedPos = intent.getIntExtra(
+						IndexDisplayActivity.MENU_SELECTED_POS, 0);
+			}
 		}
 		return selectedPos;
 	}
