@@ -1,27 +1,17 @@
 package net.jsiq.marketing.activity;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import net.jsiq.marketing.R;
 import net.jsiq.marketing.fragment.CatalogFragment;
-import net.jsiq.marketing.fragment.IndexFragment;
 import net.jsiq.marketing.fragment.LeftMenuFragment;
 import net.jsiq.marketing.fragment.LeftMenuFragment.LOADSTATUS;
 import net.jsiq.marketing.model.MenuItem;
-import net.jsiq.marketing.util.MessageToast;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
-
-	private Boolean isIndex;
-	private static Boolean isExit = false;
-	private MenuItem currentMenu;
-	private List<MenuItem> menuItems;
+	
+	private int menuPos;
 	private View loadingHintView, loadingFailedHintView;
 
 	@Override
@@ -30,6 +20,7 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.content_frame);
 		findViews();
 		setListeners();
+		menuPos = getIntent().getIntExtra("menuPos", 0);
 	}
 
 	private void findViews() {
@@ -58,31 +49,8 @@ public class MainActivity extends BaseActivity {
 						: View.GONE);
 	}
 
-	public void initIndexFragment(List<MenuItem> items) {
-		isIndex = true;
-		menuItems = items;
-		switchToIndex();
-	}
-
-	private void switchToIndex() {
-		currentMenu = null;
-		sm.setSlidingEnabled(false);
-		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction();
-		transaction.replace(R.id.content_frame, new IndexFragment());
-		transaction.addToBackStack(null);
-		transaction.commitAllowingStateLoss();
-		actionBar.hide();
-	}
-
 	public void switchCatalogByMenu(MenuItem item) {
-		isIndex = false;
-		actionBar.show();
-		sm.setSlidingEnabled(true);
-		if (currentMenu == null || currentMenu.getMenuId() != item.getMenuId()) {
-			currentMenu = item;
-			initNewCatalogFragmentByMenu(item);
-		}
+		initNewCatalogFragmentByMenu(item);
 		new Handler().post(new Runnable() {
 			public void run() {
 				sm.showContent();
@@ -104,49 +72,12 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
-	public void onBackPressed() {
-		if (isIndex == null) {
-			exitApp();
-		} else {
-			if (isIndex) {
-				exitBy2Click();
-			} else {
-				isIndex = true;
-				switchToIndex();
-			}
-		}
-	}
-
-	private void exitBy2Click() {
-		Timer tExit = null;
-		if (isExit) {
-			exitApp();
-		} else {
-			isExit = true;
-			MessageToast.showText(this, R.string.clickAgain);
-			tExit = new Timer();
-			tExit.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					isExit = false;
-				}
-			}, 2000);
-		}
-	}
-
-	private void exitApp() {
-		finish();
-		System.exit(0);
-	}
-
-	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
-
-	public List<MenuItem> getMenuItems() {
-		return menuItems;
+	
+	public int getMenuPos() {
+		return menuPos;
 	}
 
 }

@@ -107,7 +107,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				initIndexPage(menuList);
+				switchFragment(result.get(mainActivity.getMenuPos()));
 				refreshMainStatus(LOADSTATUS.SUCCEED);
 			}
 		}
@@ -126,10 +126,6 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	private void refreshMainStatus(LOADSTATUS loadstatus) {
 		mainActivity.refreshMainStatus(loadstatus);
-	}
-
-	private void initIndexPage(List<MenuItem> items) {
-		mainActivity.initIndexFragment(items);
 	}
 
 }

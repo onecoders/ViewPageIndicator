@@ -25,7 +25,6 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class BaseActivity extends SlidingFragmentActivity implements
 		OnClickListener {
 
-	protected ActionBar actionBar;
 	protected SlidingMenu sm;
 	private boolean currentNetworkConnected;
 
@@ -93,8 +92,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	}
 
 	private void initActionBar() {
-		actionBar = getSupportActionBar();
-		actionBar.hide();
+		ActionBar actionBar = getSupportActionBar();
 		// Get custom view
 		View customerView = loadCustomerView();
 		// Now set custom view

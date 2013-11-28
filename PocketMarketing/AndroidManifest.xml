@@ -48,6 +48,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="net.jsiq.marketing.activity.IndexDisplayActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sherlock.NoActionBar" >
+            <intent-filter>
+                <action android:name="net.jsiq.marketing.intent.action.IndexDisplayActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="net.jsiq.marketing.activity.MainActivity"
             android:configChanges="orientation|screenSize|screenLayout"
             android:screenOrientation="portrait" >
