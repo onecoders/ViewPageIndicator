@@ -61,7 +61,6 @@ public class RightMenuFragment extends SherlockFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.secondary_menu, null);
-
 		initBarCodeImageView(convertView);
 		initGridMenu(convertView);
 		return convertView;

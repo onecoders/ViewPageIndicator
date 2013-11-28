@@ -1,6 +1,7 @@
 package net.jsiq.marketing.model;
 
 public class ContactItem {
+
 	private int _id;
 	private String name;
 	private String number;

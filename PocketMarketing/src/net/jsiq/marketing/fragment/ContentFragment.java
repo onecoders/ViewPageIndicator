@@ -37,8 +37,7 @@ public class ContentFragment extends SherlockFragment implements
 
 	private ListView listview;
 	private ContentAdapter adapter;
-	private View loadingHintView, loadingFailedHintView;
-	private View headerView = null;
+	private View loadingHintView, loadingFailedHintView, headerView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -142,7 +141,6 @@ public class ContentFragment extends SherlockFragment implements
 			}
 			loadingHintView.setVisibility(View.GONE);
 		}
-
 	}
 
 	private void initListView(List<ContentItem> result) {

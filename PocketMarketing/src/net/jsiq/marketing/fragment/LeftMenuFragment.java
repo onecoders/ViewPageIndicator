@@ -108,17 +108,16 @@ public class LeftMenuFragment extends SherlockListFragment {
 			} else {
 				adapter.addAll(result);
 				int selectedPos = mainActivity.getMenuPos();
-				switchFragment(result.get(selectedPos));
+				MenuItem selectedItem = result.get(selectedPos);
+				initMainWithSelectedMenu(selectedItem);
 				refreshMainStatus(LOADSTATUS.SUCCEED);
 			}
 		}
+
 	}
 
-	@Override
-	public void onListItemClick(ListView lv, View v, int position, long id) {
-		MenuItem selectedItem = menuList.get(position);
-		if (selectedItem != null)
-			switchFragment(selectedItem);
+	private void initMainWithSelectedMenu(MenuItem selectedItem) {
+		switchFragment(selectedItem);
 	}
 
 	private void switchFragment(MenuItem item) {
@@ -127,6 +126,13 @@ public class LeftMenuFragment extends SherlockListFragment {
 
 	private void refreshMainStatus(LOADSTATUS loadstatus) {
 		mainActivity.refreshMainStatus(loadstatus);
+	}
+
+	@Override
+	public void onListItemClick(ListView lv, View v, int position, long id) {
+		MenuItem selectedItem = menuList.get(position);
+		if (selectedItem != null)
+			switchFragment(selectedItem);
 	}
 
 }

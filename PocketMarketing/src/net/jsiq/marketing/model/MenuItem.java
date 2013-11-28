@@ -1,7 +1,7 @@
 package net.jsiq.marketing.model;
 
-
 public class MenuItem {
+
 	private int menuId;
 	private String menuName;
 	private String menuIcon;
