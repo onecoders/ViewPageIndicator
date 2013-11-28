@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.jsiq.marketing.R;
+import net.jsiq.marketing.activity.IndexDisplayActivity;
 import net.jsiq.marketing.activity.MainActivity;
 import net.jsiq.marketing.adapter.LeftMenuAdapter;
 import net.jsiq.marketing.constants.URLStrings;
@@ -13,6 +14,7 @@ import net.jsiq.marketing.util.MessageToast;
 import net.jsiq.marketing.util.NetworkUtils;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -107,21 +109,26 @@ public class LeftMenuFragment extends SherlockListFragment {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				int selectedPos = mainActivity.getMenuPos();
+				int selectedPos = getSelectedMenuPos();
 				MenuItem selectedItem = result.get(selectedPos);
 				initMainWithSelectedMenu(selectedItem);
 				refreshMainStatus(LOADSTATUS.SUCCEED);
 			}
 		}
+	}
 
+	private int getSelectedMenuPos() {
+		int selectedPos = 0;
+		Intent intent = mainActivity.getIntent();
+		if (intent != null) {
+			selectedPos = intent.getIntExtra(
+					IndexDisplayActivity.MENU_SELECTED_POS, 0);
+		}
+		return selectedPos;
 	}
 
 	private void initMainWithSelectedMenu(MenuItem selectedItem) {
 		switchFragment(selectedItem);
-	}
-
-	private void switchFragment(MenuItem item) {
-		mainActivity.switchCatalogByMenu(item);
 	}
 
 	private void refreshMainStatus(LOADSTATUS loadstatus) {
@@ -133,6 +140,10 @@ public class LeftMenuFragment extends SherlockListFragment {
 		MenuItem selectedItem = menuList.get(position);
 		if (selectedItem != null)
 			switchFragment(selectedItem);
+	}
+
+	private void switchFragment(MenuItem item) {
+		mainActivity.switchCatalogByMenu(item);
 	}
 
 }

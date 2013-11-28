@@ -11,7 +11,6 @@ import android.view.View;
 
 public class MainActivity extends BaseActivity {
 
-	private int menuPos;
 	private View loadingHintView, loadingFailedHintView;
 
 	@Override
@@ -20,8 +19,6 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.content_frame);
 		findViews();
 		setListeners();
-		menuPos = getIntent().getIntExtra(
-				IndexDisplayActivity.MENU_SELECTED_POS, 0);
 	}
 
 	private void findViews() {
@@ -37,7 +34,7 @@ public class MainActivity extends BaseActivity {
 	public void onClick(View v) {
 		super.onClick(v);
 		if (v.getId() == R.id.loadingFailedHint) {
-			loadMenu();
+			loadContentForSlidingMenu();
 		}
 	}
 
@@ -51,7 +48,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	public void switchCatalogByMenu(MenuItem item) {
-		initNewCatalogFragmentByMenu(item);
+		initNewCatalogByMenu(item);
 		new Handler().post(new Runnable() {
 			public void run() {
 				sm.showContent();
@@ -59,7 +56,7 @@ public class MainActivity extends BaseActivity {
 		});
 	}
 
-	private void initNewCatalogFragmentByMenu(MenuItem item) {
+	private void initNewCatalogByMenu(MenuItem item) {
 		CatalogFragment fragment = new CatalogFragment();
 		Bundle extra = new Bundle();
 		if (item != null) {
@@ -69,10 +66,6 @@ public class MainActivity extends BaseActivity {
 		fragment.setArguments(extra);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
-	}
-
-	public int getMenuPos() {
-		return menuPos;
 	}
 
 }

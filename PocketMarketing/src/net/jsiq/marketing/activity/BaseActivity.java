@@ -62,11 +62,11 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	private void initSlidingMenu() {
 		sm = getSlidingMenu();
-		customizeSlidingMenu();
-		loadMenu();
+		initSlidingMenuAttr();
+		loadContentForSlidingMenu();
 	}
 
-	private void customizeSlidingMenu() {
+	private void initSlidingMenuAttr() {
 		sm.setMode(SlidingMenu.LEFT_RIGHT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);
 		sm.setShadowDrawable(R.drawable.shadow);
@@ -76,7 +76,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 	}
 
-	public void loadMenu() {
+	public void loadContentForSlidingMenu() {
 		setBehindView();
 		setSecondaryMenu();
 	}
