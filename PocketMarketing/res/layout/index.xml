@@ -34,11 +34,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="12dip"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="中国联通 掌上营销助理"
-                    android:layout_marginTop="8dip"
+                    android:text="@string/indexTitle"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="italic|bold" />

@@ -45,5 +45,6 @@
     <string name="searchNoResults">对不起，没有搜索到相关内容！</string>
     <string name="viewCollection">查看</string>
     <string name="inputKeyWords">请输入关键字</string>
+    <string name="indexTitle">中国联通 掌上营销助理</string>
 
 </resources>

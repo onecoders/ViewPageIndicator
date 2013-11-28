@@ -66,13 +66,13 @@ public class MainActivity extends BaseActivity {
 
 	private void switchToIndex() {
 		currentMenu = null;
-		actionBar.hide();
 		sm.setSlidingEnabled(false);
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
 		transaction.replace(R.id.content_frame, new IndexFragment());
 		transaction.addToBackStack(null);
 		transaction.commitAllowingStateLoss();
+		actionBar.hide();
 	}
 
 	public void switchCatalogByMenu(MenuItem item) {
