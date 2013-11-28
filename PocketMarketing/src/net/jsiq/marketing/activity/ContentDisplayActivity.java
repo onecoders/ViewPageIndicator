@@ -38,11 +38,15 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	private WebViewClient webViewClient = new WebViewClient() {
 		public void onReceivedError(WebView view, int errorCode,
 				String description, String failingUrl) {
-			mWebView.setVisibility(View.GONE);
-			loadingFailedHint.setVisibility(View.VISIBLE);
-			MessageToast.showText(ContentDisplayActivity.this,
-					R.string.loadingError);
-		};
+			doErrorHint();
+		}
+	};
+
+	private void doErrorHint() {
+		mWebView.setVisibility(View.GONE);
+		loadingFailedHint.setVisibility(View.VISIBLE);
+		MessageToast.showText(ContentDisplayActivity.this,
+				R.string.loadingError);
 	};
 
 	@Override

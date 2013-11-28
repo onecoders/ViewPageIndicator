@@ -73,7 +73,6 @@ public class LeftMenuFragment extends SherlockListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (NetworkUtils.isNetworkConnected(context)) {
-			refreshMainStatus(LOADSTATUS.LOADING);
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
 			MessageToast.showText(context, R.string.notConnected);
@@ -86,6 +85,7 @@ public class LeftMenuFragment extends SherlockListFragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			refreshMainStatus(LOADSTATUS.LOADING);
 			adapter.clear();
 		}
 
@@ -107,7 +107,8 @@ public class LeftMenuFragment extends SherlockListFragment {
 				MessageToast.showText(context, R.string.loadFailed);
 			} else {
 				adapter.addAll(result);
-				switchFragment(result.get(mainActivity.getMenuPos()));
+				int selectedPos = mainActivity.getMenuPos();
+				switchFragment(result.get(selectedPos));
 				refreshMainStatus(LOADSTATUS.SUCCEED);
 			}
 		}

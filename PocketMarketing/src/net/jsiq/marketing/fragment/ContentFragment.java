@@ -50,12 +50,16 @@ public class ContentFragment extends SherlockFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.headerview_list, null);
+		findViewsByParent(convertView);
+		setListeners();
+		return convertView;
+	}
+
+	private void findViewsByParent(View convertView) {
 		listview = (ListView) convertView.findViewById(R.id.content_list);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
 		loadingFailedHintView = convertView
 				.findViewById(R.id.loadingFailedHint);
-		setListeners();
-		return convertView;
 	}
 
 	private void setListeners() {

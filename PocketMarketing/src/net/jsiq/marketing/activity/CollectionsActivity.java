@@ -57,6 +57,11 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 	}
 
 	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		startContentDisplayActivityByCollection(collections.get(arg2));
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		adapter.clear();
@@ -121,11 +126,6 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 	protected void onDestroy() {
 		super.onDestroy();
 		DBHelper.close();
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		startContentDisplayActivityByCollection(collections.get(arg2));
 	}
 
 	@Override

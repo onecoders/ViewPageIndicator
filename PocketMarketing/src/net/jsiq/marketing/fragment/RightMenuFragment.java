@@ -36,32 +36,48 @@ public class RightMenuFragment extends SherlockFragment implements
 	private static final int POS_COLLECTION = 1;
 	private static final int POS_CONFIG = 2;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	private List<SecondaryMenuItem> menuList;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		init();
+	}
+
+	private void init() {
 		context = getSherlockActivity();
-		View convertView = inflater.inflate(R.layout.secondary_menu, null);
-
-		ImageView barCode = (ImageView) convertView.findViewById(R.id.bar_code);
-
-		LoaderUtil.displayImage(context, URLStrings.GET_BAR_CODE, barCode);
-
 		String[] menuItemTitles = getResources().getStringArray(
 				R.array.secondary_menu_title);
 		TypedArray iconArray = getResources().obtainTypedArray(
 				R.array.secondary_menu_icon);
-		List<SecondaryMenuItem> menuList = new ArrayList<SecondaryMenuItem>();
-
+		menuList = new ArrayList<SecondaryMenuItem>();
 		for (int i = 0; i < iconArray.length(); i++) {
 			menuList.add(new SecondaryMenuItem(iconArray.getResourceId(i, 0),
 					menuItemTitles[i]));
 		}
+		iconArray.recycle();
+	}
+
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View convertView = inflater.inflate(R.layout.secondary_menu, null);
+
+		initBarCodeImageView(convertView);
+		initGridMenu(convertView);
+		return convertView;
+	}
+
+	private void initBarCodeImageView(View convertView) {
+		ImageView barCode = (ImageView) convertView.findViewById(R.id.bar_code);
+		LoaderUtil.displayImage(context, URLStrings.GET_BAR_CODE, barCode);
+	}
+
+	private void initGridMenu(View convertView) {
 		ArrayAdapter<SecondaryMenuItem> adapter = new RightMenuAdapter(context,
 				menuList);
 		gridview = (GridView) convertView.findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);
 		gridview.setOnItemClickListener(this);
-		iconArray.recycle();
-		return convertView;
 	}
 
 	@Override

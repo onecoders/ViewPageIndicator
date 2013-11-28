@@ -30,7 +30,6 @@ public class CatalogFragment extends SherlockFragment implements
 
 	public static final String MENU_ID = "menu_id";
 	public static final String CATALOG_TITLE = "catalog_title";
-	private static final String CATALOG_POS = "catalog_pos";
 
 	private static final int MIN_TOPSHOW_CATALOG_COUNT = 2;
 
@@ -40,7 +39,6 @@ public class CatalogFragment extends SherlockFragment implements
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 
-	private int currentPos = 0;
 	private List<CatalogItem> catalogList;
 	private int menuId;
 	private View catalogView;
@@ -49,10 +47,17 @@ public class CatalogFragment extends SherlockFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
+		init();
+	}
+
+	private void init() {
 		catalogList = new ArrayList<CatalogItem>();
 		this.context = getSherlockActivity();
 		menuId = getArguments().getInt(MENU_ID);
+		setActionBarTitle();
+	}
+
+	private void setActionBarTitle() {
 		ActionBar actionBar = getSherlockActivity().getSupportActionBar();
 		ViewHelper.setActionBarCustomerViewContent(actionBar, getArguments()
 				.getString(CATALOG_TITLE));
@@ -63,24 +68,29 @@ public class CatalogFragment extends SherlockFragment implements
 			Bundle savedInstanceState) {
 		View convertView = inflater.inflate(R.layout.simple_tabs, container,
 				false);
+		findViewsByParent(convertView);
+		setListeners();
+		initViewPager();
+		return convertView;
+	}
+
+	private void findViewsByParent(View convertView) {
 		catalogView = convertView.findViewById(R.id.catalogs);
 		loadingHintView = convertView.findViewById(R.id.loadingHint);
 		loadingFailedHintView = convertView
 				.findViewById(R.id.loadingFailedHint);
-		loadingFailedHintView.setOnClickListener(this);
-
-		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
-
 		pager = (ViewPager) convertView.findViewById(R.id.pager);
-		pager.setAdapter(adapter);
-
 		indicator = (TabPageIndicator) convertView.findViewById(R.id.indicator);
+	}
+
+	private void setListeners() {
+		loadingFailedHintView.setOnClickListener(this);
+	}
+
+	private void initViewPager() {
+		adapter = new CatalogAdapter(getChildFragmentManager(), catalogList);
+		pager.setAdapter(adapter);
 		indicator.setViewPager(pager);
-		if (savedInstanceState != null) {
-			currentPos = savedInstanceState.getInt(CATALOG_POS);
-		}
-		indicator.setCurrentItem(currentPos);
-		return convertView;
 	}
 
 	@Override
@@ -92,8 +102,6 @@ public class CatalogFragment extends SherlockFragment implements
 	private void loadCatalog() {
 		catalogView.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(context)) {
-			loadingHintView.setVisibility(View.VISIBLE);
-			loadingFailedHintView.setVisibility(View.GONE);
 			String getCatalogUrl = URLStrings.GET_CATALOGS_BY_MENUID + menuId;
 			new LoadCatalogTask().execute(getCatalogUrl);
 		} else {
@@ -107,6 +115,8 @@ public class CatalogFragment extends SherlockFragment implements
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			loadingHintView.setVisibility(View.VISIBLE);
+			loadingFailedHintView.setVisibility(View.GONE);
 			catalogList.clear();
 		}
 
@@ -123,29 +133,26 @@ public class CatalogFragment extends SherlockFragment implements
 		@Override
 		protected void onPostExecute(List<CatalogItem> result) {
 			super.onPostExecute(result);
+			loadingHintView.setVisibility(View.GONE);
 			if (result == null) {
 				MessageToast.showText(context, R.string.loadFailed);
 				loadingFailedHintView.setVisibility(View.VISIBLE);
 			} else {
 				catalogList.addAll(result);
-				adapter.notifyDataSetChanged();
-				indicator.notifyDataSetChanged();
-				if (catalogList.size() < MIN_TOPSHOW_CATALOG_COUNT) {
-					indicator.setVisibility(View.GONE);
-				} else {
-					indicator.setVisibility(View.VISIBLE);
-				}
+				refreshViewPager();
 				catalogView.setVisibility(View.VISIBLE);
 			}
-			loadingHintView.setVisibility(View.GONE);
 		}
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		currentPos = pager.getCurrentItem();
-		outState.putInt(CATALOG_POS, currentPos);
-		super.onSaveInstanceState(outState);
+	private void refreshViewPager() {
+		adapter.notifyDataSetChanged();
+		indicator.notifyDataSetChanged();
+		if (catalogList.size() < MIN_TOPSHOW_CATALOG_COUNT) {
+			indicator.setVisibility(View.GONE);
+		} else {
+			indicator.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
