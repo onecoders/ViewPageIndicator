@@ -33,6 +33,10 @@ public class CollectionsActivity extends RightMenuBaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.collection_listview);
+		init();
+	}
+
+	private void init() {
 		initDBHelper();
 		initCollectionListView();
 	}

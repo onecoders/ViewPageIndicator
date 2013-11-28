@@ -38,6 +38,10 @@ public class SettingActivity extends SherlockPreferenceActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
+	}
+
+	private void init() {
 		initActionBar();
 		m_prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 		editor = m_prefs.edit();

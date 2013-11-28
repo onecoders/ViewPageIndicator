@@ -20,6 +20,10 @@ public class SplashActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
+		init();
+	}
+
+	private void init() {
 		// initSplashImage();
 		delayAndSwitchToMain();
 	}

@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
-	
+
 	private int menuPos;
 	private View loadingHintView, loadingFailedHintView;
 
@@ -20,7 +20,8 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.content_frame);
 		findViews();
 		setListeners();
-		menuPos = getIntent().getIntExtra("menuPos", 0);
+		menuPos = getIntent().getIntExtra(
+				IndexDisplayActivity.MENU_SELECTED_POS, 0);
 	}
 
 	private void findViews() {
@@ -75,7 +76,7 @@ public class MainActivity extends BaseActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
-	
+
 	public int getMenuPos() {
 		return menuPos;
 	}

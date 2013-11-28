@@ -49,6 +49,10 @@ public class ContentDisplayActivity extends SherlockActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.content_display);
+		init();
+	}
+
+	private void init() {
 		initDBHelper();
 		contentInfo = getIntent().getStringArrayExtra(CONTENT_INFO);
 		contentId = Integer.valueOf(contentInfo[0]);

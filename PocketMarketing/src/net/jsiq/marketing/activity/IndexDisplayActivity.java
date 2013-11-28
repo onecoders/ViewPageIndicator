@@ -31,6 +31,9 @@ import com.actionbarsherlock.app.SherlockActivity;
 public class IndexDisplayActivity extends SherlockActivity implements
 		OnClickListener {
 
+	private static final int MENU_PARTY_COUNT = 5;
+	public static final String MENU_SELECTED_POS = "menu_selected_pos";
+
 	private ViewFlow viewFlow;
 	private ImageView indexBottomLeft;
 	private ImageView[] indexImageViews;
@@ -48,12 +51,12 @@ public class IndexDisplayActivity extends SherlockActivity implements
 
 	private List<String> urls;
 	private String bottomLeftUrl;
-	private List<MenuItem> items;
+	private List<MenuItem> menuItems;
 
 	private static Boolean isExit = false;
 	private boolean currentNetworkConnected;
 
-	BroadcastReceiver receiver = new BroadcastReceiver() {
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -65,6 +68,9 @@ public class IndexDisplayActivity extends SherlockActivity implements
 			} else {
 				if (connected) {
 					MessageToast.showText(context, R.string.networkConnected);
+					if (loadingFailedHintView.isShown()) {
+						loadMenu();
+					}
 				}
 			}
 			currentNetworkConnected = connected;
@@ -75,6 +81,10 @@ public class IndexDisplayActivity extends SherlockActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.index);
+		init();
+	}
+
+	private void init() {
 		currentNetworkConnected = NetworkUtils.isNetworkConnected(this);
 		urls = new ArrayList<String>();
 		// simulation to load data
@@ -83,12 +93,9 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		urls.add("http://e.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=842e83c40df3d7ca0cf63b75c429856a/f9198618367adab456e1dfb98ad4b31c8701e413.jpg");
 		bottomLeftUrl = "http://h.hiphotos.baidu.com/image/w%3D2048/sign=369a40aadc54564ee565e33987e69d82/738b4710b912c8fcbc008a74fd039245d7882193.jpg";
 
-		indexImageViews = new ImageView[5];
-		indexTextViews = new TextView[5];
 		registerReceiver();
 		findViews();
 		setListeners();
-		indexContainer.setVisibility(View.GONE);
 		loadMenu();
 	}
 
@@ -96,7 +103,9 @@ public class IndexDisplayActivity extends SherlockActivity implements
 		indexContainer = findViewById(R.id.index_container);
 		viewFlow = (ViewFlow) findViewById(R.id.index_viewflow);
 		indexBottomLeft = (ImageView) findViewById(R.id.index_bottom_left);
-		for (int i = 0; i < resId.length; i++) {
+		indexImageViews = new ImageView[MENU_PARTY_COUNT];
+		indexTextViews = new TextView[MENU_PARTY_COUNT];
+		for (int i = 0; i < MENU_PARTY_COUNT; i++) {
 			indexImageViews[i] = (ImageView) findViewById(resId[i][0]);
 			indexTextViews[i] = (TextView) findViewById(resId[i][1]);
 		}
@@ -121,6 +130,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 	}
 
 	private void loadMenu() {
+		indexContainer.setVisibility(View.GONE);
 		if (NetworkUtils.isNetworkConnected(this)) {
 			new LoadMenuTask().execute(URLStrings.GET_MENUS);
 		} else {
@@ -157,7 +167,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 				MessageToast.showText(IndexDisplayActivity.this,
 						R.string.loadFailed);
 			} else {
-				items = result;
+				menuItems = result;
 				initIndexViewFlow();
 				initBottomLeft();
 				initIndexFiveParts();
@@ -180,7 +190,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 
 	private void initIndexFiveParts() {
 		for (int i = 0; i < indexImageViews.length; i++) {
-			MenuItem item = items.get(i);
+			MenuItem item = menuItems.get(i);
 			if (item != null) {
 				final int menuPos = i;
 				LoaderUtil.displayImage(this, item.getMenuIcon(),
@@ -193,7 +203,7 @@ public class IndexDisplayActivity extends SherlockActivity implements
 					public void onClick(View v) {
 						Intent intent = new Intent(IndexDisplayActivity.this,
 								MainActivity.class);
-						intent.putExtra("menuPos", menuPos);
+						intent.putExtra(MENU_SELECTED_POS, menuPos);
 						startActivity(intent);
 					}
 				});

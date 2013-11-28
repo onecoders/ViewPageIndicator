@@ -49,6 +49,10 @@ public class BaseActivity extends SlidingFragmentActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
+	}
+
+	private void init() {
 		ShareSDK.initSDK(this);
 		currentNetworkConnected = NetworkUtils.isNetworkConnected(this);
 		registerReceiver();

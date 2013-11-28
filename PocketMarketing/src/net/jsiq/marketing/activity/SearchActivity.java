@@ -36,6 +36,10 @@ public class SearchActivity extends RightMenuBaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_page);
+		init();
+	}
+
+	private void init() {
 		findViews();
 		setListeners();
 		initResultListView();
