@@ -17,7 +17,7 @@ public class ViewHelper {
 			View customerView) {
 		// set LayoutParams
 		ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-				ActionBar.LayoutParams.WRAP_CONTENT,
+				ActionBar.LayoutParams.MATCH_PARENT,
 				ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
 		// Set display to custom next
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

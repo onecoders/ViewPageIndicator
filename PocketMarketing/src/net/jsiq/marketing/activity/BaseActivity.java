@@ -94,6 +94,7 @@ public class BaseActivity extends SlidingFragmentActivity implements
 
 	private void initActionBar() {
 		actionBar = getSupportActionBar();
+		actionBar.hide();
 		// Get custom view
 		View customerView = loadCustomerView();
 		// Now set custom view
