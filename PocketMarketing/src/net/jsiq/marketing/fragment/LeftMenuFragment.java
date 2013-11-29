@@ -134,7 +134,9 @@ public class LeftMenuFragment extends SherlockListFragment {
 	}
 
 	private void refreshMainStatus(LOADSTATUS loadstatus) {
-		mainActivity.refreshMainStatus(loadstatus);
+		if (mainActivity != null) {
+			mainActivity.refreshMainStatus(loadstatus);
+		}
 	}
 
 	@Override
@@ -145,7 +147,9 @@ public class LeftMenuFragment extends SherlockListFragment {
 	}
 
 	private void switchFragment(MenuItem item) {
-		mainActivity.switchCatalogByMenu(item);
+		if (mainActivity != null) {
+			mainActivity.switchCatalogByMenu(item);
+		}
 	}
 
 }
