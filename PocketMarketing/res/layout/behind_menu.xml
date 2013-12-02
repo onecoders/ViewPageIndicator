@@ -6,6 +6,7 @@
     android:layout_marginBottom="@dimen/list_padding"
     android:layout_marginTop="@dimen/list_padding"
     android:background="@drawable/biz_pc_main_bg"
+    android:divider="@null"
     android:listSelector="@drawable/list_selector"
     android:padding="@dimen/list_padding"
     android:scrollbars="none" />
