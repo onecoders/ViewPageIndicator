@@ -65,7 +65,8 @@ public class MainActivity extends BaseActivity {
 		}
 		fragment.setArguments(extra);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+				.replace(R.id.content_frame, fragment)
+				.commitAllowingStateLoss();
 	}
 
 }
